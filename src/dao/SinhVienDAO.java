@@ -1,6 +1,6 @@
 package dao;
 
-import helper.DateHelper;
+//import helper.DateHelper;
 import helper.JDBCHelper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,67 +14,44 @@ import model.SinhVien;
  */
 public class SinhVienDAO {
 
-    public interface I_SinhVien {
-
-        public void Insert(SinhVien sinhVien);
-
-        public void Update(SinhVien sinhVien);
-
-        public void Delete(String id);
-
-        public List<SinhVien> select();
-
-        public SinhVien findById(String id);
-
+    public void Insert(SinhVien sinhVien) {
+        String sql = "INSERT INTO SinhVien VALUES (?, ?, ?, ?, ?, ?, ?)";
+        JDBCHelper.executeUpdate(sql,
+                sinhVien.getMaSV(),
+                sinhVien.getHoTen(),
+                sinhVien.isGioiTinh(),
+                //                    DateHelper.toString(sinhVien.getNgaySinh()),
+                sinhVien.getSDT(),
+                sinhVien.getCMND(),
+                sinhVien.getEmail());
     }
 
-    class SV implements I_SinhVien {
+    public void Update(SinhVien sinhVien) {
+        String sql = "UPDATE SinhVien SET HoTen=?, GioiTinh=?, NgaySinh=?, SDT=?, CMND=?, Email=? WHERE MaSV=?";
+        JDBCHelper.executeUpdate(sql,
+                sinhVien.getHoTen(),
+                sinhVien.isGioiTinh(),
+                //                    DateHelper.toString(sinhVien.getNgaySinh()),
+                sinhVien.getSDT(),
+                sinhVien.getCMND(),
+                sinhVien.getEmail(),
+                sinhVien.getMaSV());
+    }
 
-        @Override
-        public void Insert(SinhVien sinhVien) {
-            String sql = "INSERT INTO SinhVien VALUES (?, ?, ?, ?, ?, ?, ?)";
-            JDBCHelper.executeUpdate(sql,
-                    sinhVien.getMaSV(),
-                    sinhVien.getHoTen(),
-                    sinhVien.isGioiTinh(),
-                    DateHelper.toString(sinhVien.getNgaySinh()),
-                    sinhVien.getSDT(),
-                    sinhVien.getCMND(),
-                    sinhVien.getEmail());
-        }
+    public void Delete(String id) {
+        String sql = "DELETE FROM SinhVien WHERE MaSV=?";
+        JDBCHelper.executeUpdate(sql, id);
+    }
 
-        @Override
-        public void Update(SinhVien sinhVien) {
-            String sql = "UPDATE SinhVien SET HoTen=?, GioiTinh=?, NgaySinh=?, SDT=?, CMND=?, Email=? WHERE MaSV=?";
-            JDBCHelper.executeUpdate(sql,
-                    sinhVien.getHoTen(),
-                    sinhVien.isGioiTinh(),
-                    DateHelper.toString(sinhVien.getNgaySinh()),
-                    sinhVien.getSDT(),
-                    sinhVien.getCMND(),
-                    sinhVien.getEmail(),
-                    sinhVien.getMaSV());
-        }
+    public List<SinhVien> select() {
+        String sql = "SELECT * FROM SinhVien";
+        return selectAll(sql);
+    }
 
-        @Override
-        public void Delete(String id) {
-            String sql = "DELETE FROM SinhVien WHERE MaSV=?";
-            JDBCHelper.executeUpdate(sql, id);
-        }
-
-        @Override
-        public List<SinhVien> select() {
-            String sql = "SELECT * FROM SinhVien";
-            return selectAll(sql);
-        }
-
-        @Override
-        public SinhVien findById(String id) {
-            String sql = "SELECT * FROM SinhVien WHERE MaSV=?";
-            List<SinhVien> list = selectAll(sql, id);
-            return list.size() > 0 ? list.get(0) : null;
-        }
-
+    public SinhVien findById(String id) {
+        String sql = "SELECT * FROM SinhVien WHERE MaSV=?";
+        List<SinhVien> list = selectAll(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
     private List<SinhVien> selectAll(String sql, Object... args) {

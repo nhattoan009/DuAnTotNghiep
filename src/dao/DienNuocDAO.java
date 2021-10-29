@@ -13,44 +13,27 @@ import model.DienNuoc;
  */
 public class DienNuocDAO {
 
-    public interface I_DienNuoc {
-
-        public void Insert(DienNuoc dienNuoc);
-
-        public void Update(DienNuoc dienNuoc);
-
-        public List<DienNuoc> select();
-
+    public void Insert(DienNuoc dienNuoc) {
+        String sql = "INSERT INTO DienNuoc VALUES (?, ?, ?, ?)";
+        JDBCHelper.executeUpdate(sql,
+                dienNuoc.getChiSoDienCu(),
+                dienNuoc.getChiSoNuocCu(),
+                dienNuoc.getGiaDien(),
+                dienNuoc.getGiaNuoc());
     }
 
-    class DN implements I_DienNuoc {
+    public void Update(DienNuoc dienNuoc) {
+        String sql = "UPDATE DienNuoc SET ChiSoDienCu=?, ChiSoNuocCu=?,giaDien=?,giaNuoc=? WHERE MaDienNuoc=?"; //where
+        JDBCHelper.executeUpdate(sql,
+                dienNuoc.getChiSoDienCu(),
+                dienNuoc.getChiSoNuocCu(),
+                dienNuoc.getGiaDien(),
+                dienNuoc.getGiaNuoc());
+    }
 
-        @Override
-        public void Insert(DienNuoc dienNuoc) {
-            String sql = "INSERT INTO DienNuoc VALUES (?, ?, ?, ?)";
-            JDBCHelper.executeUpdate(sql,
-                    dienNuoc.getChiSoDienCu(),
-                    dienNuoc.getChiSoNuocCu(),
-                    dienNuoc.getGiaDien(),
-                    dienNuoc.getGiaNuoc());
-        }
-
-        @Override
-        public void Update(DienNuoc dienNuoc) {
-            String sql = "UPDATE DienNuoc SET ChiSoDienCu=?, ChiSoNuocCu=?,giaDien=?,giaNuoc=? WHERE MaDienNuoc=?"; //where
-            JDBCHelper.executeUpdate(sql,
-                    dienNuoc.getChiSoDienCu(),
-                    dienNuoc.getChiSoNuocCu(),
-                    dienNuoc.getGiaDien(),
-                    dienNuoc.getGiaNuoc());
-        }
-
-        @Override
-        public List<DienNuoc> select() {
-            String sql = "SELECT * FROM DienNuoc";
-            return selectAll(sql);
-        }
-
+    public List<DienNuoc> select() {
+        String sql = "SELECT * FROM DienNuoc";
+        return selectAll(sql);
     }
 
     private List<DienNuoc> selectAll(String sql, Object... args) {

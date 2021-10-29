@@ -13,57 +13,34 @@ import model.QuanLy;
  */
 public class QuanLyDAO {
 
-    interface I_QuanLy {
-
-        public void Insert(QuanLy quanLy);
-
-        public void Update(QuanLy quanLy);
-
-        public void Delete(String id);
-
-        public List<QuanLy> select();
-
-        public QuanLy findById(String id);
-
+    public void Insert(QuanLy quanLy) {
+        String sql = "INSERT INTO QuanLy VALUES (?, ?)";
+        JDBCHelper.executeUpdate(sql,
+                quanLy.getTenDangNhap(),
+                quanLy.getMatKhau());
     }
 
-    class QL implements I_QuanLy {
+    public void Update(QuanLy quanLy) {
+        String sql = "UPDATE SinhVien SET TenDangNhap=?, MatKhau=?"; //where
+        JDBCHelper.executeUpdate(sql,
+                quanLy.getTenDangNhap(),
+                quanLy.getMatKhau());
+    }
 
-        @Override
-        public void Insert(QuanLy quanLy) {
-            String sql = "INSERT INTO QuanLy VALUES (?, ?)";
-            JDBCHelper.executeUpdate(sql,
-                    quanLy.getTenDangNhap(),
-                    quanLy.getMatKhau());
-        }
+    public void Delete(String id) {
+        String sql = "DELETE FROM QuanLy WHERE TenDangNhap=?";
+        JDBCHelper.executeUpdate(sql, id);
+    }
 
-        @Override
-        public void Update(QuanLy quanLy) {
-            String sql = "UPDATE SinhVien SET TenDangNhap=?, MatKhau=?"; //where
-            JDBCHelper.executeUpdate(sql,
-                    quanLy.getTenDangNhap(),
-                    quanLy.getMatKhau());
-        }
+    public List<QuanLy> select() {
+        String sql = "SELECT * FROM QuanLy";
+        return selectAll(sql);
+    }
 
-        @Override
-        public void Delete(String id) {
-            String sql = "DELETE FROM QuanLy WHERE TenDangNhap=?";
-            JDBCHelper.executeUpdate(sql, id);
-        }
-
-        @Override
-        public List<QuanLy> select() {
-            String sql = "SELECT * FROM QuanLy";
-            return selectAll(sql);
-        }
-
-        @Override
-        public QuanLy findById(String id) {
-            String sql = "SELECT * FROM QuanLy WHERE MaSV=?";
-            List<QuanLy> list = selectAll(sql, id);
-            return list.size() > 0 ? list.get(0) : null;
-        }
-
+    public QuanLy findById(String id) {
+        String sql = "SELECT * FROM QuanLy WHERE TenDangNhap=?";
+        List<QuanLy> list = selectAll(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
     private List<QuanLy> selectAll(String sql, Object... args) {
@@ -90,5 +67,6 @@ public class QuanLyDAO {
         quanLy.setTenDangNhap(rs.getString("TenDangNhap"));
         quanLy.setMatKhau(rs.getString("MatKhau"));
         return quanLy;
+
     }
 }

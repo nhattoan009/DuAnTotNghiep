@@ -27,7 +27,7 @@ public class DuAnTotNghiep {
 //        });
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TrangChinh().setVisible(true);
+                new DangNhap().setVisible(true);
             }
         });
     }

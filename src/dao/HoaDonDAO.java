@@ -13,59 +13,36 @@ import model.HoaDon;
  */
 public class HoaDonDAO {
 
-    public interface I_HoaDon {
-
-        public void Insert(HoaDon hoaDon);
-
-        public void Update(HoaDon hoaDon);
-
-        public void Delete(Integer id);
-
-        public List<HoaDon> select();
-
-        public HoaDon findById(Integer id);
-
+    public void Insert(HoaDon hoaDon) {
+        String sql = "INSERT INTO HoaDon VALUES (?, ?, ?, ?)";
+        JDBCHelper.executeUpdate(sql,
+                hoaDon.getMaHoaDon(),
+                hoaDon.getHopDong(),
+                hoaDon.getTongTien(),
+                hoaDon.getNgayTao());
     }
 
-    class HDon implements I_HoaDon {
+    public void Update(HoaDon hoaDon) {
+        String sql = "UPDATE HoaDon SET TongTien=? WHERE MaHoaDon=?";
+        JDBCHelper.executeUpdate(sql,
+                hoaDon.getTongTien(),
+                hoaDon.getMaHoaDon());
+    }
 
-        @Override
-        public void Insert(HoaDon hoaDon) {
-            String sql = "INSERT INTO HoaDon VALUES (?, ?, ?, ?)";
-            JDBCHelper.executeUpdate(sql,
-                    hoaDon.getMaHoaDon(),
-                    hoaDon.getHopDong(),
-                    hoaDon.getTongTien(),
-                    hoaDon.getNgayTao());
-        }
+    public void Delete(Integer id) {
+        String sql = "DELETE FROM HoaDon WHERE MaHoaDon=?";
+        JDBCHelper.executeUpdate(sql, id);
+    }
 
-        @Override
-        public void Update(HoaDon hoaDon) {
-            String sql = "UPDATE HoaDon SET TongTien=? WHERE MaHoaDon=?";
-            JDBCHelper.executeUpdate(sql,
-                    hoaDon.getTongTien(),
-                    hoaDon.getMaHoaDon());
-        }
+    public List<HoaDon> select() {
+        String sql = "SELECT * FROM HoaDon";
+        return selectAll(sql);
+    }
 
-        @Override
-        public void Delete(Integer id) {
-            String sql = "DELETE FROM HoaDon WHERE MaHoaDon=?";
-            JDBCHelper.executeUpdate(sql, id);
-        }
-
-        @Override
-        public List<HoaDon> select() {
-            String sql = "SELECT * FROM HoaDon";
-            return selectAll(sql);
-        }
-
-        @Override
-        public HoaDon findById(Integer id) {
-            String sql = "SELECT * FROM HoaDon WHERE MaHoaDon=?";
-            List<HoaDon> list = selectAll(sql, id);
-            return list.size() > 0 ? list.get(0) : null;
-        }
-
+    public HoaDon findById(Integer id) {
+        String sql = "SELECT * FROM HoaDon WHERE MaHoaDon=?";
+        List<HoaDon> list = selectAll(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
     private List<HoaDon> selectAll(String sql, Object... args) {

@@ -13,63 +13,40 @@ import model.Phong;
  */
 public class PhongDAO {
 
-    public interface I_Phong {
-
-        public void Insert(Phong phong);
-
-        public void Update(Phong phong);
-
-        public void Delete(String id);
-
-        public List<Phong> select();
-
-        public Phong findById(String id);
-
+    public void Insert(Phong phong) {
+        String sql = "INSERT INTO Phong VALUES (?, ?, ?, ?, ?)";
+        JDBCHelper.executeUpdate(sql,
+                phong.getMaPhong(),
+                phong.getMaDienNuoc(),
+                phong.getTenPhong(),
+                phong.getGiaPhong(),
+                phong.isTrangThai());
     }
 
-    class PH implements I_Phong {
+    public void Update(Phong phong) {
+        String sql = "UPDATE Phong SET MaPhong=?,MaDienNuoc=?, TenPhong=?, GiaPhong=?, TrangThai=? WHERE MaPhong=?"; //where
+        JDBCHelper.executeUpdate(sql,
+                phong.getMaDienNuoc(),
+                phong.getTenPhong(),
+                phong.getGiaPhong(),
+                phong.isTrangThai(),
+                phong.getMaPhong());
+    }
 
-        @Override
-        public void Insert(Phong phong) {
-            String sql = "INSERT INTO Phong VALUES (?, ?, ?, ?, ?)";
-            JDBCHelper.executeUpdate(sql,
-                    phong.getMaPhong(),
-                    phong.getMaDienNuoc(),
-                    phong.getTenPhong(),
-                    phong.getGiaPhong(),
-                    phong.isTrangThai());
-        }
+    public void Delete(String id) {
+        String sql = "DELETE FROM Phong WHERE MaPhong=?";
+        JDBCHelper.executeUpdate(sql, id);
+    }
 
-        @Override
-        public void Update(Phong phong) {
-            String sql = "UPDATE Phong SET MaPhong=?,MaDienNuoc=?, TenPhong=?, GiaPhong=?, TrangThai=? WHERE MaPhong=?"; //where
-            JDBCHelper.executeUpdate(sql,
-                    phong.getMaDienNuoc(),
-                    phong.getTenPhong(),
-                    phong.getGiaPhong(),
-                    phong.isTrangThai(),
-                    phong.getMaPhong());
-        }
+    public List<Phong> select() {
+        String sql = "SELECT * FROM Phong";
+        return selectAll(sql);
+    }
 
-        @Override
-        public void Delete(String id) {
-            String sql = "DELETE FROM Phong WHERE MaPhong=?";
-            JDBCHelper.executeUpdate(sql, id);
-        }
-
-        @Override
-        public List<Phong> select() {
-            String sql = "SELECT * FROM Phong";
-            return selectAll(sql);
-        }
-
-        @Override
-        public Phong findById(String id) {
-            String sql = "SELECT * FROM Phong WHERE MaPhong=?";
-            List<Phong> list = selectAll(sql, id);
-            return list.size() > 0 ? list.get(0) : null;
-        }
-
+    public Phong findById(String id) {
+        String sql = "SELECT * FROM Phong WHERE MaPhong=?";
+        List<Phong> list = selectAll(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
     }
 
     private List<Phong> selectAll(String sql, Object... args) {
