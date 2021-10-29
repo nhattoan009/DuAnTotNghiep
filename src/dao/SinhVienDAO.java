@@ -14,7 +14,7 @@ import model.SinhVien;
  */
 public class SinhVienDAO {
 
-    interface I_SinhVien {
+    public interface I_SinhVien {
 
         public void Insert(SinhVien sinhVien);
 

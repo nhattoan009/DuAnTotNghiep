@@ -35,6 +35,7 @@ public class DangNhap extends javax.swing.JFrame {
         jButton2.setText("LOGIN");
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 350, 50));
 
+        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setFont(new java.awt.Font("InputSerifNarrow Medium", 0, 11)); // NOI18N
         jCheckBox1.setText("Remember me?");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
