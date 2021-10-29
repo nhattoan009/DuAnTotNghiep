@@ -1,17 +1,18 @@
-package duantotnghiep;
+package view;
 
+import static Bll.Bll_DangNhap.KT_DangNhap;
+import connect.connection;
 import dao.QuanLyDAO;
 import javax.swing.JOptionPane;
-import model.QuanLy;
 
 /**
  *
  * @author tuong
  */
 public class DangNhap extends javax.swing.JFrame {
-    
+
+    public static connection conn = new connection();
     QuanLyDAO quanLy = new QuanLyDAO();
-    
 
     public DangNhap() {
         initComponents();
@@ -93,14 +94,10 @@ public class DangNhap extends javax.swing.JFrame {
         String username = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
         try {
-            QuanLy ql = quanLy.findById(username);
-            if (ql != null) {
-                if (password.equals(ql.getMatKhau())) {
-                    this.dispose();
-                    new TrangChinh().setVisible(true);
-                } else {
-                    lblError.setText("Thông tin đăng nhập không đúng");
-                }
+            
+            if (KT_DangNhap(username, password) == true) {
+                this.dispose();
+                new TrangChinh().setVisible(true);
             } else {
                 lblError.setText("Thông tin đăng nhập không đúng");
             }

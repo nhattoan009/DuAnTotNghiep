@@ -1,4 +1,4 @@
-package duantotnghiep;
+package view;
 
 import de.javasoft.plaf.synthetica.SyntheticaPlainLookAndFeel;
 import java.text.ParseException;
