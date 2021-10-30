@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 /**
@@ -28,7 +23,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDSSV = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -38,7 +33,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1600, 900));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDSSV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -54,7 +49,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblDSSV);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
@@ -139,6 +134,6 @@ public class DS_SinhVien extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblDSSV;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,7 @@
 package dao;
 
 //import helper.DateHelper;
+import connect.connection;
 import helper.JDBCHelper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,13 +15,14 @@ import model.SinhVien;
  */
 public class SinhVienDAO {
 
-    public void Insert(SinhVien sinhVien) {
+    public static void Insert(SinhVien sinhVien) {
         String sql = "INSERT INTO SinhVien VALUES (?, ?, ?, ?, ?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
                 sinhVien.getMaSV(),
                 sinhVien.getHoTen(),
                 sinhVien.isGioiTinh(),
-                //                    DateHelper.toString(sinhVien.getNgaySinh()),
+                sinhVien.getNgaySinh(),
+//                                    DateHelper.toString(sinhVien.getNgaySinh()),
                 sinhVien.getSDT(),
                 sinhVien.getCMND(),
                 sinhVien.getEmail());
@@ -43,9 +45,9 @@ public class SinhVienDAO {
         JDBCHelper.executeUpdate(sql, id);
     }
 
-    public List<SinhVien> select() {
+    public static ResultSet select() {
         String sql = "SELECT * FROM SinhVien";
-        return selectAll(sql);
+        return connection.Getdata(sql);
     }
 
     public SinhVien findById(String id) {
