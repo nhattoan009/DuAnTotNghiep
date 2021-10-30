@@ -35,7 +35,7 @@ public class DS_TaiKhoan extends javax.swing.JPanel {
         btnClose = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDSTK = new javax.swing.JTable();
 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
@@ -88,7 +88,7 @@ public class DS_TaiKhoan extends javax.swing.JPanel {
                         .addContainerGap())))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDSTK.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -96,7 +96,7 @@ public class DS_TaiKhoan extends javax.swing.JPanel {
                 "Tên đăng nhập", "Mật khẩu"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblDSTK);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -132,6 +132,6 @@ public class DS_TaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblDSTK;
     // End of variables declaration//GEN-END:variables
 }

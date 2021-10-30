@@ -1,9 +1,8 @@
 package view;
 
-import static Bll.Bll_DangNhap.KT_DangNhap;
-import connect.connection;
 import dao.QuanLyDAO;
 import javax.swing.JOptionPane;
+import model.QuanLy;
 
 /**
  *
@@ -11,7 +10,6 @@ import javax.swing.JOptionPane;
  */
 public class DangNhap extends javax.swing.JFrame {
 
-    public static connection conn = new connection();
     QuanLyDAO quanLy = new QuanLyDAO();
 
     public DangNhap() {
@@ -91,15 +89,17 @@ public class DangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void login() {
-        String username = txtUsername.getText();
-        String password = new String(txtPassword.getPassword());
+        String user = txtUsername.getText();
+        String pass = new String(txtPassword.getPassword());
         try {
-            
-            if (KT_DangNhap(username, password) == true) {
-                this.dispose();
-                new TrangChinh().setVisible(true);
-            } else {
-                lblError.setText("Thông tin đăng nhập không đúng");
+            QuanLy nv = quanLy.findById(user);
+            if (nv != null) {
+                if (pass.equals(nv.getMatKhau())) {
+                    this.dispose();
+                    new TrangChinh().setVisible(true);
+                } else {
+                    lblError.setText("Thông tin đăng nhập không đúng");
+                }
             }
         } catch (Exception e) {
             lblError.setText("Lỗi");

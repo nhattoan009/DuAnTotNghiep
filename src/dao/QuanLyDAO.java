@@ -1,8 +1,10 @@
 package dao;
 
-import connect.connection;
 import helper.JDBCHelper;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import model.QuanLy;
 
 /**
@@ -30,13 +32,40 @@ public class QuanLyDAO {
         JDBCHelper.executeUpdate(sql, id);
     }
 
-    public static ResultSet select() {
+    public List<QuanLy> select() {
         String sql = "SELECT * FROM QuanLy";
-        return connection.Getdata(sql);
+        return selectAll(sql);
     }
 
-    public static ResultSet findById(String id) {
-        String sql = "SELECT * FROM QuanLy WHERE TenDangNhap='" + id + "'";
-        return connection.Getdata(sql);
+    public QuanLy findById(String id) {
+        String sql = "SELECT * FROM QuanLy WHERE TenDangNhap=?";
+        List<QuanLy> list = selectAll(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+
+    private List<QuanLy> selectAll(String sql, Object... args) {
+        List<QuanLy> list = new ArrayList<>();
+        try {
+            ResultSet rs = null;
+            try {
+                rs = JDBCHelper.executeQuery(sql, args);
+                while (rs.next()) {
+                    QuanLy model = readFromResultSet(rs);
+                    list.add(model);
+                }
+            } finally {
+                rs.getStatement().getConnection().close();
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+        return list;
+    }
+
+    private QuanLy readFromResultSet(ResultSet rs) throws SQLException {
+        QuanLy quanLy = new QuanLy();
+        quanLy.setTenDangNhap(rs.getString("TenDangNhap"));
+        quanLy.setMatKhau(rs.getString("MatKhau"));
+        return quanLy;
     }
 }
