@@ -1,7 +1,5 @@
 package dao;
 
-//import helper.DateHelper;
-import connect.connection;
 import helper.JDBCHelper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +13,7 @@ import model.SinhVien;
  */
 public class SinhVienDAO {
 
-    public static void Insert(SinhVien sinhVien) {
+    public void Insert(SinhVien sinhVien) {
         String sql = "INSERT INTO SinhVien VALUES (?, ?, ?, ?, ?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
                 sinhVien.getMaSV(),
@@ -45,10 +43,11 @@ public class SinhVienDAO {
         JDBCHelper.executeUpdate(sql, id);
     }
 
-    public static ResultSet select() {
+    public List<SinhVien> select() {
         String sql = "SELECT * FROM SinhVien";
-        return connection.Getdata(sql);
+        return selectAll(sql);
     }
+
 
     public SinhVien findById(String id) {
         String sql = "SELECT * FROM SinhVien WHERE MaSV=?";
