@@ -46,13 +46,18 @@ public class DS_SinhVien extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         btnThemMoi = new javax.swing.JButton();
+<<<<<<< HEAD
         btnCapNhat = new javax.swing.JButton();
+=======
+        jButton2 = new javax.swing.JButton();
+>>>>>>> 35ea332e91779d470702876abcbcefaf1aa10c01
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         btnThemMoi1 = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSSV = new javax.swing.JTable();
+<<<<<<< HEAD
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
@@ -70,6 +75,20 @@ public class DS_SinhVien extends javax.swing.JPanel {
             }
         });
 
+=======
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
+
+        btnThemMoi.setText("Thêm mới");
+        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemMoiActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Cập nhật");
+
+>>>>>>> 35ea332e91779d470702876abcbcefaf1aa10c01
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setText("Danh sách sinh viên");
@@ -102,9 +121,15 @@ public class DS_SinhVien extends javax.swing.JPanel {
                 .addComponent(btnThemMoi1)
                 .addGap(18, 18, 18)
                 .addComponent(btnThemMoi)
+<<<<<<< HEAD
                 .addGap(18, 18, 18)
                 .addComponent(btnCapNhat)
                 .addGap(18, 18, 18)
+=======
+                .addGap(18, 18, 18)
+                .addComponent(jButton2)
+                .addGap(18, 18, 18)
+>>>>>>> 35ea332e91779d470702876abcbcefaf1aa10c01
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -115,7 +140,11 @@ public class DS_SinhVien extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+<<<<<<< HEAD
                             .addComponent(btnCapNhat)
+=======
+                            .addComponent(jButton2)
+>>>>>>> 35ea332e91779d470702876abcbcefaf1aa10c01
                             .addComponent(btnThemMoi)
                             .addComponent(jButton4)
                             .addComponent(btnThemMoi1)
@@ -131,11 +160,14 @@ public class DS_SinhVien extends javax.swing.JPanel {
                 "Mã sinh viên", "Tên sinh viên", "Giới tính", "Ngày sinh", "Số điện thoại", "Email", "CMND"
             }
         ));
+<<<<<<< HEAD
         tblDSSV.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDSSVMouseClicked(evt);
             }
         });
+=======
+>>>>>>> 35ea332e91779d470702876abcbcefaf1aa10c01
         jScrollPane1.setViewportView(tblDSSV);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -170,6 +202,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         this.load();
     }//GEN-LAST:event_btnLamMoiActionPerformed
+
     int index = 0;
 
     void edit() {
@@ -230,11 +263,17 @@ public class DS_SinhVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnThemMoi1;
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLamMoi;
+    private javax.swing.JButton btnThemMoi;
+    private javax.swing.JButton btnThemMoi1;
+    private javax.swing.JButton jButton2;
+>>>>>>> 35ea332e91779d470702876abcbcefaf1aa10c01
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

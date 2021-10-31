@@ -49,6 +49,7 @@ public class SinhVienDAO {
         return selectAll(sql);
     }
 
+
     public SinhVien findById(String id) {
         String sql = "SELECT * FROM SinhVien WHERE MaSV=?";
         List<SinhVien> list = selectAll(sql, id);

@@ -12,6 +12,7 @@ import model.SinhVien;
 public class ThemSinhVien extends javax.swing.JFrame {
 
     SinhVienDAO dao = new SinhVienDAO();
+    DS_SinhVien ds_SinhVien = new DS_SinhVien();
 
     /**
      * Creates new form ThemSinhVien
@@ -25,6 +26,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
         SinhVien sv = getModel();
         try {
             dao.Insert(sv);
+            this.ds_SinhVien.dao.select();
             this.clear();
             lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
 
@@ -48,6 +50,17 @@ public class ThemSinhVien extends javax.swing.JFrame {
         }
 
     }
+//    void update() {
+//        SinhVien sv = getModel();
+//        try {
+//            dao.Update(sv);
+//            this.ds_SinhVien.load();
+//            lblMessage.setText("Cập nhật thành công!");
+//        } catch (Exception e) {
+//            lblMessage.setText("Cập nhật thành công!");
+//        }
+//
+//    }
 
     private static final String EMAIL_PATTERN
             = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -62,7 +75,11 @@ public class ThemSinhVien extends javax.swing.JFrame {
     boolean flag = false;
 
     void check() {
+
         if ((txtMaSV.getText()).length() < 10) {
+
+        if ((txtMaSV.getText()).length() < 7) {
+
             if ((txtMaSV.getText()).equals("")) {
                 lblMessage.setText("Thông tin không hợp lệ");
                 lblMessage.setForeground(Color.red);
