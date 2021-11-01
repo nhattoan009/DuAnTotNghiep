@@ -112,7 +112,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
         sv.setEmail(txtEmail.getText());
         sv.setSDT(txtSDT.getText());
         sv.setNgaySinh(DateHelper.toDate(txtNgaySinh.getText()));
-        sv.setGioiTinh((String) cboGioiTinh.getSelectedItem());
+        sv.setGioiTinh(cboGioiTinh.getSelectedIndex() == 0);
         return sv;
     }
 
@@ -123,7 +123,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
         txtEmail.setText(sv.getEmail());
         txtSDT.setText(sv.getSDT());
         txtNgaySinh.setText(DateHelper.toString(sv.getNgaySinh()));
-        cboGioiTinh.setSelectedItem(sv.getGioiTinh());
+        cboGioiTinh.setSelectedIndex(sv.isGioiTinh() ? 0 : 1);
     }
 
     void clear() {

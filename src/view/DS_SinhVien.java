@@ -1,9 +1,11 @@
 package view;
 
 import dao.SinhVienDAO;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.Phong;
 import model.SinhVien;
 
 /**
@@ -26,12 +28,14 @@ public class DS_SinhVien extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblDSSV.getModel();
         model.setRowCount(0);
         try {
-            List<SinhVien> list = dao.select();
+            String keyword = txtTimKiem.getText();
+            List<SinhVien> list = dao.selectByKeyword(keyword);
+//            List<SinhVien> list = dao.select();
             for (SinhVien sv : list) {
                 Object[] row = {
                     sv.getMaSV(),
                     sv.getHoTen(),
-                    sv.getGioiTinh(),
+                    sv.isGioiTinh() ? "Nam" : "Nữ",
                     sv.getNgaySinh(),
                     sv.getSDT(),
                     sv.getEmail(),
@@ -53,8 +57,13 @@ public class DS_SinhVien extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        txtTaoHopDong = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSSV = new javax.swing.JTable();
+        lblMessage = new javax.swing.JLabel();
+        txtTimKiem = new javax.swing.JTextField();
+        btnTimKiem = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
@@ -85,6 +94,20 @@ public class DS_SinhVien extends javax.swing.JPanel {
             }
         });
 
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
+
+        txtTaoHopDong.setText("Tạo hợp đồng");
+        txtTaoHopDong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTaoHopDongActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -92,16 +115,20 @@ public class DS_SinhVien extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtTaoHopDong)
+                .addGap(18, 18, 18)
                 .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnThemMoi)
                 .addGap(18, 18, 18)
                 .addComponent(btnCapNhat)
-                .addGap(18, 18, 18)
+                .addGap(10, 10, 10)
+                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +138,9 @@ public class DS_SinhVien extends javax.swing.JPanel {
                             .addComponent(btnCapNhat)
                             .addComponent(btnThemMoi)
                             .addComponent(jButton4)
-                            .addComponent(btnLamMoi))
+                            .addComponent(btnLamMoi)
+                            .addComponent(btnXoa)
+                            .addComponent(txtTaoHopDong))
                         .addContainerGap())))
         );
 
@@ -130,23 +159,49 @@ public class DS_SinhVien extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblDSSV);
 
+        lblMessage.setText(" ");
+
+        txtTimKiem.setText(" ");
+
+        btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1180, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1180, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(btnTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMessage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -158,70 +213,96 @@ public class DS_SinhVien extends javax.swing.JPanel {
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         this.load();
     }//GEN-LAST:event_btnLamMoiActionPerformed
-    int index = 0;
 
-    void edit() {
-        try {
-            String masv = (String) tblDSSV.getValueAt(this.index, 0);
-            String tensv = (String) tblDSSV.getValueAt(this.index, 1);
-//            Boolean gioitinh = (Boolean) tblDSSV.getValueAt(this.index, 3);
-            String gt = (String.valueOf(tblDSSV.getValueAt(this.index, 2)));
-//            boolean gioitinhsv = Boolean.parseBoolean(gt);
-//            String namsinh = (String) tblDSSV.getValueAt(this.index, 2);
-            String sdt = (String) tblDSSV.getValueAt(this.index, 4);
-            String email = (String) tblDSSV.getValueAt(this.index, 5);
-            String cmnd = (String) tblDSSV.getValueAt(this.index, 6);
-            SinhVien model = dao.findById(masv);
-            if (model != null) {
-//                SuaSinhVien ssv = new SuaSinhVien(masv, tensv, gt, sdt, email, cmnd);
-//                ssv.setVisible(true);
-//
-////                new SuaSinhVien().setModel(model);
-
-                System.out.println(masv + "" + tensv + "" + gt + "" + sdt + "" + email + "" + cmnd);
+    void delete() {
+        int x = JOptionPane.showConfirmDialog(this, "Ấn YES để xóa");
+        if (x == JOptionPane.YES_OPTION) {
+            try {
+                String masv = (String) tblDSSV.getValueAt(this.index, 0);
+                SinhVien model = dao.findById(masv);
+                if (model != null) {
+                    dao.Delete(masv);
+                }
+            } catch (Exception e) {
+                lblMessage.setText("xóa lỗi");
             }
-        } catch (Exception e) {
-//            lblMessage.setText("cập nhật lỗi");
         }
     }
+
+    void TimKiem() {
+        load();
+    }
+    int index = 0;
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         String masv = (String) tblDSSV.getValueAt(this.index, 0);
         String tensv = (String) tblDSSV.getValueAt(this.index, 1);
-//        String gioitinh = (String) tblDSSV.getValueAt(this.index, 3);
-//        String namsinh = (String) tblDSSV.getValueAt(this.index, 2);
         String gt = (String.valueOf(tblDSSV.getValueAt(this.index, 2)));
-//        boolean gioitinhsv = Boolean.parseBoolean(gt);
+        Date namsinh = (Date) tblDSSV.getValueAt(this.index, 3);
         String sdt = (String) tblDSSV.getValueAt(this.index, 4);
         String email = (String) tblDSSV.getValueAt(this.index, 5);
         String cmnd = (String) tblDSSV.getValueAt(this.index, 6);
         SinhVien model = dao.findById(masv);
         if (model != null) {
-            SuaSinhVien ssv = new SuaSinhVien(masv, tensv, sdt, email, cmnd, gt);
+            SuaSinhVien ssv = new SuaSinhVien(masv, tensv, sdt, email, cmnd, gt, namsinh);
             ssv.setVisible(true);
         }
-        System.out.println(masv + "-" + tensv + "-" + sdt + "-" + email + "-" + cmnd + "-" + gt);
+        System.out.println(masv + "-" + tensv + "-" + sdt + "-" + email + "-" + cmnd + "-" + gt + "" + namsinh);
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void tblDSSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSSVMouseClicked
         if (evt.getClickCount() == 1) {
             this.index = tblDSSV.rowAtPoint(evt.getPoint());
-//            if (this.index >= 0) {
-            this.edit();
-//            }
+            if (this.index >= 0) {
+                String masv = (String) tblDSSV.getValueAt(this.index, 0);
+                System.out.println(masv);
+            }
+
             System.out.println(this.index);
             System.out.println("click");
         }
     }//GEN-LAST:event_tblDSSVMouseClicked
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        delete();
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        TimKiem();
+    }//GEN-LAST:event_btnTimKiemActionPerformed
+    
+    
+    private void txtTaoHopDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaoHopDongActionPerformed
+        String masv = (String) tblDSSV.getValueAt(this.index, 0);
+        String tensv = (String) tblDSSV.getValueAt(this.index, 1);
+
+        SinhVien model = dao.findById(masv);
+        if (model != null) {
+            ThemHopDong ssv = new ThemHopDong(masv, tensv);
+            ssv.setVisible(true);
+        }
+        System.out.println(masv + "-" + tensv);
+
+//        String MaSV,
+//            String hoTen,
+//            String MaPhong,
+//            double GiaPhong,
+//            Date NgayTao
+    }//GEN-LAST:event_txtTaoHopDongActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThemMoi;
+    private javax.swing.JButton btnTimKiem;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblMessage;
     private javax.swing.JTable tblDSSV;
+    private javax.swing.JButton txtTaoHopDong;
+    private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

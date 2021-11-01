@@ -42,6 +42,7 @@ public class PhongDAO {
         String sql = "SELECT * FROM Phong";
         return selectAll(sql);
     }
+    
 
     public Phong findById(String id) {
         String sql = "SELECT * FROM Phong WHERE MaPhong=?";

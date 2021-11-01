@@ -19,7 +19,7 @@ public class SinhVienDAO {
         JDBCHelper.executeUpdate(sql,
                 sinhVien.getMaSV(),
                 sinhVien.getHoTen(),
-                sinhVien.getGioiTinh(),
+                sinhVien.isGioiTinh(),
                 sinhVien.getNgaySinh(),
                 //                                    DateHelper.toString(sinhVien.getNgaySinh()),
                 sinhVien.getSDT(),
@@ -31,7 +31,7 @@ public class SinhVienDAO {
         String sql = "UPDATE SinhVien SET HoTen=?, GioiTinh=?, NgaySinh=?, SDT=?, CMND=?, Email=? WHERE MaSV=?";
         JDBCHelper.executeUpdate(sql,
                 sinhVien.getHoTen(),
-                sinhVien.getGioiTinh(),
+                sinhVien.isGioiTinh(),
                 DateHelper.toString(sinhVien.getNgaySinh()),
                 sinhVien.getSDT(),
                 sinhVien.getCMND(),
@@ -49,6 +49,10 @@ public class SinhVienDAO {
         return selectAll(sql);
     }
 
+    public List<SinhVien> selectByKeyword(String keyword) {
+        String sql = "SELECT * FROM SinhVien WHERE HoTen LIKE ?";
+        return selectAll(sql, "%" + keyword + "%");
+    }
 
     public SinhVien findById(String id) {
         String sql = "SELECT * FROM SinhVien WHERE MaSV=?";
@@ -79,7 +83,7 @@ public class SinhVienDAO {
         SinhVien sinhVien = new SinhVien();
         sinhVien.setMaSV(rs.getString("MaSV"));
         sinhVien.setHoTen(rs.getString("HoTen"));
-        sinhVien.setGioiTinh(rs.getString("GioiTinh"));
+        sinhVien.setGioiTinh(rs.getBoolean("GioiTinh"));
         sinhVien.setNgaySinh(rs.getDate("NgaySinh"));
         sinhVien.setSDT(rs.getString("SDT"));
         sinhVien.setCMND(rs.getString("CMND"));

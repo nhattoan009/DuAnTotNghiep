@@ -15,7 +15,7 @@ class HopDong {
     String maPhong;
     Date ngayTao;
     boolean trangThai;
-    float giaThue;
+    double giaThue;
     SinhVien sinhVien;
     Phong phong;
 }
