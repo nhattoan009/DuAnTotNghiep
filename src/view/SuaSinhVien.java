@@ -1,7 +1,6 @@
 package view;
 
 import helper.DateHelper;
-import java.util.Date;
 import model.SinhVien;
 
 /**
@@ -25,7 +24,7 @@ public class SuaSinhVien extends javax.swing.JFrame {
             String SDT,
             String Email,
             String CMND,
-            boolean GioiTinh
+            String GioiTinh
     //            String NgaySinh
     ) {
         initComponents();
@@ -37,7 +36,7 @@ public class SuaSinhVien extends javax.swing.JFrame {
         this.txtSDT.setText(SDT);
 
 //        this.txtNgaySinh.setText(NgaySinh);
-        this.cboGioiTinh.setSelectedIndex(GioiTinh ? 0 : 1);
+        this.cboGioiTinh.setSelectedItem(GioiTinh);
         
 //        this.cboGioiTinh.setSelectedIndex(GioiTinh ? 0 : 1);
     }
@@ -52,7 +51,7 @@ public class SuaSinhVien extends javax.swing.JFrame {
         txtEmail.setText(sv.getEmail());
         txtSDT.setText(sv.getSDT());
         txtNgaySinh.setText(DateHelper.toString(sv.getNgaySinh()));
-        cboGioiTinh.setSelectedIndex(sv.isGioiTinh() ? 0 : 1);
+        cboGioiTinh.setSelectedItem(sv.getGioiTinh());
     }
 
     @SuppressWarnings("unchecked")

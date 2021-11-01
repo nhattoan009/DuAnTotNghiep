@@ -15,7 +15,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
     DS_SinhVien ds_SinhVien = new DS_SinhVien();
 
     /**
-     * Creates new form ThemSinhVien
+     * Creates new form ThemSinhVien1
      */
     public ThemSinhVien() {
         initComponents();
@@ -50,17 +50,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
         }
 
     }
-//    void update() {
-//        SinhVien sv = getModel();
-//        try {
-//            dao.Update(sv);
-//            this.ds_SinhVien.load();
-//            lblMessage.setText("Cập nhật thành công!");
-//        } catch (Exception e) {
-//            lblMessage.setText("Cập nhật thành công!");
-//        }
-//
-//    }
 
     private static final String EMAIL_PATTERN
             = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -76,10 +65,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
 
     void check() {
 
-        if ((txtMaSV.getText()).length() < 10) {
-
-        if ((txtMaSV.getText()).length() < 7) {
-
+        if ((txtMaSV.getText()).length() < 5) {
             if ((txtMaSV.getText()).equals("")) {
                 lblMessage.setText("Thông tin không hợp lệ");
                 lblMessage.setForeground(Color.red);
@@ -126,7 +112,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
         sv.setEmail(txtEmail.getText());
         sv.setSDT(txtSDT.getText());
         sv.setNgaySinh(DateHelper.toDate(txtNgaySinh.getText()));
-        sv.setGioiTinh(cboGioiTinh.getSelectedIndex() == 0);
+        sv.setGioiTinh((String) cboGioiTinh.getSelectedItem());
         return sv;
     }
 
@@ -137,7 +123,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
         txtEmail.setText(sv.getEmail());
         txtSDT.setText(sv.getSDT());
         txtNgaySinh.setText(DateHelper.toString(sv.getNgaySinh()));
-        cboGioiTinh.setSelectedIndex(sv.isGioiTinh() ? 0 : 1);
+        cboGioiTinh.setSelectedItem(sv.getGioiTinh());
     }
 
     void clear() {
@@ -148,7 +134,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btnLuu = new javax.swing.JButton();
         btnHuy = new javax.swing.JButton();
@@ -377,6 +362,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ThemSinhVien.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -389,7 +375,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnLuu;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboGioiTinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

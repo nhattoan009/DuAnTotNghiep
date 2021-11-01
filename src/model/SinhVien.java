@@ -15,6 +15,6 @@ class SinhVien {
     String SDT;
     String CMND;
     String Email;
-    boolean gioiTinh;
+    String gioiTinh;
     Date ngaySinh;
 }
