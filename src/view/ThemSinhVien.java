@@ -26,7 +26,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
         SinhVien sv = getModel();
         try {
             dao.Insert(sv);
-            this.ds_SinhVien.dao.select();
+//            this.ds_SinhVien.dao.select();
             this.clear();
             lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
 

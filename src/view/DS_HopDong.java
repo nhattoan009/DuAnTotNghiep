@@ -20,7 +20,7 @@ public class DS_HopDong extends javax.swing.JPanel {
      */
     public DS_HopDong() {
         initComponents();
-        load();
+        this.load();
     }
 
     public void load() {

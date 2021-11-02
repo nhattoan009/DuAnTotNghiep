@@ -12,7 +12,7 @@ class Phong {
     String maPhong;
     int maDienNuoc;
     String tenPhong;
-    float giaPhong;
+    double giaPhong;
     boolean trangThai;
     DienNuoc dienNuoc;
 

@@ -1,10 +1,15 @@
 package view;
 
+import dao.HopDongDAO;
 import dao.PhongDAO;
 import helper.DateHelper;
+import java.awt.Color;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JComboBox;
+import java.util.Locale;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import model.HopDong;
 import model.Phong;
 
@@ -14,6 +19,9 @@ import model.Phong;
  */
 public class ThemHopDong extends javax.swing.JFrame {
 
+    HopDongDAO dao = new HopDongDAO();
+    PhongDAO pDao = new PhongDAO();
+
     /**
      * Creates new form ThemHopDong
      */
@@ -22,8 +30,10 @@ public class ThemHopDong extends javax.swing.JFrame {
             String hoTen
     ) {
         initComponents();
+        loadComboBox();
         this.setLocationRelativeTo(null);
         this.txtNgayTao.setText(DateHelper.toString(new Date()));
+        
         this.txtMaSV.setText(MaSV);
         this.txtHoTen.setText(hoTen);
 
@@ -32,23 +42,22 @@ public class ThemHopDong extends javax.swing.JFrame {
     private ThemHopDong() {
     }
 
-//    public void insert() {
-//        HopDong sv = getModel();
-//        try {
-//            dao.Insert(sv);
-//            this.ds_SinhVien.dao.select();
-//            this.clear();
-//            lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
-//
-//        } catch (Exception e) {
-//            lblMessage.setText("Thêm mới thất bại!");
-//            lblMessage.setForeground(Color.red);
-//            System.out.print(e);
+    public void insert() {
+        HopDong hd = getModel();
+        try {
+            dao.Insert(hd);
+            this.clear();
+            lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
+
+        } catch (Exception e) {
+            lblMessage.setText("Thêm mới thất bại!");
+            lblMessage.setForeground(Color.RED);
+            System.out.print(e);
+        }
+//        } else {
+//            lblMessage.setText("Lỗi!");
 //        }
-////        } else {
-////            lblMessage.setText("Lỗi!");
-////        }
-//    }
+    }
 //    public void update() {
 //        SinhVien sv = getModel();
 //        try {
@@ -59,6 +68,10 @@ public class ThemHopDong extends javax.swing.JFrame {
 //        }
 //
 //    }
+    
+    void clear(){
+        
+    }
     void setModel(HopDong sv) {
         txtMaSV.setText(sv.getMaSV());
         txtHoTen.setText(sv.getSinhVien().getHoTen());
@@ -71,12 +84,15 @@ public class ThemHopDong extends javax.swing.JFrame {
 
     HopDong getModel() {
         HopDong sv = new HopDong();
-
         sv.setMaSV(txtMaSV.getText());
         sv.setMaPhong(cboPhong.getSelectedItem().toString()); //////
         sv.setNgayTao(DateHelper.toDate(txtNgayTao.getText()));
+        String gia = txtGia.getText();
+        String str = gia.substring(0, gia.length() - 2);
+        sv.setGiaThue(Double.parseDouble(str));
         sv.setTrangThai(cboTrangThai.getSelectedIndex() == 0);
         return sv;
+        
 
     }
 
@@ -85,8 +101,8 @@ public class ThemHopDong extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnLuu = new javax.swing.JButton();
+        btnHuy = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -101,14 +117,25 @@ public class ThemHopDong extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtGia = new javax.swing.JTextField();
         txtMaSV = new javax.swing.JTextField();
+        lblMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
-        jButton3.setText("Lưu");
+        btnLuu.setText("Lưu");
+        btnLuu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLuuActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Hủy");
+        btnHuy.setText("Hủy");
+        btnHuy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
@@ -121,9 +148,9 @@ public class ThemHopDong extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLuu, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,8 +160,8 @@ public class ThemHopDong extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
+                            .addComponent(btnHuy)
+                            .addComponent(btnLuu))
                         .addContainerGap())))
         );
 
@@ -159,6 +186,9 @@ public class ThemHopDong extends javax.swing.JFrame {
         cboTrangThai.setToolTipText("chọ trạng thái");
 
         jLabel7.setText("Giá Phòng:");
+
+        lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblMessage.setForeground(new java.awt.Color(0, 153, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -192,11 +222,17 @@ public class ThemHopDong extends javax.swing.JFrame {
                         .addGap(29, 29, 29)
                         .addComponent(cboPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(15, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addContainerGap()
+                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -242,24 +278,53 @@ public class ThemHopDong extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    void selectComboBox() {
-        PhongDAO dao = new PhongDAO();
-//        String phong = (String) cboPhong.getSelectedItem();
-//        txtGia.setText(String.valueOf(phong.getGiaPhong()));
+    void loadComboBox() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboPhong.getModel();
+        model.removeAllElements();
+        try {
+            List<Phong> list = pDao.select();
+            for (Phong p : list) {
+                model.addElement(p.getMaPhong());
+                System.out.println(p.getMaPhong());
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi truy vấn!");
+        }
+        setGiaLenComboboxPhong();
+    }
 
+    void setGiaLenComboboxPhong() {
+        
+        String id = (String) cboPhong.getSelectedItem();
+        Phong phong = pDao.findById(id);
+        double giaPhong = phong.getGiaPhong();
+        
+        Locale locale = new Locale("vi", "VN");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+        String gia = currencyFormatter.format(giaPhong);
+        System.out.println(gia);
+        txtGia.setText(gia);
         
     }
 
     private void cboPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhongActionPerformed
-        selectComboBox();
+        
     }//GEN-LAST:event_cboPhongActionPerformed
+
+    private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnHuyActionPerformed
+
+    private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
+        insert();
+    }//GEN-LAST:event_btnLuuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -297,10 +362,10 @@ public class ThemHopDong extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHuy;
+    private javax.swing.JButton btnLuu;
     private javax.swing.JComboBox<String> cboPhong;
     private javax.swing.JComboBox<String> cboTrangThai;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -310,6 +375,7 @@ public class ThemHopDong extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblMessage;
     private javax.swing.JTextField txtGia;
     private javax.swing.JTextField txtHoTen;
     private javax.swing.JTextField txtMaSV;

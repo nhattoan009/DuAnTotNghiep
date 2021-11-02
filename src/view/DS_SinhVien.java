@@ -1,8 +1,15 @@
 package view;
 
+import dao.PhongDAO;
 import dao.SinhVienDAO;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Phong;
@@ -15,6 +22,8 @@ import model.SinhVien;
 public class DS_SinhVien extends javax.swing.JPanel {
 
     SinhVienDAO dao = new SinhVienDAO();
+    PhongDAO Pdao = new PhongDAO();
+    Phong phong = new Phong();
 
     /**
      * Creates new form ThemSinhVien1
@@ -269,24 +278,15 @@ public class DS_SinhVien extends javax.swing.JPanel {
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
         TimKiem();
     }//GEN-LAST:event_btnTimKiemActionPerformed
-    
-    
+
+
     private void txtTaoHopDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaoHopDongActionPerformed
         String masv = (String) tblDSSV.getValueAt(this.index, 0);
         String tensv = (String) tblDSSV.getValueAt(this.index, 1);
-
-        SinhVien model = dao.findById(masv);
-        if (model != null) {
-            ThemHopDong ssv = new ThemHopDong(masv, tensv);
-            ssv.setVisible(true);
-        }
-        System.out.println(masv + "-" + tensv);
-
-//        String MaSV,
-//            String hoTen,
-//            String MaPhong,
-//            double GiaPhong,
-//            Date NgayTao
+        
+        ThemHopDong ssv = new ThemHopDong(masv, tensv);
+        ssv.setVisible(true);
+        
     }//GEN-LAST:event_txtTaoHopDongActionPerformed
 
 
