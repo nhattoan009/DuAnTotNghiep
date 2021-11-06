@@ -10,7 +10,6 @@ public @Data
 class Phong {
 
     String maPhong;
-    int maDienNuoc;
     String tenPhong;
     double giaPhong;
     boolean trangThai;

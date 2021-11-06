@@ -25,6 +25,7 @@ public class TrangChinh extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         btnDSPhong = new javax.swing.JMenuItem();
         btn_DSHopDong = new javax.swing.JMenuItem();
+        btnDichVu = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         btnDSTK = new javax.swing.JMenuItem();
         btnQLSV = new javax.swing.JMenu();
@@ -71,6 +72,14 @@ public class TrangChinh extends javax.swing.JFrame {
             }
         });
         jMenu4.add(btn_DSHopDong);
+
+        btnDichVu.setText("Dịch vụ");
+        btnDichVu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDichVuActionPerformed(evt);
+            }
+        });
+        jMenu4.add(btnDichVu);
 
         jMenuBar2.add(jMenu4);
 
@@ -186,6 +195,16 @@ public class TrangChinh extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_DSHopDongActionPerformed
 
+    private void btnDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDichVuActionPerformed
+        try {
+            tab.setSelectedComponent(new DS_DichVu());
+        } catch (Exception e) {
+            DS_DichVu pnl = new DS_DichVu();
+            tab.add("Danh sách dịch vụ", pnl);
+            tab.setSelectedComponent(pnl);
+        }
+    }//GEN-LAST:event_btnDichVuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -220,6 +239,7 @@ public class TrangChinh extends javax.swing.JFrame {
     private javax.swing.JMenuItem btnDSPhong;
     private javax.swing.JMenuItem btnDSSV;
     private javax.swing.JMenuItem btnDSTK;
+    private javax.swing.JMenuItem btnDichVu;
     private javax.swing.JMenu btnQLSV;
     private javax.swing.JMenuItem btn_DSHopDong;
     private javax.swing.JMenu jMenu1;

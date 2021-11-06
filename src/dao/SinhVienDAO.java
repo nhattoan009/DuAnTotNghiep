@@ -50,7 +50,7 @@ public class SinhVienDAO {
     }
 
     public List<SinhVien> selectByKeyword(String keyword) {
-        String sql = "SELECT * FROM SinhVien WHERE HoTen LIKE ?";
+        String sql = "SELECT * FROM SinhVien WHERE HoTen LIKE ? ORDER BY HoTen";
         return selectAll(sql, "%" + keyword + "%");
     }
 

@@ -48,7 +48,7 @@ public class HopDongDAO {
     }
     
     public List<HopDong> selectByKeyword(String keyword) {
-        String sql = "SELECT * FROM HopDong WHERE MaSV LIKE ?";
+        String sql = "SELECT * FROM HopDong WHERE MaSV LIKE ? ORDER BY TrangThai DESC";
         return selectAll(sql, "%" + keyword + "%");
     }
 

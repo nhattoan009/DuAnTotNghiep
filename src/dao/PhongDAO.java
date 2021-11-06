@@ -14,19 +14,17 @@ import model.Phong;
 public class PhongDAO {
 
     public void Insert(Phong phong) {
-        String sql = "INSERT INTO Phong VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Phong VALUES (?, ?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
                 phong.getMaPhong(),
-                phong.getMaDienNuoc(),
                 phong.getTenPhong(),
                 phong.getGiaPhong(),
                 phong.isTrangThai());
     }
 
     public void Update(Phong phong) {
-        String sql = "UPDATE Phong SET MaPhong=?,MaDienNuoc=?, TenPhong=?, GiaPhong=?, TrangThai=? WHERE MaPhong=?"; //where
+        String sql = "UPDATE Phong SET TenPhong=?, GiaPhong=?, TrangThai=? WHERE MaPhong=?"; //where
         JDBCHelper.executeUpdate(sql,
-                phong.getMaDienNuoc(),
                 phong.getTenPhong(),
                 phong.getGiaPhong(),
                 phong.isTrangThai(),
@@ -41,6 +39,11 @@ public class PhongDAO {
     public List<Phong> select() {
         String sql = "SELECT * FROM Phong";
         return selectAll(sql);
+    }
+    
+    public List<Phong> selectByKeyword(String keyword) {
+        String sql = "SELECT * FROM Phong WHERE MaPhong LIKE ?";
+        return selectAll(sql, "%" + keyword + "%");
     }
 
     public Phong findById(String id) {
@@ -71,7 +74,6 @@ public class PhongDAO {
     private Phong readFromResultSet(ResultSet rs) throws SQLException {
         Phong phong = new Phong();
         phong.setMaPhong(rs.getString("MaPhong"));
-        phong.setMaDienNuoc(rs.getInt("MaDienNuoc"));
         phong.setTenPhong(rs.getString("TenPhong"));
         phong.setGiaPhong(rs.getFloat("GiaPhong"));
         phong.setTrangThai(rs.getBoolean("TrangThai"));

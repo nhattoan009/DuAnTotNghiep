@@ -92,8 +92,6 @@ public class ThemHopDong extends javax.swing.JFrame {
         sv.setGiaThue(Double.parseDouble(str));
         sv.setTrangThai(cboTrangThai.getSelectedIndex() == 0);
         return sv;
-        
-
     }
 
     @SuppressWarnings("unchecked")
@@ -130,7 +128,7 @@ public class ThemHopDong extends javax.swing.JFrame {
             }
         });
 
-        btnHuy.setText("Hủy");
+        btnHuy.setText("Đóng");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHuyActionPerformed(evt);

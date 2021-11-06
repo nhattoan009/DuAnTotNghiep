@@ -68,6 +68,8 @@ public class DangNhap extends javax.swing.JFrame {
 
         txtUsername.setText("hntoan");
         getContentPane().add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 360, 50));
+
+        txtPassword.setText("123");
         getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 350, 50));
 
         jLabel4.setFont(new java.awt.Font("InputSerifNarrow Medium", 0, 11)); // NOI18N

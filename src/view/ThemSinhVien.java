@@ -14,9 +14,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
     SinhVienDAO dao = new SinhVienDAO();
     DS_SinhVien ds_SinhVien = new DS_SinhVien();
 
-    /**
-     * Creates new form ThemSinhVien1
-     */
+
     public ThemSinhVien() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -40,16 +38,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
 //        }
     }
 
-    public void update() {
-        SinhVien sv = getModel();
-        try {
-            dao.Update(sv);
-            lblMessage.setText("Cập nhật thành công!");
-        } catch (Exception e) {
-            lblMessage.setText("Cập nhật thành công!");
-        }
-
-    }
 
     private static final String EMAIL_PATTERN
             = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
@@ -61,47 +49,53 @@ public class ThemSinhVien extends javax.swing.JFrame {
         }
         return email.matches(EMAIL_PATTERN);
     }
-    boolean flag = false;
 
-    void check() {
-
+    boolean check() {
         if ((txtMaSV.getText()).length() < 5) {
             if ((txtMaSV.getText()).equals("")) {
                 lblMessage.setText("Thông tin không hợp lệ");
                 lblMessage.setForeground(Color.red);
-            } else {
-
+                return false;
             }
         } else if ((txtHoTen.getText()).equals("")) {
             lblMessage.setText("Thông tin không hợp lệ");
             lblMessage.setForeground(Color.red);
+            return false;
         } else if (txtSDT.getText().equals("")) {
             lblMessage.setText("Thông tin không hợp lệ");
             lblMessage.setForeground(Color.red);
+            return false;
         } else if (txtSDT.getText().length() < 10 || txtSDT.getText().length() > 12) {
             lblMessage.setText("Thông tin không hợp lệ");
             lblMessage.setForeground(Color.red);
+            return false;
         } else if (!txtSDT.getText().matches("[0-9]+")) {
             lblMessage.setText("Thông tin không hợp lệ");
             lblMessage.setForeground(Color.red);
+            return false;
         } else if (txtEmail.getText().equals("")) {
             lblMessage.setText("Thông tin không hợp lệ");
             lblMessage.setForeground(Color.red);
+            return false;
         } else if (verifyEmail(txtEmail.getText()) == false) {
             lblMessage.setText("Thông tin không hợp lệ");
             lblMessage.setForeground(Color.red);
+            return false;
         } else if (txtNgaySinh.getText().equals("")) {
             lblMessage.setText("Thông tin không hợp lệ");
             lblMessage.setForeground(Color.red);
+            return false;
         } else if (!txtNgaySinh.getText().equals("")) {
             if ((txtNgaySinh.getText().length() != 10)) {
                 lblMessage.setText("Thông tin không hợp lệ");
                 lblMessage.setForeground(Color.red);
+                return false;
             } else {
-                flag = true;
+                lblMessage.setForeground(new Color(0,153,255));
+                return true;
             }
         }
-
+        return true;
     }
 
     SinhVien getModel() {
@@ -326,8 +320,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        check();
-        if (flag == true) {
+        if (check()) {
             insert();
         }
     }//GEN-LAST:event_btnLuuActionPerformed

@@ -18,8 +18,8 @@ public class DienNuocDAO {
         JDBCHelper.executeUpdate(sql,
                 dienNuoc.getChiSoDienCu(),
                 dienNuoc.getChiSoNuocCu(),
-                dienNuoc.getGiaDien(),
-                dienNuoc.getGiaNuoc());
+                dienNuoc.getChiSoDienMoi(),
+                dienNuoc.getChiSoNuocMoi());
     }
 
     public void Update(DienNuoc dienNuoc) {
@@ -27,8 +27,8 @@ public class DienNuocDAO {
         JDBCHelper.executeUpdate(sql,
                 dienNuoc.getChiSoDienCu(),
                 dienNuoc.getChiSoNuocCu(),
-                dienNuoc.getGiaDien(),
-                dienNuoc.getGiaNuoc());
+                dienNuoc.getChiSoDienMoi(),
+                dienNuoc.getChiSoNuocMoi());
     }
 
     public List<DienNuoc> select() {
@@ -58,9 +58,9 @@ public class DienNuocDAO {
     private DienNuoc readFromResultSet(ResultSet rs) throws SQLException {
         DienNuoc dienNuoc = new DienNuoc();
         dienNuoc.setChiSoDienCu(rs.getInt("ChiSoDienCu"));
-        dienNuoc.setChiSoNuocCu(rs.getInt("ChiSoDienMoi"));
-        dienNuoc.setGiaDien(rs.getFloat("GiaDien"));
-        dienNuoc.setGiaNuoc(rs.getFloat("GiaNuoc"));
+        dienNuoc.setChiSoNuocCu(rs.getInt("ChiSoNuocCu"));
+        dienNuoc.setChiSoDienMoi(rs.getInt("ChiSoDienMoi"));
+        dienNuoc.setChiSoNuocMoi(rs.getInt("ChiSoNuocMoi"));
         return dienNuoc;
     }
 }

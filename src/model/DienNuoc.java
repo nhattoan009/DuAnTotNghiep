@@ -10,9 +10,12 @@ public @Data
 class DienNuoc {
 
     int maDienNuoc;
+    String maPhong;
+    String maDV;
     int chiSoDienCu;
     int chiSoNuocCu;
-    float giaDien;
-    float giaNuoc;
-
+    int chiSoDienMoi;
+    int chiSoNuocMoi;
+    Phong phong;
+    DichVu dichVu;
 }
