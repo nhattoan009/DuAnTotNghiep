@@ -28,6 +28,8 @@ public class SuaPhong extends javax.swing.JFrame {
         this.cboTrangThai.setSelectedItem(TrangThai);
     }
 
+    private SuaPhong() {}
+
     void update() {
         Phong model = getModel();
         try {

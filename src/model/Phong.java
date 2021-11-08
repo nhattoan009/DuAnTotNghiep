@@ -13,6 +13,5 @@ class Phong {
     String tenPhong;
     double giaPhong;
     boolean trangThai;
-    DienNuoc dienNuoc;
-
+//    DienNuoc dienNuoc;
 }

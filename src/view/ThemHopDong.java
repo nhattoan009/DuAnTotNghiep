@@ -39,7 +39,7 @@ public class ThemHopDong extends javax.swing.JFrame {
 
     }
 
-    private ThemHopDong() {
+    ThemHopDong() {
     }
 
     public void insert() {

@@ -59,7 +59,7 @@ public class DS_HopDong extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnTaoHoaDon = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSHD = new javax.swing.JTable();
         btnTimKiem = new javax.swing.JButton();
@@ -90,7 +90,12 @@ public class DS_HopDong extends javax.swing.JPanel {
             }
         });
 
-        jButton5.setText("Thanh toán");
+        btnTaoHoaDon.setText("Tạo hóa đơn");
+        btnTaoHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaoHoaDonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,7 +104,7 @@ public class DS_HopDong extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(btnTaoHoaDon)
                 .addGap(18, 18, 18)
                 .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -118,7 +123,7 @@ public class DS_HopDong extends javax.swing.JPanel {
                             .addComponent(btnCapNhat)
                             .addComponent(jButton4)
                             .addComponent(btnLamMoi)
-                            .addComponent(jButton5))
+                            .addComponent(btnTaoHoaDon))
                         .addContainerGap())))
         );
 
@@ -226,8 +231,8 @@ public class DS_HopDong extends javax.swing.JPanel {
 
 //        HopDong model = dao.findById(mahd);
 //        if (model != null) {
-            SuaHopDong ssv = new SuaHopDong(mahd, masv, mp, ngayTao, tt, gia);
-            ssv.setVisible(true);
+        SuaHopDong ssv = new SuaHopDong(mahd, masv, mp, ngayTao, tt, gia);
+        ssv.setVisible(true);
 //        }
         System.out.println(mahd + "-" + masv + "-" + mp + "-" + ngayTao + "-" + tt + "-" + gia);
     }//GEN-LAST:event_btnCapNhatActionPerformed
@@ -236,13 +241,24 @@ public class DS_HopDong extends javax.swing.JPanel {
         this.load();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
+    private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
+        int mahd = (int) tblDSHD.getValueAt(this.index, 0);
+        String masv = (String) tblDSHD.getValueAt(this.index, 1);
+        String maphong = (String) tblDSHD.getValueAt(this.index, 2);
+        Date ngatTao = (Date) tblDSHD.getValueAt(this.index, 3);
+        String trangThai = (String) tblDSHD.getValueAt(this.index, 4);
+        String giaThue = String.valueOf(tblDSHD.getValueAt(this.index, 5));
+
+        HoaDon hoaDon = new HoaDon(mahd, masv, maphong, ngatTao, trangThai, giaThue);
+        hoaDon.setVisible(true);
+    }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnLamMoi;
+    private javax.swing.JButton btnTaoHoaDon;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -253,27 +269,4 @@ public class DS_HopDong extends javax.swing.JPanel {
     private javax.swing.JTextField txtTimKiem1;
     // End of variables declaration//GEN-END:variables
 
-//    void load() {
-//        DefaultTableModel model = (DefaultTableModel) tblDSHD.getModel();
-//        model.setRowCount(0);
-//        try {
-//            String keyword = txtTimKiem.getText();
-//            List<HopDong> list = dao.selectByKeyword(keyword);
-//            for (NguoiHoc nh : list) {
-//                Object[] row = {
-//                    nh.getMaNH(),
-//                    nh.getHoTen(),
-//                    nh.getGioiTinh() ? "Nam" : "Nữ",
-//                    DateHelper.toString(nh.getNgaySinh()),
-//                    nh.getDienThoai(),
-//                    nh.getEmail(),
-//                    nh.getMaNV(),
-//                    DateHelper.toString(nh.getNgayDK())
-//                };
-//                model.addRow(row);
-//            }
-//        } catch (Exception e) {
-//            DialogHelper.alert(this, "Lỗi truy vấn dữ liệu!");
-//        }
-//    }
 }

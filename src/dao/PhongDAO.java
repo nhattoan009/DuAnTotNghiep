@@ -40,7 +40,17 @@ public class PhongDAO {
         String sql = "SELECT * FROM Phong";
         return selectAll(sql);
     }
-    
+
+    public List<Phong> selectPhong_1() {
+        String sql = "SELECT * FROM Phong Where TrangThai=1";
+        return selectAll(sql);
+    }
+
+    public List<Phong> selectPhong_0() {
+        String sql = "SELECT * FROM Phong Where TrangThai=0";
+        return selectAll(sql);
+    }
+
     public List<Phong> selectByKeyword(String keyword) {
         String sql = "SELECT * FROM Phong WHERE MaPhong LIKE ?";
         return selectAll(sql, "%" + keyword + "%");

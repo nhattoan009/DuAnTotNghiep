@@ -1,14 +1,9 @@
 package view;
 
-/**
- *
- * @author tuong
- */
+import javax.swing.JOptionPane;
+
 public class TrangChinh extends javax.swing.JFrame {
 
-    /**
-     * Creates new form TrangChinh
-     */
     public TrangChinh() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -19,13 +14,16 @@ public class TrangChinh extends javax.swing.JFrame {
     private void initComponents() {
 
         tab = new javax.swing.JTabbedPane();
+        pnlDSP = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu6 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
+        DSP = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         btnDSPhong = new javax.swing.JMenuItem();
         btn_DSHopDong = new javax.swing.JMenuItem();
         btnDichVu = new javax.swing.JMenuItem();
+        btn_DSHoaDon = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         btnDSTK = new javax.swing.JMenuItem();
         btnQLSV = new javax.swing.JMenu();
@@ -34,6 +32,17 @@ public class TrangChinh extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout pnlDSPLayout = new javax.swing.GroupLayout(pnlDSP);
+        pnlDSP.setLayout(pnlDSPLayout);
+        pnlDSPLayout.setHorizontalGroup(
+            pnlDSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1383, Short.MAX_VALUE)
+        );
+        pnlDSPLayout.setVerticalGroup(
+            pnlDSPLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 638, Short.MAX_VALUE)
+        );
 
         jMenu6.setBackground(new java.awt.Color(204, 204, 204));
         jMenu6.setText("                                                                                          ");
@@ -49,6 +58,15 @@ public class TrangChinh extends javax.swing.JFrame {
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu3.setMargin(new java.awt.Insets(10, 10, 10, 10));
         jMenu3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        DSP.setText("DSP");
+        DSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DSPActionPerformed(evt);
+            }
+        });
+        jMenu3.add(DSP);
+
         jMenuBar2.add(jMenu3);
 
         jMenu4.setText("Quản lí phòng");
@@ -80,6 +98,14 @@ public class TrangChinh extends javax.swing.JFrame {
             }
         });
         jMenu4.add(btnDichVu);
+
+        btn_DSHoaDon.setText("Danh sách hóa đơn");
+        btn_DSHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DSHoaDonActionPerformed(evt);
+            }
+        });
+        jMenu4.add(btn_DSHoaDon);
 
         jMenuBar2.add(jMenu4);
 
@@ -135,6 +161,11 @@ public class TrangChinh extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(tab, javax.swing.GroupLayout.DEFAULT_SIZE, 1388, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(12, Short.MAX_VALUE)
+                    .addComponent(pnlDSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(13, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,6 +173,11 @@ public class TrangChinh extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(tab, javax.swing.GroupLayout.DEFAULT_SIZE, 638, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(pnlDSP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         pack();
@@ -152,17 +188,19 @@ public class TrangChinh extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu6ActionPerformed
 
     private void btnQLSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQLSVActionPerformed
-        
+
     }//GEN-LAST:event_btnQLSVActionPerformed
 
     private void btnDSSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDSSVActionPerformed
         try {
             tab.setSelectedComponent(new DS_SinhVien());
+
         } catch (Exception e) {
             DS_SinhVien pnl = new DS_SinhVien();
             tab.add("Danh sách sinh viên", pnl);
             tab.setSelectedComponent(pnl);
         }
+
     }//GEN-LAST:event_btnDSSVActionPerformed
 
     private void btnDSTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDSTKActionPerformed
@@ -205,9 +243,26 @@ public class TrangChinh extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDichVuActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void DSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DSPActionPerformed
+        try {
+            tab.setSelectedComponent(new Load_DS_Phong());
+        } catch (Exception e) {
+            Load_DS_Phong pnl = new Load_DS_Phong();
+            tab.add("Danh sách p", pnl);
+            tab.setSelectedComponent(pnl);
+        }
+    }//GEN-LAST:event_DSPActionPerformed
+
+    private void btn_DSHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DSHoaDonActionPerformed
+        try {
+            tab.setSelectedComponent(new DS_HoaDon());
+        } catch (Exception e) {
+            DS_HoaDon pnl = new DS_HoaDon();
+            tab.add("Danh sách hóa đơn", pnl);
+            tab.setSelectedComponent(pnl);
+        }
+    }//GEN-LAST:event_btn_DSHoaDonActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -236,11 +291,13 @@ public class TrangChinh extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem DSP;
     private javax.swing.JMenuItem btnDSPhong;
     private javax.swing.JMenuItem btnDSSV;
     private javax.swing.JMenuItem btnDSTK;
     private javax.swing.JMenuItem btnDichVu;
     private javax.swing.JMenu btnQLSV;
+    private javax.swing.JMenuItem btn_DSHoaDon;
     private javax.swing.JMenuItem btn_DSHopDong;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -248,6 +305,7 @@ public class TrangChinh extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JPanel pnlDSP;
     private javax.swing.JTabbedPane tab;
     // End of variables declaration//GEN-END:variables
 }
