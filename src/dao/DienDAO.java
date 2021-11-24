@@ -38,11 +38,16 @@ public class DienDAO {
         String sql = "SELECT * FROM Dien";
         return selectAll(sql);
     }
-    
+
     public Dien findById(String id) {
         String sql = "SELECT * FROM Dien WHERE MaDien = ?";
         List<Dien> list = selectAll(sql, id);
         return list.size() > 0 ? list.get(0) : null;
+    }
+
+    public List<Dien> selectSCMDien(String keyword) {
+        String sql = "SELECT * FROM Dien WHERE MaPhong = ?";
+        return selectAll(sql, keyword);
     }
 
     private List<Dien> selectAll(String sql, Object... args) {

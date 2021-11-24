@@ -20,20 +20,16 @@ public class ThemDienNuoc extends javax.swing.JFrame {
     NuocDAO nDao = new NuocDAO();
     DichVuDAO dvDAO = new DichVuDAO();
 
-    public ThemDienNuoc(
-            int csmDien,
-            int csmNuoc
-    ) {
+    public ThemDienNuoc( //            int csmDien,
+            //            int csmNuoc
+            ) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.txtCSCdien.setText(String.valueOf(csmDien));
-        this.txtCSCnuoc.setText(String.valueOf(csmNuoc));
-        
-        
+//        this.txtCSCdien.setText(String.valueOf(csmDien));
+//        this.txtCSCnuoc.setText(String.valueOf(csmNuoc));
+
         this.loadComboBox();
     }
-
-    private ThemDienNuoc() {}
 
     void loadComboBox() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboPhong.getModel();
@@ -87,6 +83,7 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         double gia = dichVu.getGiaDV();
 //        dien.setMaDV(dv.getMaDV());
         dien.setMaPhong(cboPhong.getSelectedItem().toString());
+        dien.setMaDV(dichVu.getMaDV());
         dien.setThang(cboThang.getSelectedItem().toString());
         dien.setChiSoCu(csc);
         dien.setChiSoMoi(csm);
@@ -103,7 +100,7 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         int csm = Integer.parseInt(txtCSMnuoc.getText());
         int dntt = csm - csc;
         double gia = dichVu.getGiaDV();
-//        dien.setMaDV(dv.getMaDV());
+        nuoc.setMaDV(dichVu.getMaDV());
         nuoc.setMaPhong(cboPhong.getSelectedItem().toString());
         nuoc.setThang(cboThang.getSelectedItem().toString());
         nuoc.setChiSoCu(csc);
@@ -111,6 +108,21 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         nuoc.setSuDung(dntt);
         nuoc.setTongTien(dntt * gia);
         return nuoc;
+    }
+
+    public void loadDN() {
+        String MaPhong = (String) cboPhong.getSelectedItem();
+        List<Dien> diens = dDao.selectSCMDien(MaPhong);
+        for (int i = 0; i < diens.size(); i++) {
+            int csm = diens.get(i).getChiSoMoi();
+            txtCSCdien.setText(String.valueOf(csm));
+        }
+
+        List<Nuoc> nuocs = nDao.selectSCMNuoc(MaPhong);
+        for (int i = 0; i < nuocs.size(); i++) {
+            int csm = nuocs.get(i).getChiSoMoi();
+            txtCSCnuoc.setText(String.valueOf(csm));
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -135,6 +147,7 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         cboThang = new javax.swing.JComboBox<>();
         txtCSMnuoc = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        btnChon = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -147,7 +160,7 @@ public class ThemDienNuoc extends javax.swing.JFrame {
             }
         });
 
-        btnHuy.setText("Hủy");
+        btnHuy.setText("Đóng");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHuyActionPerformed(evt);
@@ -205,6 +218,13 @@ public class ThemDienNuoc extends javax.swing.JFrame {
 
         jLabel9.setText("Chỉ số mới");
 
+        btnChon.setText("chọn");
+        btnChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -220,7 +240,9 @@ public class ThemDienNuoc extends javax.swing.JFrame {
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(cboPhong, 0, 168, Short.MAX_VALUE)))
-                .addGap(153, 153, 153)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnChon)
+                .addGap(90, 90, 90)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,13 +269,14 @@ public class ThemDienNuoc extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(cboPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnChon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -311,6 +334,10 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cboPhongMouseClicked
 
+    private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
+        loadDN();
+    }//GEN-LAST:event_btnChonActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -344,6 +371,7 @@ public class ThemDienNuoc extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChon;
     private javax.swing.JButton btnHuy;
     private javax.swing.JButton btnLuu;
     private javax.swing.JComboBox<String> cboPhong;

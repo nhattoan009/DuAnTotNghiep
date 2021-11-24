@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.Dien;
 import model.Nuoc;
 
 public class NuocDAO {
@@ -33,6 +34,10 @@ public class NuocDAO {
     public List<Nuoc> select() {
         String sql = "SELECT * FROM Nuoc";
         return selectAll(sql);
+    }
+    public List<Nuoc> selectSCMNuoc(String keyword) {
+        String sql = "SELECT * FROM Nuoc WHERE MaPhong = ?";
+        return selectAll(sql, keyword);
     }
 
     private List<Nuoc> selectAll(String sql, Object... args) {

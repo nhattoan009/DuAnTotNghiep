@@ -97,7 +97,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnHuy">
           <Properties>
-            <Property name="text" type="java.lang.String" value="H&#x1ee7;y"/>
+            <Property name="text" type="java.lang.String" value="&#x110;&#xf3;ng"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHuyActionPerformed"/>
@@ -135,7 +135,9 @@
                           <Component id="cboPhong" pref="168" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnChon" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="jLabel9" min="-2" pref="95" max="-2" attributes="0"/>
@@ -171,14 +173,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="lblMessage" min="-2" pref="23" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="jLabel8" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                   <Component id="cboPhong" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jLabel3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="jLabel3" max="32767" attributes="0"/>
+                              <Component id="btnChon" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -294,6 +297,14 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Ch&#x1ec9; s&#x1ed1; m&#x1edb;i"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnChon">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ch&#x1ecd;n"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

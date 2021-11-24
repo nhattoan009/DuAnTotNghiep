@@ -5,6 +5,9 @@
         <group>
             <file>file:/E:/MyFile/aDUAn/KTX/DuAnTotNghiep/src/view/ThemDienNuoc.java</file>
             <file>file:/E:/MyFile/aDUAn/KTX/DuAnTotNghiep/src/view/DS_SinhVien.java</file>
+            <file>file:/E:/MyFile/aDUAn/KTX/DuAnTotNghiep/src/dao/DienDAO.java</file>
+            <file>file:/E:/MyFile/aDUAn/KTX/DuAnTotNghiep/src/view/DS_HopDong.java</file>
+            <file>file:/E:/MyFile/aDUAn/KTX/DuAnTotNghiep/src/dao/NuocDAO.java</file>
             <file>file:/E:/MyFile/aDUAn/KTX/DuAnTotNghiep/src/view/DienNuoc.java</file>
             <file>file:/E:/MyFile/aDUAn/KTX/DuAnTotNghiep/src/dao/DichVuDAO.java</file>
         </group>

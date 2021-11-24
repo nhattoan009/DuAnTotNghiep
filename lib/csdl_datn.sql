@@ -91,7 +91,7 @@ select * from Dien
 select * from HopDong
 
 drop table DichVu
-drop table Phong 
+drop table Phong
 drop table SinhVien
 drop table HopDong
 drop table HoaDon
@@ -103,3 +103,6 @@ ALTER TABLE Nuoc
 
 ALTER TABLE Nuoc
   ALTER COLUMN Thang NVARCHAR(10) NOT NULL;
+
+delete from Nuoc
+
