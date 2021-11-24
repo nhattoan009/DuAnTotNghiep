@@ -23,11 +23,13 @@ public class TrangChinh extends javax.swing.JFrame {
         btnDSPhong = new javax.swing.JMenuItem();
         btn_DSHopDong = new javax.swing.JMenuItem();
         btnDichVu = new javax.swing.JMenuItem();
-        btn_DSHoaDon = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         btnDSTK = new javax.swing.JMenuItem();
         btnQLSV = new javax.swing.JMenu();
         btnDSSV = new javax.swing.JMenuItem();
+        btn_DienNuoc = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        btn_DSHoaDon = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -99,14 +101,6 @@ public class TrangChinh extends javax.swing.JFrame {
         });
         jMenu4.add(btnDichVu);
 
-        btn_DSHoaDon.setText("Danh sách hóa đơn");
-        btn_DSHoaDon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_DSHoaDonActionPerformed(evt);
-            }
-        });
-        jMenu4.add(btn_DSHoaDon);
-
         jMenuBar2.add(jMenu4);
 
         jMenu1.setText("Quản lí tài khoản");
@@ -144,6 +138,27 @@ public class TrangChinh extends javax.swing.JFrame {
         btnQLSV.add(btnDSSV);
 
         jMenuBar2.add(btnQLSV);
+
+        btn_DienNuoc.setText("Thanh toán");
+        btn_DienNuoc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jMenuItem1.setText("Hóa đơn điện/ nước");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        btn_DienNuoc.add(jMenuItem1);
+
+        btn_DSHoaDon.setText("Danh sách hóa đơn");
+        btn_DSHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_DSHoaDonActionPerformed(evt);
+            }
+        });
+        btn_DienNuoc.add(btn_DSHoaDon);
+
+        jMenuBar2.add(btn_DienNuoc);
 
         jMenu2.setText("Thống Kê");
         jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -263,6 +278,16 @@ public class TrangChinh extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_DSHoaDonActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        try {
+            tab.setSelectedComponent(new DienNuoc());
+        } catch (Exception e) {
+            DienNuoc pnl = new DienNuoc();
+            tab.add("Quản lý điện nước", pnl);
+            tab.setSelectedComponent(pnl);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -299,12 +324,14 @@ public class TrangChinh extends javax.swing.JFrame {
     private javax.swing.JMenu btnQLSV;
     private javax.swing.JMenuItem btn_DSHoaDon;
     private javax.swing.JMenuItem btn_DSHopDong;
+    private javax.swing.JMenu btn_DienNuoc;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel pnlDSP;
     private javax.swing.JTabbedPane tab;
     // End of variables declaration//GEN-END:variables

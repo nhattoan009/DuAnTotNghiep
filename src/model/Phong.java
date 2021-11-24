@@ -2,10 +2,6 @@ package model;
 
 import lombok.Data;
 
-/**
- *
- * @author huynh
- */
 public @Data
 class Phong {
 
@@ -13,5 +9,4 @@ class Phong {
     String tenPhong;
     double giaPhong;
     boolean trangThai;
-//    DienNuoc dienNuoc;
 }

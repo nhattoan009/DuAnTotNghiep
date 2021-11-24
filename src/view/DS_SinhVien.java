@@ -39,10 +39,10 @@ public class DS_SinhVien extends javax.swing.JPanel {
                     sv.getMaSV(),
                     sv.getHoTen(),
                     sv.isGioiTinh() ? "Nam" : "Nữ",
-                    sv.getNgaySinh(),
                     sv.getSDT(),
+                    sv.getCMND(),
                     sv.getEmail(),
-                    sv.getCMND(),};
+                    sv.getNgaySinh()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -193,19 +193,17 @@ public class DS_SinhVien extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1180, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTimKiem1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtTimKiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
                                 .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
@@ -219,13 +217,13 @@ public class DS_SinhVien extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblMessage)
-                            .addComponent(jLabel2))
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTimKiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -250,9 +248,11 @@ public class DS_SinhVien extends javax.swing.JPanel {
                 SinhVien model = dao.findById(masv);
                 if (model != null) {
                     dao.Delete(masv);
+                    lblMessage.setText("Xóa thành công");
                 }
             } catch (Exception e) {
                 lblMessage.setText("xóa lỗi");
+                System.out.println(e);
             }
         }
     }
@@ -265,10 +265,10 @@ public class DS_SinhVien extends javax.swing.JPanel {
         String masv = (String) tblDSSV.getValueAt(this.index, 0);
         String tensv = (String) tblDSSV.getValueAt(this.index, 1);
         String gt = (String.valueOf(tblDSSV.getValueAt(this.index, 2)));
-        Date namsinh = (Date) tblDSSV.getValueAt(this.index, 3);
-        String sdt = (String) tblDSSV.getValueAt(this.index, 4);
+        String sdt = (String) tblDSSV.getValueAt(this.index, 3);
+        String cmnd = (String) tblDSSV.getValueAt(this.index, 4);
         String email = (String) tblDSSV.getValueAt(this.index, 5);
-        String cmnd = (String) tblDSSV.getValueAt(this.index, 6);
+        Date namsinh = (Date) tblDSSV.getValueAt(this.index, 6);
         SinhVien model = dao.findById(masv);
         if (model != null) {
             SuaSinhVien ssv = new SuaSinhVien(masv, tensv, sdt, email, cmnd, gt, namsinh);
@@ -302,10 +302,10 @@ public class DS_SinhVien extends javax.swing.JPanel {
     private void txtTaoHopDongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTaoHopDongActionPerformed
         String masv = (String) tblDSSV.getValueAt(this.index, 0);
         String tensv = (String) tblDSSV.getValueAt(this.index, 1);
-        
+
         ThemHopDong ssv = new ThemHopDong(masv, tensv);
         ssv.setVisible(true);
-        
+
     }//GEN-LAST:event_txtTaoHopDongActionPerformed
 
 

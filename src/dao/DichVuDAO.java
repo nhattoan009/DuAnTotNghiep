@@ -7,27 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 import model.DichVu;
 
-/**
- *
- * @author huynh
- */
 public class DichVuDAO {
 
     public void Insert(DichVu dichVu) {
-        String sql = "INSERT INTO DichVu VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO DichVu VALUES (?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
                 dichVu.getMaDV(),
                 dichVu.getTenDV(),
-                dichVu.getGiaDV(),
-                dichVu.getGhiChu());
+                dichVu.getGiaDV());
     }
 
     public void Update(DichVu dichVu) {
-        String sql = "UPDATE DichVu SET TenDV=?, GiaDV=?, GhiChu=? WHERE MaDV=?"; //where
+        String sql = "UPDATE DichVu SET TenDV=?, GiaDV=? WHERE MaDV=?"; //where
         JDBCHelper.executeUpdate(sql,
                 dichVu.getTenDV(),
                 dichVu.getGiaDV(),
-                dichVu.getGhiChu(),
                 dichVu.getMaDV());
     }
 
@@ -38,6 +32,11 @@ public class DichVuDAO {
 
     public List<DichVu> select() {
         String sql = "SELECT * FROM DichVu";
+        return selectAll(sql);
+    }
+
+    public List<DichVu> getGiaDien() {
+        String sql = "SELECT GiaDV FROM DichVu WHERE MaDV = 'DIEN'";
         return selectAll(sql);
     }
 
@@ -71,7 +70,6 @@ public class DichVuDAO {
         dichVu.setMaDV(rs.getString("MaDV"));
         dichVu.setTenDV(rs.getString("TenDV"));
         dichVu.setGiaDV(rs.getDouble("GiaDV"));
-        dichVu.setGhiChu(rs.getString("GhiChu"));
         return dichVu;
     }
 }

@@ -84,13 +84,13 @@ public class ThemHopDong extends javax.swing.JFrame {
 
     HopDong getModel() {
         HopDong sv = new HopDong();
-        sv.setMaSV(txtMaSV.getText());
         sv.setMaPhong(cboPhong.getSelectedItem().toString()); //////
+        sv.setMaSV(txtMaSV.getText());
         sv.setNgayTao(DateHelper.toDate(txtNgayTao.getText()));
-        String gia = txtGia.getText();
-        String str = gia.substring(0, gia.length() - 2);
-        sv.setGiaThue(Double.parseDouble(str));
         sv.setTrangThai(cboTrangThai.getSelectedIndex() == 0);
+        String gia = txtGia.getText();
+        String str = gia.substring(0, 6);
+        sv.setGiaThue(Double.parseDouble(str));
         return sv;
     }
 

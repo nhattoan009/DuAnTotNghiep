@@ -26,8 +26,7 @@ public class DS_DichVu extends javax.swing.JPanel {
                 Object[] row = {
                     sv.getMaDV(),
                     sv.getTenDV(),
-                    sv.getGiaDV(),
-                    sv.getGhiChu()};
+                    sv.getGiaDV()};
                 model.addRow(row);
             }
         } catch (Exception e) {

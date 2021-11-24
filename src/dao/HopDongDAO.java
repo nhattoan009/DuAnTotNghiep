@@ -16,8 +16,8 @@ public class HopDongDAO {
     public void Insert(HopDong hopDong) {
         String sql = "INSERT INTO HopDong VALUES (?, ?, ?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
-                hopDong.getMaSV(),
                 hopDong.getMaPhong(),
+                hopDong.getMaSV(),
                 hopDong.getNgayTao(),
                 hopDong.isTrangThai(),
                 hopDong.getGiaThue());
@@ -47,9 +47,21 @@ public class HopDongDAO {
         return list.size() > 0 ? list.get(0) : null;
     }
     
-    public List<HopDong> selectByKeyword(String keyword) {
-        String sql = "SELECT * FROM HopDong WHERE MaSV LIKE ? ORDER BY TrangThai DESC";
+    public List<HopDong> selectByMaSV(String keyword) {
+        String sql = "SELECT * FROM HopDong WHERE MaSV LIKE ? and TrangThai = 1";
         return selectAll(sql, "%" + keyword + "%");
+    }
+    public List<HopDong> selectByMaPhong(String keyword) {
+        String sql = "SELECT * FROM HopDong WHERE MaPhong = ?";
+        return selectAll(sql, keyword);
+    }
+    public List<HopDong> selectByTrangThai0() {
+        String sql = "SELECT * FROM HopDong WHERE TrangThai = 0";
+        return selectAll(sql);
+    }
+    public List<HopDong> selectByTrangThai1() {
+        String sql = "SELECT * FROM HopDong WHERE TrangThai = 1";
+        return selectAll(sql);
     }
 
     private List<HopDong> selectAll(String sql, Object... args) {

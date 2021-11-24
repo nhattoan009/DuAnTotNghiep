@@ -3,19 +3,15 @@ package model;
 import java.util.Date;
 import lombok.Data;
 
-/**
- *
- * @author huynh
- */
 public @Data
 class HopDong {
 
     int maHopDong;
-    String maSV;
     String maPhong;
+    String maSV;
     Date ngayTao;
     boolean trangThai;
     double giaThue;
-    SinhVien sinhVien;
     Phong phong;
+    SinhVien sinhVien;
 }

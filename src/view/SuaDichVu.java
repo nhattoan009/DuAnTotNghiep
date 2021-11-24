@@ -40,7 +40,6 @@ public class SuaDichVu extends javax.swing.JFrame {
         model.setMaDV(txtMaDV.getText());
         model.setTenDV(txtTenDV.getText());
         model.setGiaDV(Double.parseDouble(txtGia.getText()));
-        model.setGhiChu(txtGhiChu.getText());
         return model;
     }
 

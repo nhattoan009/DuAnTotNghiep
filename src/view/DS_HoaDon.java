@@ -17,6 +17,8 @@ public class DS_HoaDon extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSP = new javax.swing.JTable();
         txtTimKiem = new javax.swing.JTextField();
@@ -59,13 +61,21 @@ public class DS_HoaDon extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setText("Xuất hóa đơn");
+
+        jButton6.setText("Gửi email");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 470, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
+                .addComponent(jButton6)
+                .addGap(18, 18, 18)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnThemMoi)
@@ -88,7 +98,9 @@ public class DS_HoaDon extends javax.swing.JPanel {
                             .addComponent(btnCapNhat)
                             .addComponent(btnThemMoi)
                             .addComponent(jButton4)
-                            .addComponent(btnLamMoi))
+                            .addComponent(btnLamMoi)
+                            .addComponent(jButton5)
+                            .addComponent(jButton6))
                         .addContainerGap())))
         );
 
@@ -203,6 +215,8 @@ public class DS_HoaDon extends javax.swing.JPanel {
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

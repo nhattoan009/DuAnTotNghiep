@@ -44,7 +44,6 @@ public class ThemDichVu extends javax.swing.JFrame {
         model.setMaDV(txtMaDV.getText());
         model.setTenDV(txtTenDV.getText());
         model.setGiaDV(Double.parseDouble(txtGia.getText()));
-        model.setGhiChu(txtGhiChu.getText());
         return model;
     }
 
@@ -52,7 +51,6 @@ public class ThemDichVu extends javax.swing.JFrame {
         txtMaDV.setText(sv.getMaDV());
         txtTenDV.setText(sv.getTenDV());
         txtGia.setText(String.valueOf(sv.getGiaDV()));
-        txtGhiChu.setText(sv.getGhiChu());
     }
 
     void clear() {
