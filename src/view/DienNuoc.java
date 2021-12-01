@@ -1,69 +1,45 @@
 package view;
 
-import dao.DienDAO;
-import dao.NuocDAO;
+import dao.DienNuocDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import model.Dien;
-import model.Nuoc;
 
 public class DienNuoc extends javax.swing.JPanel {
 
-    DienDAO dDao = new DienDAO();
-    NuocDAO nDao = new NuocDAO();
+    DienNuocDAO dDao = new DienNuocDAO();
+    int x = 0;
 
     public DienNuoc() {
         initComponents();
-        this.loadDien();
-        this.loadNuoc();
+        this.loadDienNuoc();
     }
 
-    public void loadDien() {
-        DefaultTableModel model = (DefaultTableModel) tblDSD.getModel();
+    public void loadDienNuoc() {
+        DefaultTableModel model = (DefaultTableModel) tblDSDienNuoc.getModel();
         model.setRowCount(0);
         try {
-            List<Dien> list = dDao.select();
-            System.out.println("List" + list);
-            for (Dien sv : list) {
+            List<model.DienNuoc> list = dDao.select();
+            for (model.DienNuoc sv : list) {
                 Object[] row = {
-                    sv.getMaDien(),
+                    sv.getMaDienNuoc(),
                     sv.getMaPhong(),
-                    sv.getChiSoCu(),
-                    sv.getChiSoMoi(),
-                    sv.getSuDung(),
-                    sv.getTongTien(),
-                    sv.getThang()};
+                    sv.getChiSoCuDien(),
+                    sv.getChiSoMoiDien(),
+                    sv.getChiSoCuNuoc(),
+                    sv.getChiSoMoiNuoc(),
+                    sv.getSuDungDien(),
+                    sv.getSuDungNuoc(),
+                    sv.getTongTienDien(),
+                    sv.getTongTienNuoc(),
+                    sv.getThang(),
+                    sv.isTrangThai() ? "Đã thanh toán" : "Chưa thanh toán"};
                 model.addRow(row);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
         }
     }
-
-    public void loadNuoc() {
-        DefaultTableModel model = (DefaultTableModel) tblDSN.getModel();
-        model.setRowCount(0);
-        try {
-            List<Nuoc> list = nDao.select();
-            System.out.println("List" + list);
-            for (Nuoc sv : list) {
-                Object[] row = {
-                    sv.getMaNuoc(),
-                    sv.getMaPhong(),
-                    sv.getChiSoCu(),
-                    sv.getChiSoMoi(),
-                    sv.getSuDung(),
-                    sv.getTongTien(),
-                    sv.getThang()};
-                model.addRow(row);
-                System.out.println(sv.getMaNuoc());
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
-        }
-    }
-    int index = 0;
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -76,12 +52,10 @@ public class DienNuoc extends javax.swing.JPanel {
         jButton4 = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        btnHDDN = new javax.swing.JButton();
+        btnPDF = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblDSD = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblDSN = new javax.swing.JTable();
+        tblDSDienNuoc = new javax.swing.JTable();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
@@ -117,7 +91,21 @@ public class DienNuoc extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel3.setText("Quản lý điện nước");
+        jLabel3.setText("Hóa đơn điện nước");
+
+        btnHDDN.setText("Lập hóa đơn điện nước");
+        btnHDDN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHDDNActionPerformed(evt);
+            }
+        });
+
+        btnPDF.setText("export pdf");
+        btnPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPDFActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -126,7 +114,11 @@ public class DienNuoc extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 463, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
+                .addComponent(btnPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnHDDN)
+                .addGap(18, 18, 18)
                 .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnThemMoi)
@@ -148,63 +140,42 @@ public class DienNuoc extends javax.swing.JPanel {
                             .addComponent(btnCapNhat)
                             .addComponent(btnThemMoi)
                             .addComponent(jButton4)
-                            .addComponent(btnLamMoi)))
+                            .addComponent(btnLamMoi)
+                            .addComponent(btnHDDN)
+                            .addComponent(btnPDF)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
-        tblDSD.setModel(new javax.swing.table.DefaultTableModel(
+        tblDSDienNuoc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã Điện", "Mã Phòng", "CSC", "CSM", "Sử dụng", "Tổng tiền", "Tháng"
+                "Mã hóa đơn", "Mã Phòng", "CSC Điện", "CSM Điện", "CSC Nước", "CSM Nước", "Điện sử dụng", "Nước sử dụng", "Tổng tiền điện", "Tổng tiền nước", "Tháng", "Trạng thái"
             }
         ));
-        tblDSD.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblDSDienNuoc.setToolTipText("click dup chuột phải để xem chi tiết");
+        tblDSDienNuoc.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDSDMouseClicked(evt);
+                tblDSDienNuocMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblDSD);
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel1.setText("Điện");
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel2.setText("Nước");
-
-        tblDSN.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mã nước", "Mã phòng", "CSC", "CSM", "Sử dụng", "Tổng tiền", "Tháng"
-            }
-        ));
-        jScrollPane3.setViewportView(tblDSN);
+        jScrollPane1.setViewportView(tblDSDienNuoc);
+        if (tblDSDienNuoc.getColumnModel().getColumnCount() > 0) {
+            tblDSDienNuoc.getColumnModel().getColumn(0).setResizable(false);
+            tblDSDienNuoc.getColumnModel().getColumn(11).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1193, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -213,15 +184,9 @@ public class DienNuoc extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(86, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -264,37 +229,71 @@ public class DienNuoc extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        loadDien();
-        loadNuoc();
+        loadDienNuoc();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
-    private void tblDSDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSDMouseClicked
+    
+    private void tblDSDienNuocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSDienNuocMouseClicked
         if (evt.getClickCount() == 1) {
-            this.index = tblDSD.rowAtPoint(evt.getPoint());
-            if (this.index >= 0) {
-                int masv = (int) tblDSD.getValueAt(this.index, 3);
-                System.out.println(masv);
-            }
-
-            System.out.println(this.index);
-            System.out.println("click");
+            x = tblDSDienNuoc.rowAtPoint(evt.getPoint());
+//            if (this.x >= 0) {
+//                int maHD = (int) tblDSDienNuoc.getValueAt(x, 0);
+//                String maPhong = (String) tblDSDienNuoc.getValueAt(x, 1);
+//                int cscDien = (int) tblDSDienNuoc.getValueAt(x, 2);
+//                int csmDien = (int) tblDSDienNuoc.getValueAt(x, 3);
+//                int cscNuoc = (int) tblDSDienNuoc.getValueAt(x, 4);
+//                int csmNuoc = (int) tblDSDienNuoc.getValueAt(x, 5);
+//                int dienSD = (int) tblDSDienNuoc.getValueAt(x, 6);
+//                int nuocSD = (int) tblDSDienNuoc.getValueAt(x, 7);
+//                double tienDien = (double) tblDSDienNuoc.getValueAt(x, 8);
+//                double tienNuoc = (double) tblDSDienNuoc.getValueAt(x, 9);
+//                String thang = (String) tblDSDienNuoc.getValueAt(x, 10);
+//                String trangthai = (String) tblDSDienNuoc.getValueAt(x, 11);
+//
+//                HoaDonDienNuoc ssv = new HoaDonDienNuoc(maHD, maPhong, thang, trangthai, cscDien, csmDien, cscNuoc, csmNuoc, dienSD, nuocSD, tienDien, tienNuoc);
+//                ssv.setVisible(true);
+////
+//                System.out.println("x: " + x);
+//            }
         }
-    }//GEN-LAST:event_tblDSDMouseClicked
+    }//GEN-LAST:event_tblDSDienNuocMouseClicked
+
+
+    private void btnHDDNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHDDNActionPerformed
+
+        int maHD = (int) tblDSDienNuoc.getValueAt(this.x, 0);
+        String maPhong = (String) tblDSDienNuoc.getValueAt(this.x, 1);
+        int cscDien = (int) tblDSDienNuoc.getValueAt(this.x, 2);
+        int csmDien = (int) tblDSDienNuoc.getValueAt(this.x, 3);
+        int cscNuoc = (int) tblDSDienNuoc.getValueAt(this.x, 4);
+        int csmNuoc = (int) tblDSDienNuoc.getValueAt(this.x, 5);
+        int dienSD = (int) tblDSDienNuoc.getValueAt(this.x, 6);
+        int nuocSD = (int) tblDSDienNuoc.getValueAt(this.x, 7);
+        double tienDien = (double) tblDSDienNuoc.getValueAt(this.x, 8);
+        double tienNuoc = (double) tblDSDienNuoc.getValueAt(this.x, 9);
+        String thang = (String) tblDSDienNuoc.getValueAt(this.x, 10);
+
+        HoaDonDienNuoc ssv = new HoaDonDienNuoc(maHD, maPhong, thang, cscDien, csmDien, cscNuoc, csmNuoc, dienSD, nuocSD, tienDien, tienNuoc);
+        ssv.setVisible(true);
+
+    }//GEN-LAST:event_btnHDDNActionPerformed
+
+    private void btnPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPDFActionPerformed
+
+    }//GEN-LAST:event_btnPDFActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnHDDN;
     private javax.swing.JButton btnLamMoi;
+    private javax.swing.JButton btnPDF;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tblDSD;
-    private javax.swing.JTable tblDSN;
+    private javax.swing.JTable tblDSDienNuoc;
     // End of variables declaration//GEN-END:variables
 }

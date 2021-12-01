@@ -119,7 +119,7 @@ public class DS_HopDong extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn!");
         }
     }
-    int index = 0;
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -233,6 +233,11 @@ public class DS_HopDong extends javax.swing.JPanel {
                 "Mã hợp đồng", "Mã sinh viên", "Mã phòng", "Ngày tạo", "Trạng thái", "Giá thuê"
             }
         ));
+        tblDSHD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDSHDMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDSHD);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -318,7 +323,7 @@ public class DS_HopDong extends javax.swing.JPanel {
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         this.load();
     }//GEN-LAST:event_btnLamMoiActionPerformed
-
+    int index = 0;
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
         int mahd = (int) tblDSHD.getValueAt(this.index, 0);
         String masv = (String) tblDSHD.getValueAt(this.index, 1);
@@ -330,6 +335,15 @@ public class DS_HopDong extends javax.swing.JPanel {
         HoaDon hoaDon = new HoaDon(mahd, masv, maphong, ngatTao, trangThai, giaThue);
         hoaDon.setVisible(true);
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
+
+    private void tblDSHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSHDMouseClicked
+        if (evt.getClickCount() == 1) {
+            this.index = tblDSHD.rowAtPoint(evt.getPoint());
+            
+            System.out.println(index);
+            System.out.println("click");
+        }
+    }//GEN-LAST:event_tblDSHDMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;

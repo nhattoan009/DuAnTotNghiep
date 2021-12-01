@@ -19,32 +19,25 @@ create database KTX_1
 	TrangThai bit, 
 	primary key (MaPhong)
  )
- create table Dien(
-	MaDien int identity(1,1),
+ create table DienNuoc(
+	MaDienNuoc int identity(1,1),
 	MaDV char(10),
 	MaPhong char(10),
-	ChiSoCu int not null,
-	ChiSoMoi int not null,
-	SuDung int not null,
-	TongTien float not null,
+	ChiSoCuDien int not null,
+	ChiSoMoiDien int not null,
+	ChiSoCuNuoc int not null,
+	ChiSoMoiNuoc int not null,
+	SuDungDien int not null,
+	SuDungNuoc int not null,
+	TongTienDien float not null,
+	TongTienNuoc float not null,
 	Thang NVARCHAR(10) NOT NULL,
-	primary key (MaDien),
+	TrangThai bit not null,
+	primary key (MaDienNuoc),
 	foreign key (MaDV)references DichVu (MaDV),
 	foreign key (MaPhong)references Phong (MaPhong)
  )
- create table Nuoc(
-	MaNuoc int identity(1,1),
-	MaDV char(10),
-	MaPhong char(10),
-	ChiSoCu int not null,
-	ChiSoMoi int not null,
-	SuDung int not null,
-	TongTien float not null,
-	Thang NVARCHAR(10) NOT NULL,
-	primary key (MaNuoc),
-	foreign key (MaDV)references DichVu (MaDV),
-	foreign key (MaPhong)references Phong (MaPhong)
- )
+
    create table SinhVien(
 	MaSV char(10),
 	HoTen nvarchar(50) not null,
@@ -71,10 +64,7 @@ create database KTX_1
  create table HoaDon(
 	MaHoaDon int identity(1,1),
 	MaHopDong int,
-	TienDien float,
-	TienNuoc float,
 	TienPhong float,
-	TongTien float,
 	NgayTao date,
 	TrangThai bit,
 	primary key (MaHoaDon),
@@ -88,6 +78,7 @@ select * from HoaDonChiTiet
 select * from HopDong
 
 select * from Dien
+select * from Nuoc
 select * from HopDong
 
 drop table DichVu
@@ -95,8 +86,7 @@ drop table Phong
 drop table SinhVien
 drop table HopDong
 drop table HoaDon
-drop table Dien
-drop table Nuoc
+drop table DienNuoc
 
 ALTER TABLE Nuoc
   ADD Thang date not null;
@@ -106,3 +96,9 @@ ALTER TABLE Nuoc
 
 delete from Nuoc
 
+
+select * from Dien
+select * from Nuoc
+SELECT d.TongTien, n.TongTien
+FROM Dien d
+INNER JOIN Nuoc n ON d.MaPhong = n.MaPhong and d.Thang = n.Thang

@@ -26,6 +26,7 @@ public class DS_Phong extends javax.swing.JPanel {
         try {
             String keyword = txtTimKiem.getText();
             List<Phong> list = dao.selectByKeyword(keyword);
+            
 //            List<SinhVien> list = dao.select();
             for (Phong sv : list) {
                 Object[] row = {

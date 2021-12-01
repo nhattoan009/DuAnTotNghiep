@@ -1,23 +1,20 @@
 package view;
 
 import dao.DichVuDAO;
-import dao.DienDAO;
-import dao.NuocDAO;
+import dao.DienNuocDAO;
 import dao.PhongDAO;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import model.DichVu;
-import model.Dien;
-import model.Nuoc;
+import model.DienNuoc;
 import model.Phong;
 
 public class ThemDienNuoc extends javax.swing.JFrame {
 
     PhongDAO pDao = new PhongDAO();
-    DienDAO dDao = new DienDAO();
-    NuocDAO nDao = new NuocDAO();
+    DienNuocDAO dDao = new DienNuocDAO();
     DichVuDAO dvDAO = new DichVuDAO();
 
     public ThemDienNuoc( //            int csmDien,
@@ -28,10 +25,10 @@ public class ThemDienNuoc extends javax.swing.JFrame {
 //        this.txtCSCdien.setText(String.valueOf(csmDien));
 //        this.txtCSCnuoc.setText(String.valueOf(csmNuoc));
 
-        this.loadComboBox();
+        this.loadComboBoxPhong();
     }
 
-    void loadComboBox() {
+    void loadComboBoxPhong() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboPhong.getModel();
         model.removeAllElements();
         try {
@@ -45,8 +42,8 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         }
     }
 
-    public void insertDien() {
-        Dien dien = getModelDien();
+    public void insertDienNuoc() {
+        DienNuoc dien = getModelDienNuoc();
         try {
             dDao.Insert(dien);
 //            this.clear();
@@ -59,70 +56,44 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         }
     }
 
-    public void insertNuoc() {
-        Nuoc nuoc = getModelNuoc();
-        try {
-            nDao.Insert(nuoc);
-//            this.clear();
-            lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
-
-        } catch (Exception e) {
-            lblMessage.setText("Thêm mới thất bại!");
-            lblMessage.setForeground(Color.RED);
-            System.out.print(e);
-        }
-    }
-
-    Dien getModelDien() {
-        Dien dien = new Dien();
+    DienNuoc getModelDienNuoc() {
+        DienNuoc dien = new DienNuoc();
         List<DichVu> dv = dvDAO.select();
-        DichVu dichVu = dv.get(0);
-        int csc = Integer.parseInt(txtCSCdien.getText());
-        int csm = Integer.parseInt(txtCSMdien.getText());
-        int dntt = csm - csc;
-        double gia = dichVu.getGiaDV();
-//        dien.setMaDV(dv.getMaDV());
+        DichVu dichVuDien = dv.get(0);
+        DichVu dichVuNuoc = dv.get(1);
+        
+        int cscd = Integer.parseInt(txtCSCdien.getText());
+        int csmd = Integer.parseInt(txtCSMdien.getText());
+        int dntt = csmd - cscd;
+        double giaDien = dichVuDien.getGiaDV();
+        
+        int cscn = Integer.parseInt(txtCSCnuoc.getText());
+        int csmn = Integer.parseInt(txtCSMnuoc.getText());
+        int ntt = csmn - cscn;
+        double giaNuoc = dichVuDien.getGiaDV();
+//        dien.setTrangThai(cboTrangThai.getSelectedIndex() == 0);
         dien.setMaPhong(cboPhong.getSelectedItem().toString());
-        dien.setMaDV(dichVu.getMaDV());
+//        dien.setMaDV(dichVuDien.getMaDV());
         dien.setThang(cboThang.getSelectedItem().toString());
-        dien.setChiSoCu(csc);
-        dien.setChiSoMoi(csm);
-        dien.setSuDung(dntt);
-        dien.setTongTien(dntt * gia);
+        dien.setChiSoCuDien(cscd);
+        dien.setChiSoMoiDien(csmd);
+        dien.setChiSoCuNuoc(cscn);
+        dien.setChiSoMoiNuoc(csmn);
+        dien.setSuDungDien(dntt);
+        dien.setSuDungNuoc(ntt);
+        dien.setTongTienDien(dntt * giaDien);
+        dien.setTongTienNuoc(ntt * giaNuoc);
         return dien;
     }
 
-    Nuoc getModelNuoc() {
-        Nuoc nuoc = new Nuoc();
-        List<DichVu> dv = dvDAO.select();
-        DichVu dichVu = dv.get(1);
-        int csc = Integer.parseInt(txtCSCnuoc.getText());
-        int csm = Integer.parseInt(txtCSMnuoc.getText());
-        int dntt = csm - csc;
-        double gia = dichVu.getGiaDV();
-        nuoc.setMaDV(dichVu.getMaDV());
-        nuoc.setMaPhong(cboPhong.getSelectedItem().toString());
-        nuoc.setThang(cboThang.getSelectedItem().toString());
-        nuoc.setChiSoCu(csc);
-        nuoc.setChiSoMoi(csm);
-        nuoc.setSuDung(dntt);
-        nuoc.setTongTien(dntt * gia);
-        return nuoc;
-    }
 
+    
+    // load csc lên from
     public void loadDN() {
         String MaPhong = (String) cboPhong.getSelectedItem();
-        List<Dien> diens = dDao.selectSCMDien(MaPhong);
-        for (int i = 0; i < diens.size(); i++) {
-            int csm = diens.get(i).getChiSoMoi();
-            txtCSCdien.setText(String.valueOf(csm));
-        }
-
-        List<Nuoc> nuocs = nDao.selectSCMNuoc(MaPhong);
-        for (int i = 0; i < nuocs.size(); i++) {
-            int csm = nuocs.get(i).getChiSoMoi();
-            txtCSCnuoc.setText(String.valueOf(csm));
-        }
+        List<DienNuoc> diens = dDao.selectSCMDien(MaPhong);
+        diens.stream().forEach(s -> txtCSCdien.setText(String.valueOf(s.getChiSoMoiDien())));
+        diens.stream().forEach(s -> txtCSCnuoc.setText(String.valueOf(s.getChiSoMoiNuoc())));
     }
 
     @SuppressWarnings("unchecked")
@@ -195,11 +166,11 @@ public class ThemDienNuoc extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
-        jLabel3.setText("Chỉ số củ:");
+        jLabel3.setText("CSC Điện:");
 
-        jLabel5.setText("Chỉ số mới:");
+        jLabel5.setText("CSM Điện:");
 
-        jLabel6.setText("Chỉ số củ:");
+        jLabel6.setText("CSC Nước:");
 
         jLabel8.setText("Phòng:");
 
@@ -214,9 +185,9 @@ public class ThemDienNuoc extends javax.swing.JFrame {
 
         jLabel10.setText("Tháng:");
 
-        cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12" }));
+        cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
-        jLabel9.setText("Chỉ số mới");
+        jLabel9.setText("CSM Nước:");
 
         btnChon.setText("chọn");
         btnChon.addActionListener(new java.awt.event.ActionListener() {
@@ -322,8 +293,7 @@ public class ThemDienNuoc extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        insertDien();
-        insertNuoc();
+        insertDienNuoc();
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed

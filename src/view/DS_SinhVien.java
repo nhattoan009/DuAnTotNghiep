@@ -1,11 +1,14 @@
 package view;
 
+import dao.HopDongDAO;
 import dao.PhongDAO;
 import dao.SinhVienDAO;
+import java.awt.Color;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.HopDong;
 import model.Phong;
 import model.SinhVien;
 
@@ -18,6 +21,8 @@ public class DS_SinhVien extends javax.swing.JPanel {
     SinhVienDAO dao = new SinhVienDAO();
     PhongDAO Pdao = new PhongDAO();
     Phong phong = new Phong();
+    HopDongDAO hdDao = new HopDongDAO();
+    int index = 0;
 
     /**
      * Creates new form ThemSinhVien1
@@ -192,20 +197,19 @@ public class DS_SinhVien extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1180, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTimKiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(10, 10, 10)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -213,19 +217,20 @@ public class DS_SinhVien extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblMessage)
-                            .addComponent(jLabel3))
+                        .addComponent(lblMessage)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtTimKiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtTimKiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -245,13 +250,20 @@ public class DS_SinhVien extends javax.swing.JPanel {
         if (x == JOptionPane.YES_OPTION) {
             try {
                 String masv = (String) tblDSSV.getValueAt(this.index, 0);
-                SinhVien model = dao.findById(masv);
-                if (model != null) {
-                    dao.Delete(masv);
-                    lblMessage.setText("Xóa thành công");
+                SinhVien sv = dao.findById(masv);
+                HopDong hopDong = hdDao.findByIdMaSV(masv);
+                if (sv != null) {
+                    if (hopDong.getMaSV().equals(masv)) {
+                        lblMessage.setText("Sinh viên này đang ở, không thể xóa");
+                        lblMessage.setForeground(Color.RED);
+                    }else{
+                        dao.Delete(masv);
+                        lblMessage.setText("Xóa thành công");
+                    }
                 }
             } catch (Exception e) {
                 lblMessage.setText("xóa lỗi");
+                lblMessage.setForeground(Color.RED);
                 System.out.println(e);
             }
         }
@@ -260,7 +272,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
     void TimKiem() {
         load();
     }
-    int index = 0;
+
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         String masv = (String) tblDSSV.getValueAt(this.index, 0);
         String tensv = (String) tblDSSV.getValueAt(this.index, 1);
@@ -269,11 +281,11 @@ public class DS_SinhVien extends javax.swing.JPanel {
         String cmnd = (String) tblDSSV.getValueAt(this.index, 4);
         String email = (String) tblDSSV.getValueAt(this.index, 5);
         Date namsinh = (Date) tblDSSV.getValueAt(this.index, 6);
-        SinhVien model = dao.findById(masv);
-        if (model != null) {
+        if (this.index >= 0) {
             SuaSinhVien ssv = new SuaSinhVien(masv, tensv, sdt, email, cmnd, gt, namsinh);
             ssv.setVisible(true);
         }
+
         System.out.println(masv + "-" + tensv + "-" + sdt + "-" + email + "-" + cmnd + "-" + gt + "" + namsinh);
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
@@ -284,7 +296,6 @@ public class DS_SinhVien extends javax.swing.JPanel {
                 String masv = (String) tblDSSV.getValueAt(this.index, 0);
                 System.out.println(masv);
             }
-
             System.out.println(this.index);
             System.out.println("click");
         }

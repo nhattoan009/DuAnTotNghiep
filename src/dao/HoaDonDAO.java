@@ -14,13 +14,10 @@ import model.HoaDon;
 public class HoaDonDAO {
 
     public void Insert(HoaDon hoaDon) {
-        String sql = "INSERT INTO HoaDon VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO HoaDon VALUES (?, ?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
                 hoaDon.getMaHopDong(),
-                hoaDon.getTienDien(),
-                hoaDon.getTienNuoc(),
                 hoaDon.getTienPhong(),
-                hoaDon.getTongTien(),
                 hoaDon.getNgayTao(),
                 hoaDon.isTrangThai()
         );
@@ -29,7 +26,6 @@ public class HoaDonDAO {
     public void Update(HoaDon hoaDon) {
         String sql = "UPDATE HoaDon SET TongTien=? WHERE MaHoaDon=?";
         JDBCHelper.executeUpdate(sql,
-                hoaDon.getTongTien(),
                 hoaDon.getMaHoaDon());
     }
 
@@ -47,6 +43,16 @@ public class HoaDonDAO {
         String sql = "SELECT * FROM HoaDon WHERE MaHoaDon=?";
         List<HoaDon> list = selectAll(sql, id);
         return list.size() > 0 ? list.get(0) : null;
+    }
+    
+    public HoaDon findByIdPhong(Integer id) {
+        String sql = "SELECT * FROM HoaDon WHERE MaHoaDon=?";
+        List<HoaDon> list = selectAll(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
+    }
+    public List<HoaDon> selectMaPhong(int keyword) {
+        String sql = "SELECT MaPhong FROM HoaDon WHERE MaHoaDon = ?";
+        return selectAll(sql, keyword);
     }
 
     private List<HoaDon> selectAll(String sql, Object... args) {
@@ -72,10 +78,7 @@ public class HoaDonDAO {
         HoaDon hoaDon = new HoaDon();
         hoaDon.setMaHoaDon(rs.getInt("MaHoaDon"));
         hoaDon.setMaHopDong(rs.getInt("MaHopDong"));
-        hoaDon.setTienDien(rs.getDouble("TienDien"));
-        hoaDon.setTienNuoc(rs.getDouble("TienNuoc"));
         hoaDon.setTienPhong(rs.getDouble("TienPhong"));
-        hoaDon.setTongTien(rs.getFloat("TongTien"));
         hoaDon.setNgayTao(rs.getDate("NgayTao"));
         hoaDon.setTrangThai(rs.getBoolean("TrangThai"));
         return hoaDon;

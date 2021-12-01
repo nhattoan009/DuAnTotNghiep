@@ -1,11 +1,8 @@
 package view;
 
 import dao.PhongDAO;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import model.Phong;
 
 public class Load_DS_Phong extends javax.swing.JPanel {
@@ -41,44 +38,9 @@ public class Load_DS_Phong extends javax.swing.JPanel {
 //            lblC.setText(String.valueOf(g));
 
         }
-        ridLayoutExam1();
     }
 
-    void ridLayoutExam1() {
-        JFrame frame = new JFrame();
-        for (int i = 0; i < 5; i++) {
-            frame.add(new JButton());
-        }
-//        JButton b1 = new JButton("1");
-//        JButton b2 = new JButton("2");
-//        JButton b3 = new JButton("3");
-//        JButton b4 = new JButton("4");
-//        JButton b5 = new JButton("5");
-//        JButton b6 = new JButton("6");
-//        JButton b7 = new JButton("7");
-//        JButton b8 = new JButton("8");
-//        JButton b9 = new JButton("9");
-//        JButton b12 = new JButton("9");
-//        JPanel bb = new JPanel();
-//        bb.setBackground(Color.red);
-//
-//        frame.add(b1);
-//        frame.add(b2);
-//        frame.add(b3);
-//        frame.add(b4);
-//        frame.add(b5);
-//        frame.add(b6);
-//        frame.add(b7);
-//        frame.add(b8);
-//        frame.add(b9);
-//        frame.add(b12);
-//        frame.add(bb);
-
-        // thiet lap 3 hang va 3 cot cho grid layout
-        frame.setLayout(new GridLayout(3, 7));
-        frame.setVisible(true);
-    }
-
+   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -100,16 +62,16 @@ public class Load_DS_Phong extends javax.swing.JPanel {
         pnlLayout.setHorizontalGroup(
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLayout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addComponent(btnNut, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(590, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(btnNut, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(949, Short.MAX_VALUE))
         );
         pnlLayout.setVerticalGroup(
             pnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLayout.createSequentialGroup()
-                .addGap(177, 177, 177)
+                .addContainerGap()
                 .addComponent(btnNut, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(310, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -131,7 +93,7 @@ public class Load_DS_Phong extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNutActionPerformed
-        
+        loadPhong();
     }//GEN-LAST:event_btnNutActionPerformed
 
 
