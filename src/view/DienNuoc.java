@@ -196,16 +196,13 @@ public class DienNuoc extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-//        List<Dien> list = dDao.select();
-//        int csm = (int) tblDSD.getValueAt(this.index, 3);
-//        System.out.println(csm);
-//        List<Nuoc> list1 = nDao.select();
-//        int csm1 = (int) tblDSN.getValueAt(this.index, 3);
-//        System.out.println(csm1);
 
-//        ThemDienNuoc tdn = new ThemDienNuoc(csm, csm1);
-        ThemDienNuoc tdn = new ThemDienNuoc();
+    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
+        int csm = (int) tblDSDienNuoc.getValueAt(this.x, 3);
+        int csm1 = (int) tblDSDienNuoc.getValueAt(this.x, 5);
+
+        ThemDienNuoc tdn = new ThemDienNuoc(csm, csm1);
+//        ThemDienNuoc tdn = new ThemDienNuoc();
         tdn.setVisible(true);
 
 
@@ -232,7 +229,7 @@ public class DienNuoc extends javax.swing.JPanel {
         loadDienNuoc();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
-    
+
     private void tblDSDienNuocMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSDienNuocMouseClicked
         if (evt.getClickCount() == 1) {
             x = tblDSDienNuoc.rowAtPoint(evt.getPoint());

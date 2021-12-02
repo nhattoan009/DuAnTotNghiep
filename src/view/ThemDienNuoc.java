@@ -17,16 +17,19 @@ public class ThemDienNuoc extends javax.swing.JFrame {
     DienNuocDAO dDao = new DienNuocDAO();
     DichVuDAO dvDAO = new DichVuDAO();
 
-    public ThemDienNuoc( //            int csmDien,
-            //            int csmNuoc
-            ) {
+    public ThemDienNuoc(
+            int csmDien,
+            int csmNuoc
+    ) {
         initComponents();
         this.setLocationRelativeTo(null);
-//        this.txtCSCdien.setText(String.valueOf(csmDien));
-//        this.txtCSCnuoc.setText(String.valueOf(csmNuoc));
+        this.txtCSCdien.setText(String.valueOf(csmDien));
+        this.txtCSCnuoc.setText(String.valueOf(csmNuoc));
 
         this.loadComboBoxPhong();
     }
+
+    private ThemDienNuoc() { }
 
     void loadComboBoxPhong() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboPhong.getModel();
@@ -61,16 +64,16 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         List<DichVu> dv = dvDAO.select();
         DichVu dichVuDien = dv.get(0);
         DichVu dichVuNuoc = dv.get(1);
-        
+
         int cscd = Integer.parseInt(txtCSCdien.getText());
         int csmd = Integer.parseInt(txtCSMdien.getText());
         int dntt = csmd - cscd;
         double giaDien = dichVuDien.getGiaDV();
-        
+
         int cscn = Integer.parseInt(txtCSCnuoc.getText());
         int csmn = Integer.parseInt(txtCSMnuoc.getText());
         int ntt = csmn - cscn;
-        double giaNuoc = dichVuDien.getGiaDV();
+        double giaNuoc = dichVuNuoc.getGiaDV();
 //        dien.setTrangThai(cboTrangThai.getSelectedIndex() == 0);
         dien.setMaPhong(cboPhong.getSelectedItem().toString());
 //        dien.setMaDV(dichVuDien.getMaDV());
@@ -86,8 +89,6 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         return dien;
     }
 
-
-    
     // load csc lên from
     public void loadDN() {
         String MaPhong = (String) cboPhong.getSelectedItem();
