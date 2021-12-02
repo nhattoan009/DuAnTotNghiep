@@ -56,6 +56,7 @@ create database KTX_1
 	NgayTao date not null,
 	TrangThai bit not null,
 	GiaThue float not null,
+	Thang nvarchar(10) not null,
 	primary key (MaHopDong),
 	foreign key (MaPhong)references Phong (MaPhong),
 	foreign key (MaSV)references SinhVien (MaSV),
@@ -91,7 +92,7 @@ drop table DienNuoc
 ALTER TABLE Nuoc
   ADD Thang date not null;
 
-ALTER TABLE Nuoc
+ALTER TABLE HopDong
   ALTER COLUMN Thang NVARCHAR(10) NOT NULL;
 
 delete from Nuoc

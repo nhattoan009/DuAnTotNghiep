@@ -1,7 +1,5 @@
 package view;
 
-import javax.swing.JOptionPane;
-
 public class TrangChinh extends javax.swing.JFrame {
 
     public TrangChinh() {
@@ -32,6 +30,9 @@ public class TrangChinh extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         btn_DSHoaDon = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -64,6 +65,7 @@ public class TrangChinh extends javax.swing.JFrame {
         });
         jMenuBar2.add(jMenu6);
 
+        jMenu3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_home_24px.png"))); // NOI18N
         jMenu3.setText("Trang Chủ");
         jMenu3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu3.setMargin(new java.awt.Insets(10, 10, 10, 10));
@@ -79,6 +81,7 @@ public class TrangChinh extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu3);
 
+        jMenu4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_hotel_bed_24px.png"))); // NOI18N
         jMenu4.setText("Quản lí phòng");
         jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu4.setMargin(new java.awt.Insets(10, 10, 10, 10));
@@ -111,6 +114,7 @@ public class TrangChinh extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu4);
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_account_24px.png"))); // NOI18N
         jMenu1.setText("Quản lí tài khoản");
         jMenu1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu1.setMargin(new java.awt.Insets(10, 10, 10, 10));
@@ -127,6 +131,7 @@ public class TrangChinh extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu1);
 
+        btnQLSV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_writer_male_24px.png"))); // NOI18N
         btnQLSV.setText("Quản lí sinh viên");
         btnQLSV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnQLSV.setMargin(new java.awt.Insets(10, 10, 10, 10));
@@ -147,6 +152,7 @@ public class TrangChinh extends javax.swing.JFrame {
 
         jMenuBar2.add(btnQLSV);
 
+        btn_DienNuoc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cash_and_credit_card_24px.png"))); // NOI18N
         btn_DienNuoc.setText("Thanh toán");
         btn_DienNuoc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
@@ -168,10 +174,26 @@ public class TrangChinh extends javax.swing.JFrame {
 
         jMenuBar2.add(btn_DienNuoc);
 
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_statistics_24px.png"))); // NOI18N
         jMenu2.setText("Thống Kê");
         jMenu2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jMenu2.setMargin(new java.awt.Insets(10, 10, 10, 10));
         jMenu2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        jMenuItem2.setText("Doanh thu theo tháng");
+        jMenu2.add(jMenuItem2);
+
+        jMenuItem4.setText("Doanh thu theo phòng");
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem3.setText("Thóng kê thu tiền");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
         jMenuBar2.add(jMenu2);
 
         setJMenuBar(jMenuBar2);
@@ -204,7 +226,7 @@ public class TrangChinh extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(48, Short.MAX_VALUE)
+                    .addContainerGap(56, Short.MAX_VALUE)
                     .addComponent(pnlDSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
@@ -308,6 +330,16 @@ public class TrangChinh extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        try {
+            tab.setSelectedComponent(new ThongKeThuTien());
+        } catch (Exception e) {
+            ThongKeThuTien pnl = new ThongKeThuTien();
+            tab.add("Thống kê thu tiền", pnl);
+            tab.setSelectedComponent(pnl);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -353,6 +385,9 @@ public class TrangChinh extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel pnlDSP;
     private javax.swing.JTabbedPane tab;
     // End of variables declaration//GEN-END:variables

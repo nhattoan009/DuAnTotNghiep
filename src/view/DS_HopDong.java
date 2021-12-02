@@ -44,7 +44,8 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.getMaPhong(),
                     sv.getNgayTao(),
                     sv.isTrangThai() ? "Hoạt động" : "không hoạt động",
-                    sv.getGiaThue()};
+                    sv.getGiaThue(),
+                    sv.getThang()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -67,7 +68,8 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.getMaPhong(),
                     sv.getNgayTao(),
                     sv.isTrangThai() ? "Hoạt động" : "không hoạt động",
-                    sv.getGiaThue()};
+                    sv.getGiaThue(),
+                    sv.getThang()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -94,7 +96,8 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.getMaPhong(),
                     sv.getNgayTao(),
                     sv.isTrangThai() ? "Hoạt động" : "không hoạt động",
-                    sv.getGiaThue()};
+                    sv.getGiaThue(),
+                    sv.getThang()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -119,7 +122,6 @@ public class DS_HopDong extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn!");
         }
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -128,7 +130,6 @@ public class DS_HopDong extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         btnCapNhat = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
         btnTaoHoaDon = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -155,8 +156,6 @@ public class DS_HopDong extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setText("Danh sách hợp đồng");
 
-        jButton4.setText("Đóng");
-
         btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +178,7 @@ public class DS_HopDong extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 362, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addGap(18, 18, 18)
                 .addComponent(btnTaoHoaDon)
@@ -187,8 +186,7 @@ public class DS_HopDong extends javax.swing.JPanel {
                 .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCapNhat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +197,6 @@ public class DS_HopDong extends javax.swing.JPanel {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnCapNhat)
-                            .addComponent(jButton4)
                             .addComponent(btnLamMoi)
                             .addComponent(btnTaoHoaDon)
                             .addComponent(jButton5))
@@ -218,6 +215,11 @@ public class DS_HopDong extends javax.swing.JPanel {
         txtTimKiemMaSV.setText(" ");
 
         cboPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cboPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboPhongActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Mã phòng");
 
@@ -230,7 +232,7 @@ public class DS_HopDong extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã hợp đồng", "Mã sinh viên", "Mã phòng", "Ngày tạo", "Trạng thái", "Giá thuê"
+                "Mã hợp đồng", "Mã sinh viên", "Mã phòng", "Ngày tạo", "Trạng thái", "Giá thuê", "Tháng"
             }
         ));
         tblDSHD.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -239,6 +241,10 @@ public class DS_HopDong extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tblDSHD);
+        if (tblDSHD.getColumnModel().getColumnCount() > 0) {
+            tblDSHD.getColumnModel().getColumn(4).setResizable(false);
+            tblDSHD.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -264,7 +270,7 @@ public class DS_HopDong extends javax.swing.JPanel {
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
                                 .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(21, 21, 21)))))
                 .addContainerGap())
@@ -339,11 +345,15 @@ public class DS_HopDong extends javax.swing.JPanel {
     private void tblDSHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSHDMouseClicked
         if (evt.getClickCount() == 1) {
             this.index = tblDSHD.rowAtPoint(evt.getPoint());
-            
+
             System.out.println(index);
             System.out.println("click");
         }
     }//GEN-LAST:event_tblDSHDMouseClicked
+
+    private void cboPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhongActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboPhongActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
@@ -352,7 +362,6 @@ public class DS_HopDong extends javax.swing.JPanel {
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JComboBox<String> cboPhong;
     private javax.swing.JComboBox<String> cboTrangThai;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

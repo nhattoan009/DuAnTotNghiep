@@ -66,8 +66,6 @@ public class DS_DichVu extends javax.swing.JPanel {
         btnCapNhat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSDV = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
@@ -75,14 +73,22 @@ public class DS_DichVu extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setText("Danh sách dịch vụ");
 
+        btnThemDV.setBackground(new java.awt.Color(0, 153, 255));
+        btnThemDV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThemDV.setForeground(new java.awt.Color(255, 255, 255));
         btnThemDV.setText("Thêm dịch vụ");
+        btnThemDV.setBorderPainted(false);
         btnThemDV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemDVActionPerformed(evt);
             }
         });
 
+        btnLamMoi.setBackground(new java.awt.Color(0, 153, 255));
+        btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLamMoi.setForeground(new java.awt.Color(255, 255, 255));
         btnLamMoi.setText("Làm mới");
+        btnLamMoi.setBorderPainted(false);
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLamMoiActionPerformed(evt);
@@ -92,14 +98,22 @@ public class DS_DichVu extends javax.swing.JPanel {
         lblMessage.setForeground(new java.awt.Color(0, 204, 255));
         lblMessage.setText(" ");
 
+        btnXoaDV.setBackground(new java.awt.Color(0, 153, 255));
+        btnXoaDV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXoaDV.setForeground(new java.awt.Color(255, 255, 255));
         btnXoaDV.setText("Xóa dịch vụ");
+        btnXoaDV.setBorderPainted(false);
         btnXoaDV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaDVActionPerformed(evt);
             }
         });
 
+        btnCapNhat.setBackground(new java.awt.Color(0, 153, 255));
+        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCapNhat.setForeground(new java.awt.Color(255, 255, 255));
         btnCapNhat.setText("Cập nhật");
+        btnCapNhat.setBorderPainted(false);
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCapNhatActionPerformed(evt);
@@ -154,16 +168,6 @@ public class DS_DichVu extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblDSDV);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Mã Điện Nước", "Ma Phòng", "Mã Dịch Vụ", "Chỉ số điện củ", "Chỉ số điện mới", "Chỉ số nước củ", "Chie số nước mới"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -171,9 +175,7 @@ public class DS_DichVu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(723, 723, 723))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -184,9 +186,7 @@ public class DS_DichVu extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(69, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -241,8 +241,6 @@ public class DS_DichVu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblMessage;
     private javax.swing.JTable tblDSDV;
     // End of variables declaration//GEN-END:variables

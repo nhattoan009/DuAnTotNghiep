@@ -12,6 +12,5 @@ class HopDong {
     Date ngayTao;
     boolean trangThai;
     double giaThue;
-    Phong phong;
-    SinhVien sinhVien;
+    String Thang;
 }

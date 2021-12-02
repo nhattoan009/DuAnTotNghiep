@@ -14,13 +14,14 @@ import model.HopDong;
 public class HopDongDAO {
 
     public void Insert(HopDong hopDong) {
-        String sql = "INSERT INTO HopDong VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO HopDong VALUES (?, ?, ?, ?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
                 hopDong.getMaPhong(),
                 hopDong.getMaSV(),
                 hopDong.getNgayTao(),
                 hopDong.isTrangThai(),
-                hopDong.getGiaThue());
+                hopDong.getGiaThue(),
+                hopDong.getThang());
     }
 
     public void Update(HopDong hopDong) {
@@ -96,6 +97,7 @@ public class HopDongDAO {
         hopDong.setNgayTao(rs.getDate("NgayTao"));
         hopDong.setGiaThue(rs.getFloat("GiaThue"));
         hopDong.setTrangThai(rs.getBoolean("TrangThai"));
+        hopDong.setThang(rs.getString("Thang"));
         return hopDong;
     }
 }
