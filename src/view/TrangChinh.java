@@ -56,7 +56,7 @@ public class TrangChinh extends javax.swing.JFrame {
         });
 
         jMenu6.setBackground(new java.awt.Color(204, 204, 204));
-        jMenu6.setText("                                                                                          ");
+        jMenu6.setText("                                                                        ");
         jMenu6.setEnabled(false);
         jMenu6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
