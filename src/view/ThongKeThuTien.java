@@ -152,7 +152,7 @@ public class ThongKeThuTien extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã hợp đồng", "Mã sinh viên", "Mã phòng", "Ngày tạo", "Trạng thái", "Giá thuê", "Tháng"
+                "Mã hợp đồng", "Mã sinh viên", "Mã phòng", "Ngày tạo", "Trạng thái", "Giá thuê", "Tháng", "Trạng thái thu"
             }
         ));
         tblDSHD.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -190,7 +190,7 @@ public class ThongKeThuTien extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1018, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,7 +202,7 @@ public class ThongKeThuTien extends javax.swing.JPanel {
                                 .addGap(50, 50, 50)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

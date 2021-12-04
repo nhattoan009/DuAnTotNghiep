@@ -98,11 +98,10 @@ public class DS_DichVu extends javax.swing.JPanel {
         lblMessage.setForeground(new java.awt.Color(0, 204, 255));
         lblMessage.setText(" ");
 
-        btnXoaDV.setBackground(new java.awt.Color(0, 153, 255));
+        btnXoaDV.setBackground(new java.awt.Color(0, 0, 0));
         btnXoaDV.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnXoaDV.setForeground(new java.awt.Color(255, 255, 255));
         btnXoaDV.setText("Xóa dịch vụ");
-        btnXoaDV.setBorderPainted(false);
         btnXoaDV.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnXoaDVActionPerformed(evt);

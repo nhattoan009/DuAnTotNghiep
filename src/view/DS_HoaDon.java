@@ -19,19 +19,24 @@ public class DS_HoaDon extends javax.swing.JPanel {
     }
 
     public void load() {
-        DefaultTableModel model = (DefaultTableModel) tblDSP.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblDSHoaDon.getModel();
         model.setRowCount(0);
         try {
 //            String MaSV = txtTimKiemMaSV.getText();
 //            List<model.HoaDon> list = hdDao.selectByMaSV(MaSV);
             List<model.HoaDon> list = hdDao.select();
+            System.out.println("-=-=-=-"+ list);
             for (model.HoaDon sv : list) {
                 Object[] row = {
                     sv.getMaHoaDon(),
-                    sv.getMaHopDong(),
+                    sv.getMaSV(),
+                    sv.getHoTen(),
+                    sv.getMaPhong(),
                     sv.getTienPhong(),
                     sv.getNgayTao(),
-                    sv.isTrangThai() ? "Hoạt động" : "không hoạt động"};
+                    sv.isTrangThai() ? "Chưa thu" : "Đã thu",
+                    sv.getThang()
+                };
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -48,18 +53,20 @@ public class DS_HoaDon extends javax.swing.JPanel {
         btnCapNhat = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
         btnXuatHoaDon = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblDSP = new javax.swing.JTable();
+        tblDSHoaDon = new javax.swing.JTable();
         txtTimKiem = new javax.swing.JTextField();
         lblMessage = new javax.swing.JLabel();
         btnTimKiem = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
+        btnThemMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThemMoi.setForeground(new java.awt.Color(51, 51, 51));
+        btnThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_create_20px.png"))); // NOI18N
         btnThemMoi.setText("Thêm mới");
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +74,9 @@ public class DS_HoaDon extends javax.swing.JPanel {
             }
         });
 
+        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCapNhat.setForeground(new java.awt.Color(51, 51, 51));
+        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_update_20px.png"))); // NOI18N
         btnCapNhat.setText("Cập nhật");
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,6 +84,9 @@ public class DS_HoaDon extends javax.swing.JPanel {
             }
         });
 
+        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXoa.setForeground(new java.awt.Color(51, 51, 51));
+        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Delete_20px.png"))); // NOI18N
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,8 +98,9 @@ public class DS_HoaDon extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setText("Danh sách hóa đơn");
 
-        jButton4.setText("Đóng");
-
+        btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLamMoi.setForeground(new java.awt.Color(51, 51, 51));
+        btnLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_available_updates_20px.png"))); // NOI18N
         btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +108,10 @@ public class DS_HoaDon extends javax.swing.JPanel {
             }
         });
 
+        btnXuatHoaDon.setBackground(new java.awt.Color(204, 204, 204));
+        btnXuatHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXuatHoaDon.setForeground(new java.awt.Color(51, 51, 51));
+        btnXuatHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_export_pdf_20px_1.png"))); // NOI18N
         btnXuatHoaDon.setText("Xuất hóa đơn");
         btnXuatHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +119,10 @@ public class DS_HoaDon extends javax.swing.JPanel {
             }
         });
 
+        jButton6.setBackground(new java.awt.Color(204, 204, 204));
+        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(51, 51, 51));
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_forward_message_20px.png"))); // NOI18N
         jButton6.setText("Gửi email");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -109,20 +131,18 @@ public class DS_HoaDon extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton6)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnXuatHoaDon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnThemMoi)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCapNhat)
-                .addGap(18, 18, 18)
-                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,33 +155,34 @@ public class DS_HoaDon extends javax.swing.JPanel {
                             .addComponent(btnXoa)
                             .addComponent(btnCapNhat)
                             .addComponent(btnThemMoi)
-                            .addComponent(jButton4)
                             .addComponent(btnLamMoi)
                             .addComponent(btnXuatHoaDon)
                             .addComponent(jButton6))
                         .addContainerGap())))
         );
 
-        tblDSP.setModel(new javax.swing.table.DefaultTableModel(
+        tblDSHoaDon.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Mã hóa đơn", "Mã hợp đồng", "Tiền phòng", "Ngày tạo", "Trạng thái"
+                "Mã hóa đơn", "Mã Sinh viên", "Tên sinh viên", "Phòng", "Tiền phòng", "Ngày tạo", "Trạng thái", "Tháng"
             }
         ));
-        tblDSP.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblDSHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDSPMouseClicked(evt);
+                tblDSHoaDonMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblDSP);
+        jScrollPane1.setViewportView(tblDSHoaDon);
 
         txtTimKiem.setText(" ");
 
         lblMessage.setForeground(new java.awt.Color(0, 153, 255));
         lblMessage.setText(" ");
 
+        btnTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_search_20px.png"))); // NOI18N
         btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +207,7 @@ public class DS_HoaDon extends javax.swing.JPanel {
                                 .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lblMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1222, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,22 +250,22 @@ public class DS_HoaDon extends javax.swing.JPanel {
 //        load();
     }//GEN-LAST:event_btnLamMoiActionPerformed
     int index = 0;
-    private void tblDSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSPMouseClicked
+    private void tblDSHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSHoaDonMouseClicked
         if (evt.getClickCount() == 1) {
-            this.index = tblDSP.rowAtPoint(evt.getPoint());
+            this.index = tblDSHoaDon.rowAtPoint(evt.getPoint());
         }
-    }//GEN-LAST:event_tblDSPMouseClicked
+    }//GEN-LAST:event_tblDSHoaDonMouseClicked
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
 //        TimKiem();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
-        int mahoadon = (int) tblDSP.getValueAt(this.index, 0);
+        int mahoadon = (int) tblDSHoaDon.getValueAt(this.index, 0);
 //        String mahopdong = (String) tblDSP.getValueAt(this.index, 1);
 //        String tienphong = (String) tblDSP.getValueAt(this.index, 2);
-        Date ngatTaohoadon = (Date) tblDSP.getValueAt(this.index, 3);
-        String trangThai = (String) tblDSP.getValueAt(this.index, 4);
+        Date ngatTaohoadon = (Date) tblDSHoaDon.getValueAt(this.index, 3);
+        String trangThai = (String) tblDSHoaDon.getValueAt(this.index, 4);
 
         model.HoaDon hd = hdDao.findById(mahoadon);
         int mahopdong = hd.getMaHopDong();
@@ -253,8 +274,9 @@ public class DS_HoaDon extends javax.swing.JPanel {
         String maPhong = hopDong.getMaPhong();
         double gia = hopDong.getGiaThue();
         Date ngayTaoHopDong = hopDong.getNgayTao();
+        String thang = hopDong.getThang();
 
-        HoaDonPhong hoaDon = new HoaDonPhong(mahoadon, mahopdong,maPhong, maSV, gia, ngayTaoHopDong, ngatTaohoadon);
+        HoaDonPhong hoaDon = new HoaDonPhong(mahoadon, mahopdong,maPhong, maSV, gia, ngayTaoHopDong, ngatTaohoadon, thang);
         hoaDon.setVisible(true);
     }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 
@@ -266,13 +288,12 @@ public class DS_HoaDon extends javax.swing.JPanel {
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXuatHoaDon;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblMessage;
-    private javax.swing.JTable tblDSP;
+    private javax.swing.JTable tblDSHoaDon;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }

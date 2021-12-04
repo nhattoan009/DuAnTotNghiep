@@ -8,7 +8,12 @@ class HoaDon {
 
     int maHoaDon;
     int maHopDong;
+    String maSV;
+    String hoTen;
+    String maPhong;
     double tienPhong;
     Date ngayTao;
     boolean trangThai;
+    String Thang;
+    
 }

@@ -66,7 +66,7 @@
                   <Component id="jLabel1" min="-2" pref="245" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnXuatFile" min="-2" pref="104" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnHuy" min="-2" pref="101" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -92,6 +92,12 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="btnXuatFile">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/icons8_export_pdf_20px_1.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
           </Properties>
           <Events>
@@ -100,6 +106,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnHuy">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/icons8_cancel_20px.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="&#x110;&#xf3;ng"/>
           </Properties>
           <Events>

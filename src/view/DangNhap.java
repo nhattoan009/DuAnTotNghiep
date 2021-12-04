@@ -24,7 +24,6 @@ public class DangNhap extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         lblError = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
@@ -43,7 +42,7 @@ public class DangNhap extends javax.swing.JFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 350, 50));
+        getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 350, 50));
 
         jButton1.setText("Thoát");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -51,20 +50,10 @@ public class DangNhap extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 460, 160, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 433, 170, 50));
 
         lblError.setForeground(new java.awt.Color(255, 0, 0));
         getContentPane().add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 340, 30));
-
-        jCheckBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setFont(new java.awt.Font("InputSerifNarrow Medium", 0, 11)); // NOI18N
-        jCheckBox1.setText("Remember me?");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, -1, -1));
 
         txtUsername.setText("hntoan");
         getContentPane().add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 360, 50));
@@ -116,10 +105,6 @@ public class DangNhap extends javax.swing.JFrame {
         }
     }
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
-
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         login();
     }//GEN-LAST:event_btnLoginActionPerformed
@@ -161,7 +146,6 @@ public class DangNhap extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

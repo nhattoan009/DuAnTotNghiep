@@ -57,6 +57,8 @@ create database KTX_1
 	TrangThai bit not null,
 	GiaThue float not null,
 	Thang nvarchar(10) not null,
+	TrangThaiThu bit,
+	HoTen nvarchar(50) not null,
 	primary key (MaHopDong),
 	foreign key (MaPhong)references Phong (MaPhong),
 	foreign key (MaSV)references SinhVien (MaSV),
@@ -68,6 +70,10 @@ create database KTX_1
 	TienPhong float,
 	NgayTao date,
 	TrangThai bit,
+	Thang nvarchar(10) not null,
+	MaSV char(10),
+	Hoten nvarchar(50) not null,
+	MaPhong char(10),
 	primary key (MaHoaDon),
 	foreign key (MaHopDong)references HopDong (MaHopDong)
  )
@@ -89,17 +95,18 @@ drop table HopDong
 drop table HoaDon
 drop table DienNuoc
 
-ALTER TABLE Nuoc
-  ADD Thang date not null;
+ALTER TABLE HopDong
+  ADD HoTen nvarchar(50)
 
 ALTER TABLE HopDong
-  ALTER COLUMN Thang NVARCHAR(10) NOT NULL;
+  ALTER COLUMN HoTen nvarchar(50)
 
 delete from Nuoc
 
 
 select * from Dien
 select * from Nuoc
-SELECT d.TongTien, n.TongTien
-FROM Dien d
+
+SELECT *
+FROM HopDong d
 INNER JOIN Nuoc n ON d.MaPhong = n.MaPhong and d.Thang = n.Thang

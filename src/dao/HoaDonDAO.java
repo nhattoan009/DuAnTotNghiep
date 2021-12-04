@@ -14,12 +14,16 @@ import model.HoaDon;
 public class HoaDonDAO {
 
     public void Insert(HoaDon hoaDon) {
-        String sql = "INSERT INTO HoaDon VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO HoaDon VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
                 hoaDon.getMaHopDong(),
                 hoaDon.getTienPhong(),
                 hoaDon.getNgayTao(),
-                hoaDon.isTrangThai()
+                hoaDon.isTrangThai(),
+                hoaDon.getThang(),
+                hoaDon.getMaSV(),
+                hoaDon.getHoTen(),
+                hoaDon.getMaPhong()
         );
     }
 
@@ -81,6 +85,10 @@ public class HoaDonDAO {
         hoaDon.setTienPhong(rs.getDouble("TienPhong"));
         hoaDon.setNgayTao(rs.getDate("NgayTao"));
         hoaDon.setTrangThai(rs.getBoolean("TrangThai"));
+        hoaDon.setThang(rs.getString("Thang"));
+        hoaDon.setMaSV(rs.getString("MaSV"));
+        hoaDon.setHoTen(rs.getString("HoTen"));
+        hoaDon.setMaPhong(rs.getString("MaPhong"));
         return hoaDon;
     }
 }

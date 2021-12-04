@@ -41,11 +41,13 @@ public class DS_HopDong extends javax.swing.JPanel {
                 Object[] row = {
                     sv.getMaHopDong(),
                     sv.getMaSV(),
+                    sv.getHoTen(),
                     sv.getMaPhong(),
                     sv.getNgayTao(),
-                    sv.isTrangThai() ? "Hoạt động" : "không hoạt động",
+                    sv.isTrangThai() ? "Hiệu lực" : "Hết hiệu lực",
                     sv.getGiaThue(),
-                    sv.getThang()};
+                    sv.getThang(),
+                    sv.isTrangThaiThu() ? "Đã thu" : "Nợ"};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -93,6 +95,7 @@ public class DS_HopDong extends javax.swing.JPanel {
                 Object[] row = {
                     sv.getMaHopDong(),
                     sv.getMaSV(),
+                    sv.getHoTen(),
                     sv.getMaPhong(),
                     sv.getNgayTao(),
                     sv.isTrangThai() ? "Hoạt động" : "không hoạt động",
@@ -145,6 +148,8 @@ public class DS_HopDong extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
+        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_update_20px.png"))); // NOI18N
         btnCapNhat.setText("Cập nhật");
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,6 +161,8 @@ public class DS_HopDong extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setText("Danh sách hợp đồng");
 
+        btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_available_updates_20px.png"))); // NOI18N
         btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,6 +170,8 @@ public class DS_HopDong extends javax.swing.JPanel {
             }
         });
 
+        btnTaoHoaDon.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnTaoHoaDon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_receipt_dollar_20px.png"))); // NOI18N
         btnTaoHoaDon.setText("Tạo hóa đơn cá nhân");
         btnTaoHoaDon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -170,6 +179,8 @@ public class DS_HopDong extends javax.swing.JPanel {
             }
         });
 
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_receipt_dollar_20px.png"))); // NOI18N
         jButton5.setText("Tạo hóa đơn phòng");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -178,15 +189,15 @@ public class DS_HopDong extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 344, Short.MAX_VALUE)
                 .addComponent(jButton5)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTaoHoaDon)
-                .addGap(18, 18, 18)
-                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCapNhat)
-                .addContainerGap())
+                .addGap(2, 2, 2))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,6 +214,8 @@ public class DS_HopDong extends javax.swing.JPanel {
                         .addContainerGap())))
         );
 
+        btnTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_search_20px.png"))); // NOI18N
         btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,7 +245,7 @@ public class DS_HopDong extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã hợp đồng", "Mã sinh viên", "Mã phòng", "Ngày tạo", "Trạng thái", "Giá thuê", "Tháng"
+                "Mã hợp đồng", "Mã sinh viên", "Tên sinh viên", "Mã phòng", "Ngày tạo", "Trạng thái", "Giá thuê", "Tháng", "Trạng thái thu"
             }
         ));
         tblDSHD.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -242,8 +255,8 @@ public class DS_HopDong extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblDSHD);
         if (tblDSHD.getColumnModel().getColumnCount() > 0) {
-            tblDSHD.getColumnModel().getColumn(4).setResizable(false);
-            tblDSHD.getColumnModel().getColumn(6).setResizable(false);
+            tblDSHD.getColumnModel().getColumn(5).setResizable(false);
+            tblDSHD.getColumnModel().getColumn(7).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -331,14 +344,18 @@ public class DS_HopDong extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLamMoiActionPerformed
     int index = 0;
     private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
-        int mahd = (int) tblDSHD.getValueAt(this.index, 0);
+        
+        
+        int maHDong = (int) tblDSHD.getValueAt(this.index, 0);
         String masv = (String) tblDSHD.getValueAt(this.index, 1);
-        String maphong = (String) tblDSHD.getValueAt(this.index, 2);
-        Date ngatTao = (Date) tblDSHD.getValueAt(this.index, 3);
-        String trangThai = (String) tblDSHD.getValueAt(this.index, 4);
-        String giaThue = String.valueOf(tblDSHD.getValueAt(this.index, 5));
+        String hoTen = (String) tblDSHD.getValueAt(this.index, 2);
+        String maphong = (String) tblDSHD.getValueAt(this.index, 3);
+        Date ngatTao = (Date) tblDSHD.getValueAt(this.index, 4);
+        String trangThai = (String) tblDSHD.getValueAt(this.index, 5);
+        String giaThue = String.valueOf(tblDSHD.getValueAt(this.index, 6));
+        String thang = String.valueOf(tblDSHD.getValueAt(this.index, 7));
 
-        HoaDon hoaDon = new HoaDon(mahd, masv, maphong, ngatTao, trangThai, giaThue);
+        HoaDon hoaDon = new HoaDon(maHDong ,masv, hoTen, maphong, ngatTao, trangThai, giaThue, thang);
         hoaDon.setVisible(true);
     }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
