@@ -72,7 +72,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <Component id="jLabel1" min="-2" pref="245" max="-2" attributes="0"/>
-                  <EmptySpace pref="490" max="32767" attributes="0"/>
+                  <EmptySpace pref="317" max="32767" attributes="0"/>
+                  <Component id="btnLamMoi1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnLamMoi" min="-2" pref="107" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnThemMoi" min="-2" max="-2" attributes="0"/>
@@ -95,6 +97,7 @@
                               <Component id="btnCapNhat" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnThemMoi" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnLamMoi" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnLamMoi1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -173,6 +176,24 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLamMoiActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnLamMoi1">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/img/icons8_eye_20px.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Xem chi ti&#x1ebf;t ph&#xf2;ng"/>
+            <Property name="opaque" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLamMoi1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

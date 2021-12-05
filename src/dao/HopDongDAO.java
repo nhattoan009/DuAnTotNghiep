@@ -40,7 +40,7 @@ public class HopDongDAO {
 //            JDBCHelper.executeUpdate(sql, id);
 //        }
     public List<HopDong> select() {
-        String sql = "SELECT * FROM HopDong";
+        String sql = "SELECT * FROM HopDong order by MaPhong";
         return selectAll(sql);
     }
 
@@ -58,6 +58,10 @@ public class HopDongDAO {
     public List<HopDong> selectByMaSV(String keyword) {
         String sql = "SELECT * FROM HopDong WHERE MaSV LIKE ? and TrangThai = 1";
         return selectAll(sql, "%" + keyword + "%");
+    }
+    public List<HopDong> selectByMaPhongAndThang(String maPhong, String Thang) {
+        String sql = "SELECT * FROM HopDong WHERE MaPhong = ? and Thang = ? order by MaPhong";
+        return selectAll(sql, maPhong, Thang);
     }
     public List<HopDong> selectByMaPhong(String keyword) {
         String sql = "SELECT * FROM HopDong WHERE MaPhong = ?";

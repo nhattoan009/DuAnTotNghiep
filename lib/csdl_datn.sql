@@ -95,8 +95,10 @@ drop table HopDong
 drop table HoaDon
 drop table DienNuoc
 
-ALTER TABLE HopDong
-  ADD HoTen nvarchar(50)
+ALTER TABLE HoaDon
+  ADD MaSV char(10),
+	Hoten nvarchar(50),
+	MaPhong char(10)
 
 ALTER TABLE HopDong
   ALTER COLUMN HoTen nvarchar(50)

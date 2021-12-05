@@ -72,6 +72,7 @@ public class DS_Phong extends javax.swing.JPanel {
         btnXoa = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnLamMoi = new javax.swing.JButton();
+        btnLamMoi1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSP = new javax.swing.JTable();
         txtTimKiem = new javax.swing.JTextField();
@@ -122,13 +123,26 @@ public class DS_Phong extends javax.swing.JPanel {
             }
         });
 
+        btnLamMoi1.setBackground(new java.awt.Color(0, 153, 255));
+        btnLamMoi1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLamMoi1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_eye_20px.png"))); // NOI18N
+        btnLamMoi1.setText("Xem chi tiết phòng");
+        btnLamMoi1.setOpaque(false);
+        btnLamMoi1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLamMoi1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 490, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
+                .addComponent(btnLamMoi1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnThemMoi)
@@ -148,7 +162,8 @@ public class DS_Phong extends javax.swing.JPanel {
                             .addComponent(btnXoa)
                             .addComponent(btnCapNhat)
                             .addComponent(btnThemMoi)
-                            .addComponent(btnLamMoi))
+                            .addComponent(btnLamMoi)
+                            .addComponent(btnLamMoi1))
                         .addContainerGap())))
         );
 
@@ -257,10 +272,15 @@ public class DS_Phong extends javax.swing.JPanel {
         delete();
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    private void btnLamMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoi1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnLamMoi1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnLamMoi;
+    private javax.swing.JButton btnLamMoi1;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;

@@ -22,7 +22,6 @@ public class DS_SinhVien extends javax.swing.JPanel {
     PhongDAO Pdao = new PhongDAO();
     Phong phong = new Phong();
     HopDongDAO hdDao = new HopDongDAO();
-    int index = 0;
 
     /**
      * Creates new form ThemSinhVien1
@@ -36,9 +35,9 @@ public class DS_SinhVien extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblDSSV.getModel();
         model.setRowCount(0);
         try {
-            String keyword = txtTimKiem.getText();
-            List<SinhVien> list = dao.selectByKeyword(keyword);
-//            List<SinhVien> list = dao.select();
+//            String keyword = txtTimKiem.getText();
+//            List<SinhVien> list = dao.selectByKeyword(keyword);
+            List<SinhVien> list = dao.select();
             for (SinhVien sv : list) {
                 Object[] row = {
                     sv.getMaSV(),
@@ -66,6 +65,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
         btnLamMoi = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         txtTaoHopDong = new javax.swing.JButton();
+        btnChiTietSinhVien = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSSV = new javax.swing.JTable();
         lblMessage = new javax.swing.JLabel();
@@ -126,6 +126,15 @@ public class DS_SinhVien extends javax.swing.JPanel {
             }
         });
 
+        btnChiTietSinhVien.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnChiTietSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_show_property_20px.png"))); // NOI18N
+        btnChiTietSinhVien.setText("Xem chi tiết hợp đồng");
+        btnChiTietSinhVien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChiTietSinhVienActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,6 +142,8 @@ public class DS_SinhVien extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnChiTietSinhVien)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtTaoHopDong)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLamMoi)
@@ -156,7 +167,8 @@ public class DS_SinhVien extends javax.swing.JPanel {
                             .addComponent(btnThemMoi)
                             .addComponent(btnLamMoi)
                             .addComponent(btnXoa)
-                            .addComponent(txtTaoHopDong))
+                            .addComponent(txtTaoHopDong)
+                            .addComponent(btnChiTietSinhVien))
                         .addContainerGap())))
         );
 
@@ -263,7 +275,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
                     if (hopDong.getMaSV().equals(masv)) {
                         lblMessage.setText("Sinh viên này đang ở, không thể xóa");
                         lblMessage.setForeground(Color.RED);
-                    }else{
+                    } else {
                         dao.Delete(masv);
                         lblMessage.setText("Xóa thành công");
                     }
@@ -281,6 +293,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
     }
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+
         String masv = (String) tblDSSV.getValueAt(this.index, 0);
         String tensv = (String) tblDSSV.getValueAt(this.index, 1);
         String gt = (String.valueOf(tblDSSV.getValueAt(this.index, 2)));
@@ -295,10 +308,10 @@ public class DS_SinhVien extends javax.swing.JPanel {
 
         System.out.println(masv + "-" + tensv + "-" + sdt + "-" + email + "-" + cmnd + "-" + gt + "" + namsinh);
     }//GEN-LAST:event_btnCapNhatActionPerformed
-
+    int index;
     private void tblDSSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSSVMouseClicked
         if (evt.getClickCount() == 1) {
-            this.index = tblDSSV.rowAtPoint(evt.getPoint());
+             index = tblDSSV.rowAtPoint(evt.getPoint());
             if (this.index >= 0) {
                 String masv = (String) tblDSSV.getValueAt(this.index, 0);
                 System.out.println(masv);
@@ -306,6 +319,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
             System.out.println(this.index);
             System.out.println("click");
         }
+
     }//GEN-LAST:event_tblDSSVMouseClicked
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -326,9 +340,22 @@ public class DS_SinhVien extends javax.swing.JPanel {
 
     }//GEN-LAST:event_txtTaoHopDongActionPerformed
 
+    private void btnChiTietSinhVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietSinhVienActionPerformed
+        String masv = (String) tblDSSV.getValueAt(this.index, 0);
+        HopDong hd = hdDao.findByIdMaSV(masv);
+        String hoTen = hd.getHoTen();
+        String maPhong = hd.getMaPhong();
+        String thang = hd.getThang();
+        String ttHD = hd.isTrangThai() ? "Hiệu lực" : "Hết hiệu lực";
+        String ttTT = hd.isTrangThai() ? "Đã thu" : "Chưa thu";
+        ChiTietSinhVien ssv = new ChiTietSinhVien(masv, hoTen, maPhong, thang, ttHD, ttTT);
+        ssv.setVisible(true);
+    }//GEN-LAST:event_btnChiTietSinhVienActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnChiTietSinhVien;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimKiem;

@@ -47,7 +47,7 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.isTrangThai() ? "Hiệu lực" : "Hết hiệu lực",
                     sv.getGiaThue(),
                     sv.getThang(),
-                    sv.isTrangThaiThu() ? "Đã thu" : "Nợ"};
+                    sv.isTrangThaiThu() ? "Đã thu" : "Chưa thu"};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -67,11 +67,13 @@ public class DS_HopDong extends javax.swing.JPanel {
                 Object[] row = {
                     sv.getMaHopDong(),
                     sv.getMaSV(),
+                    sv.getHoTen(),
                     sv.getMaPhong(),
                     sv.getNgayTao(),
-                    sv.isTrangThai() ? "Hoạt động" : "không hoạt động",
+                    sv.isTrangThai() ? "Hiệu lực" : "Hết hiệu lực",
                     sv.getGiaThue(),
-                    sv.getThang()};
+                    sv.getThang(),
+                    sv.isTrangThaiThu() ? "Đã thu" : "Chưa thu"};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -98,9 +100,10 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.getHoTen(),
                     sv.getMaPhong(),
                     sv.getNgayTao(),
-                    sv.isTrangThai() ? "Hoạt động" : "không hoạt động",
+                    sv.isTrangThai() ? "Hiệu lực" : "Hết hiệu lực",
                     sv.getGiaThue(),
-                    sv.getThang()};
+                    sv.getThang(),
+                    sv.isTrangThaiThu() ? "Đã thu" : "Chưa thu"};
                 model.addRow(row);
             }
         } catch (Exception e) {

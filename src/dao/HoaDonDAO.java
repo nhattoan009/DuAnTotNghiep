@@ -42,6 +42,10 @@ public class HoaDonDAO {
         String sql = "SELECT * FROM HoaDon";
         return selectAll(sql);
     }
+    public List<HoaDon> selectByMaSV(String keyword) {
+        String sql = "SELECT * FROM HoaDon WHERE MaSV = ?";
+        return selectAll(sql, keyword);
+    }
 
     public HoaDon findById(Integer id) {
         String sql = "SELECT * FROM HoaDon WHERE MaHoaDon=?";
