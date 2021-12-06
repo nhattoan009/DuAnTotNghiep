@@ -184,6 +184,11 @@ public class TrangChinh extends javax.swing.JFrame {
         jMenu2.add(jMenuItem2);
 
         jMenuItem4.setText("Doanh thu theo phòng");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuItem3.setText("Thóng kê thu tiền");
@@ -202,12 +207,12 @@ public class TrangChinh extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tab, javax.swing.GroupLayout.DEFAULT_SIZE, 1388, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tab)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 1295, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,6 +344,16 @@ public class TrangChinh extends javax.swing.JFrame {
             tab.setSelectedComponent(pnl);
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+         try {
+            tab.setSelectedComponent(new DoanhThu());
+        } catch (Exception e) {
+            DoanhThu pnl = new DoanhThu();
+            tab.add("Doanh thu", pnl);
+            tab.setSelectedComponent(pnl);
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

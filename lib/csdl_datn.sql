@@ -103,12 +103,13 @@ ALTER TABLE HoaDon
 ALTER TABLE HopDong
   ALTER COLUMN HoTen nvarchar(50)
 
-delete from Nuoc
-
-
-select * from Dien
-select * from Nuoc
-
-SELECT *
-FROM HopDong d
-INNER JOIN Nuoc n ON d.MaPhong = n.MaPhong and d.Thang = n.Thang
+CREATE PROC thongKeThang (@TrangThai bit)
+AS BEGIN
+	SELECT
+	MaPhong Phong,
+		Thang Thang,
+		SUM(TienPhong) DoanhThu
+	FROM HoaDon 
+	WHERE TrangThai = @TrangThai
+	group by MaPhong, Thang
+END

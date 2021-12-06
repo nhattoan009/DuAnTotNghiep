@@ -35,14 +35,14 @@ public class ChiTietSinhVien extends javax.swing.JFrame {
         model.setRowCount(0);
         try {
             String maSV = txtMaSV.getText();
-            List<model.HoaDon> list = dao.selectByMaSV(maSV);
+            List<model.HoaDon> list = dao.selectByMaSV(maSV.trim());
             for (model.HoaDon sv : list) {
                 Object[] row = {
                     sv.getThang(),
                     sv.getTienPhong(),
                     sv.isTrangThai() ? "Đã thu" : "Chưa thu"};
                 model.addRow(row);
-            }
+            } 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
         }

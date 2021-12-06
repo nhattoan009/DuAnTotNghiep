@@ -30,7 +30,7 @@ public class DS_HopDong extends javax.swing.JPanel {
         this.loadComboBoxPhong();
     }
 
-    public void load() {
+    private void load() {
         DefaultTableModel model = (DefaultTableModel) tblDSHD.getModel();
         model.setRowCount(0);
         try {
@@ -115,7 +115,7 @@ public class DS_HopDong extends javax.swing.JPanel {
         loadTT();
     }
 
-    void loadComboBoxPhong() {
+    private void loadComboBoxPhong() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboPhong.getModel();
         model.removeAllElements();
         try {
