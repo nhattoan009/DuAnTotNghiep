@@ -34,9 +34,9 @@ public class DS_HopDong extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblDSHD.getModel();
         model.setRowCount(0);
         try {
-            String MaSV = txtTimKiemMaSV.getText();
-            List<HopDong> list = dao.selectByMaSV(MaSV);
-//            List<HopDong> list = dao.select();
+//            String MaSV = txtTimKiemMaSV.getText();
+//            List<HopDong> list = dao.selectByMaSV(MaSV);
+            List<HopDong> list = dao.select();
             for (HopDong sv : list) {
                 Object[] row = {
                     sv.getMaHopDong(),
@@ -44,14 +44,15 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.getHoTen(),
                     sv.getMaPhong(),
                     sv.getNgayTao(),
-                    sv.isTrangThai() ? "Hiệu lực" : "Hết hiệu lực",
+                    sv.getTrangThai(),
                     sv.getGiaThue(),
                     sv.getThang(),
-                    sv.isTrangThaiThu() ? "Đã thu" : "Chưa thu"};
+                    sv.getTrangThaiThu()};
                 model.addRow(row);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
+            System.out.println(e);
         }
     }
 
@@ -70,10 +71,10 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.getHoTen(),
                     sv.getMaPhong(),
                     sv.getNgayTao(),
-                    sv.isTrangThai() ? "Hiệu lực" : "Hết hiệu lực",
+                    sv.getTrangThai(),
                     sv.getGiaThue(),
                     sv.getThang(),
-                    sv.isTrangThaiThu() ? "Đã thu" : "Chưa thu"};
+                    sv.getTrangThaiThu()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -100,10 +101,10 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.getHoTen(),
                     sv.getMaPhong(),
                     sv.getNgayTao(),
-                    sv.isTrangThai() ? "Hiệu lực" : "Hết hiệu lực",
+                    sv.getTrangThai(),
                     sv.getGiaThue(),
                     sv.getThang(),
-                    sv.isTrangThaiThu() ? "Đã thu" : "Chưa thu"};
+                    sv.getTrangThaiThu()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -331,7 +332,7 @@ public class DS_HopDong extends javax.swing.JPanel {
         String masv = (String) tblDSHD.getValueAt(this.index, 1);
         String mp = (String) tblDSHD.getValueAt(this.index, 2);
         Date ngayTao = (Date) tblDSHD.getValueAt(this.index, 3);
-        String tt = (String.valueOf(tblDSHD.getValueAt(this.index, 4)));
+        String tt = (String) tblDSHD.getValueAt(this.index, 4);
         double gia = (double) tblDSHD.getValueAt(this.index, 5);
 
 //        HopDong model = dao.findById(mahd);

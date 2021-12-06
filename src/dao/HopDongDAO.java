@@ -19,17 +19,17 @@ public class HopDongDAO {
                 hopDong.getMaPhong(),
                 hopDong.getMaSV(),
                 hopDong.getNgayTao(),
-                hopDong.isTrangThai(),
+                hopDong.getTrangThai(),
                 hopDong.getGiaThue(),
                 hopDong.getThang(),
-                hopDong.isTrangThaiThu(),
+                hopDong.getTrangThaiThu(),
                 hopDong.getHoTen());
     }
 
     public void Update(HopDong hopDong) {
         String sql = "UPDATE HopDong SET TrangThai=?, GiaThue=? WHERE MaHopDong=?"; //where
         JDBCHelper.executeUpdate(sql,
-                hopDong.isTrangThai(),
+                hopDong.getTrangThai(),
                 hopDong.getGiaThue(),
                 hopDong.getMaHopDong());
     }
@@ -56,8 +56,8 @@ public class HopDongDAO {
     }
     
     public List<HopDong> selectByMaSV(String keyword) {
-        String sql = "SELECT * FROM HopDong WHERE MaSV LIKE ? and TrangThai = 1";
-        return selectAll(sql, "%" + keyword + "%");
+        String sql = "SELECT * FROM HopDong WHERE MaSV = ?";
+        return selectAll(sql, keyword);
     }
     public List<HopDong> selectByMaPhongAndThang(String maPhong, String Thang) {
         String sql = "SELECT * FROM HopDong WHERE MaPhong = ? and Thang = ? order by MaPhong";
@@ -68,11 +68,11 @@ public class HopDongDAO {
         return selectAll(sql, keyword);
     }
     public List<HopDong> selectByTrangThai0() {
-        String sql = "SELECT * FROM HopDong WHERE TrangThai = 0";
+        String sql = "SELECT * FROM HopDong WHERE TrangThai = 'Hoạt động'";
         return selectAll(sql);
     }
     public List<HopDong> selectByTrangThai1() {
-        String sql = "SELECT * FROM HopDong WHERE TrangThai = 1";
+        String sql = "SELECT * FROM HopDong WHERE TrangThai = 'Không hoạt động'";
         return selectAll(sql);
     }
 
@@ -98,13 +98,14 @@ public class HopDongDAO {
     private HopDong readFromResultSet(ResultSet rs) throws SQLException {
         HopDong hopDong = new HopDong();
         hopDong.setMaHopDong(rs.getInt("MaHopDong"));
-        hopDong.setMaSV(rs.getString("MaSV"));
-        hopDong.setHoTen(rs.getString("HoTen"));
         hopDong.setMaPhong(rs.getString("MaPhong"));
+        hopDong.setMaSV(rs.getString("MaSV"));
         hopDong.setNgayTao(rs.getDate("NgayTao"));
         hopDong.setGiaThue(rs.getFloat("GiaThue"));
-        hopDong.setTrangThai(rs.getBoolean("TrangThai"));
+        hopDong.setTrangThai(rs.getString("TrangThai"));
         hopDong.setThang(rs.getString("Thang"));
+        hopDong.setTrangThaiThu(rs.getString("TrangThaiThu"));
+        hopDong.setHoTen(rs.getString("HoTen"));
         return hopDong;
     }
 }

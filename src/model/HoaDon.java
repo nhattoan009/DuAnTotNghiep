@@ -13,7 +13,7 @@ class HoaDon {
     String maPhong;
     double tienPhong;
     Date ngayTao;
-    boolean trangThai;
+    String trangThai;
     String Thang;
     
 }

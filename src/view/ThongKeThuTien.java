@@ -46,10 +46,10 @@ public class ThongKeThuTien extends javax.swing.JPanel {
                     sv.getMaSV(),
                     sv.getHoTen(),
                     sv.getMaPhong(),
-                    sv.isTrangThai() ? "Hiệu lực" : "Hết hiệu lực",
+                    sv.getTrangThai(),
                     sv.getGiaThue(),
                     sv.getThang(),
-                    sv.isTrangThaiThu() ? "Đã thu" : "Chưa thu"};
+                    sv.getTrangThaiThu()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -66,10 +66,10 @@ public class ThongKeThuTien extends javax.swing.JPanel {
                     sv.getMaSV(),
                     sv.getHoTen(),
                     sv.getMaPhong(),
-                    sv.isTrangThai() ? "Hiệu lực" : "Hết hiệu lực",
+                    sv.getTrangThai(),
                     sv.getGiaThue(),
                     sv.getThang(),
-                    sv.isTrangThaiThu() ? "Đã thu" : "Chưa thu"};
+                    sv.getTrangThaiThu()};
                 model.addRow(row);
             }
         } catch (Exception e) {

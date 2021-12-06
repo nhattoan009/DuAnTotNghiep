@@ -11,8 +11,8 @@ class HopDong {
     String maSV;
     String hoTen;
     Date ngayTao;
-    boolean trangThai;
+    String trangThai;
     double giaThue;
     String Thang;
-    boolean trangThaiThu;
+    String trangThaiThu;
 }

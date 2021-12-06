@@ -60,6 +60,10 @@ public class DienNuocDAO {
         String sql = "SELECT * FROM DienNuoc WHERE Thang = ?";
         return selectAll(sql,keyword);
     }
+    public List<DienNuoc> selectByMaPhong(String keyword) {
+        String sql = "SELECT * FROM DienNuoc WHERE MaPhong = ?";
+        return selectAll(sql,keyword);
+    }
 
     private List<DienNuoc> selectAll(String sql, Object... args) {
         List<DienNuoc> list = new ArrayList<>();

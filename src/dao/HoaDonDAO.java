@@ -19,7 +19,7 @@ public class HoaDonDAO {
                 hoaDon.getMaHopDong(),
                 hoaDon.getTienPhong(),
                 hoaDon.getNgayTao(),
-                hoaDon.isTrangThai(),
+                hoaDon.getTrangThai(),
                 hoaDon.getThang(),
                 hoaDon.getMaSV(),
                 hoaDon.getHoTen(),
@@ -46,6 +46,11 @@ public class HoaDonDAO {
         String sql = "SELECT * FROM HoaDon WHERE MaSV = ?";
         return selectAll(sql, keyword);
     }
+    
+    public void UpdateStatus(int maHD) {
+        String sql = "UPDATE HoaDon SET TrangThai='Đã thu' WHERE MaHoaDon=?"; //where
+        JDBCHelper.executeUpdate(sql, maHD);
+    }
 
     public HoaDon findById(Integer id) {
         String sql = "SELECT * FROM HoaDon WHERE MaHoaDon=?";
@@ -60,6 +65,10 @@ public class HoaDonDAO {
     }
     public List<HoaDon> selectMaPhong(int keyword) {
         String sql = "SELECT MaPhong FROM HoaDon WHERE MaHoaDon = ?";
+        return selectAll(sql, keyword);
+    }
+    public List<HoaDon> selectByMaPhong(String keyword) {
+        String sql = "SELECT * FROM HoaDon WHERE MaPhong = ?";
         return selectAll(sql, keyword);
     }
 
@@ -88,7 +97,7 @@ public class HoaDonDAO {
         hoaDon.setMaHopDong(rs.getInt("MaHopDong"));
         hoaDon.setTienPhong(rs.getDouble("TienPhong"));
         hoaDon.setNgayTao(rs.getDate("NgayTao"));
-        hoaDon.setTrangThai(rs.getBoolean("TrangThai"));
+        hoaDon.setTrangThai(rs.getString("TrangThai"));
         hoaDon.setThang(rs.getString("Thang"));
         hoaDon.setMaSV(rs.getString("MaSV"));
         hoaDon.setHoTen(rs.getString("HoTen"));

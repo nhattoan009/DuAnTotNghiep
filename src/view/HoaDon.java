@@ -36,7 +36,8 @@ public class HoaDon extends javax.swing.JFrame {
         model.HoaDon hd = getModel();
         try {
             hdDao.Insert(hd);
-//            this.clear();
+//            this.clear(););
+
             lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
         } catch (Exception e) {
             lblMessage.setText("Thêm mới thất bại!");
@@ -50,7 +51,7 @@ public class HoaDon extends javax.swing.JFrame {
         sv.setMaHopDong(Integer.parseInt(txtMaHD.getText()));
         sv.setTienPhong(Double.parseDouble(txtGiaPhong.getText()));
         sv.setNgayTao(new Date());
-        sv.setTrangThai(cboTrangThai.getSelectedIndex() == 0);
+        sv.setTrangThai(cboTrangThai.getSelectedItem().toString());
         sv.setThang(txtThang.getText());
         sv.setMaSV(txtMaSV.getText());
         sv.setHoTen(txtHoTen.getText());
@@ -155,7 +156,7 @@ public class HoaDon extends javax.swing.JFrame {
 
         jLabel10.setText("Trạng thái thu:");
 
-        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nợ", "Đã thu", " " }));
+        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã thu", "Chưa thu" }));
 
         jLabel5.setText("Ngày tạo hợp đồng:");
 

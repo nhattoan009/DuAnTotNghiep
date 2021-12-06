@@ -54,10 +54,10 @@ create database KTX_1
 	MaPhong char(10),
 	MaSV char(10),
 	NgayTao date not null,
-	TrangThai bit not null,
+	TrangThai nvarchar(20) not null,
 	GiaThue float not null,
 	Thang nvarchar(10) not null,
-	TrangThaiThu bit,
+	TrangThaiThu nvarchar(20),
 	HoTen nvarchar(50) not null,
 	primary key (MaHopDong),
 	foreign key (MaPhong)references Phong (MaPhong),
@@ -69,7 +69,7 @@ create database KTX_1
 	MaHopDong int,
 	TienPhong float,
 	NgayTao date,
-	TrangThai bit,
+	TrangThai nvarchar(20),
 	Thang nvarchar(10) not null,
 	MaSV char(10),
 	Hoten nvarchar(50) not null,
@@ -103,13 +103,7 @@ ALTER TABLE HoaDon
 ALTER TABLE HopDong
   ALTER COLUMN HoTen nvarchar(50)
 
-CREATE PROC thongKeThang (@TrangThai bit)
-AS BEGIN
-	SELECT
-	MaPhong Phong,
-		Thang Thang,
-		SUM(TienPhong) DoanhThu
-	FROM HoaDon 
-	WHERE TrangThai = @TrangThai
-	group by MaPhong, Thang
-END
+  ALTER TABLE HopDong
+  ALTER COLUMN TrangThaiThu nvarchar(20);
+
+

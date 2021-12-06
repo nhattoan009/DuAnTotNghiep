@@ -38,15 +38,15 @@ public class SuaHopDong extends javax.swing.JFrame {
 
     }
 
-    void setModel(HopDong sv) {
-        txtMaHD.setText(String.valueOf(sv.getMaHopDong()));
-        txtMaSV.setText(sv.getMaSV());
-        txtMaPhong.setText(sv.getMaPhong());
-        txtNgayTao.setText(DateHelper.toString(sv.getNgayTao()));
-        cboTrangThai.setSelectedIndex(sv.isTrangThai() ? "Hoạt động" : "Không hoạt động");
-        txtGia.setText(String.valueOf(sv.getGiaThue()));
-
-    }
+//    void setModel(HopDong sv) {
+//        txtMaHD.setText(String.valueOf(sv.getMaHopDong()));
+//        txtMaSV.setText(sv.getMaSV());
+//        txtMaPhong.setText(sv.getMaPhong());
+//        txtNgayTao.setText(DateHelper.toString(sv.getNgayTao()));
+//        cboTrangThai.setSelectedIndex(sv.isTrangThai() ? "Hoạt động" : "Không hoạt động");
+//        txtGia.setText(String.valueOf(sv.getGiaThue()));
+//
+//    }
 
     HopDong getModel() {
         HopDong sv = new HopDong();
@@ -54,7 +54,7 @@ public class SuaHopDong extends javax.swing.JFrame {
         sv.setMaSV(txtMaSV.getText());
         sv.setMaPhong(txtMaPhong.getText());
         sv.setNgayTao(DateHelper.toDate(txtNgayTao.getText()));
-        sv.setTrangThai(cboTrangThai.getSelectedIndex() == 0);
+        sv.setTrangThai(cboTrangThai.getSelectedItem().toString());
         sv.setGiaThue(Double.parseDouble(txtGia.getText()));
         return sv;
 

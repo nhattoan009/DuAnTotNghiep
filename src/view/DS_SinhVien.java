@@ -346,8 +346,8 @@ public class DS_SinhVien extends javax.swing.JPanel {
         String hoTen = hd.getHoTen();
         String maPhong = hd.getMaPhong();
         String thang = hd.getThang();
-        String ttHD = hd.isTrangThai() ? "Hiệu lực" : "Hết hiệu lực";
-        String ttTT = hd.isTrangThai() ? "Đã thu" : "Chưa thu";
+        String ttHD = hd.getTrangThai();
+        String ttTT = hd.getTrangThai();
         ChiTietSinhVien ssv = new ChiTietSinhVien(masv, hoTen, maPhong, thang, ttHD, ttTT);
         ssv.setVisible(true);
     }//GEN-LAST:event_btnChiTietSinhVienActionPerformed

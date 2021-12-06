@@ -25,7 +25,7 @@ public class DS_HoaDon extends javax.swing.JPanel {
 //            String MaSV = txtTimKiemMaSV.getText();
 //            List<model.HoaDon> list = hdDao.selectByMaSV(MaSV);
             List<model.HoaDon> list = hdDao.select();
-            System.out.println("-=-=-=-"+ list);
+            System.out.println("-=-=-=-" + list);
             for (model.HoaDon sv : list) {
                 Object[] row = {
                     sv.getMaHoaDon(),
@@ -34,7 +34,7 @@ public class DS_HoaDon extends javax.swing.JPanel {
                     sv.getMaPhong(),
                     sv.getTienPhong(),
                     sv.getNgayTao(),
-                    sv.isTrangThai() ? "Chưa thu" : "Đã thu",
+                    sv.getTrangThai(),
                     sv.getThang()
                 };
                 model.addRow(row);
@@ -247,7 +247,7 @@ public class DS_HoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-//        load();
+        load();
     }//GEN-LAST:event_btnLamMoiActionPerformed
     int index = 0;
     private void tblDSHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSHoaDonMouseClicked
@@ -262,21 +262,18 @@ public class DS_HoaDon extends javax.swing.JPanel {
 
     private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
         int mahoadon = (int) tblDSHoaDon.getValueAt(this.index, 0);
-//        String mahopdong = (String) tblDSP.getValueAt(this.index, 1);
-//        String tienphong = (String) tblDSP.getValueAt(this.index, 2);
-        Date ngatTaohoadon = (Date) tblDSHoaDon.getValueAt(this.index, 3);
-        String trangThai = (String) tblDSHoaDon.getValueAt(this.index, 4);
 
         model.HoaDon hd = hdDao.findById(mahoadon);
+        Date ngatTaohoadon = hd.getNgayTao();
         int mahopdong = hd.getMaHopDong();
         HopDong hopDong = hdongDao.findById(mahopdong);
         String maSV = hopDong.getMaSV();
         String maPhong = hopDong.getMaPhong();
+        String hoTen = hopDong.getHoTen();
         double gia = hopDong.getGiaThue();
-        Date ngayTaoHopDong = hopDong.getNgayTao();
         String thang = hopDong.getThang();
 
-        HoaDonPhong hoaDon = new HoaDonPhong(mahoadon, mahopdong,maPhong, maSV, gia, ngayTaoHopDong, ngatTaohoadon, thang);
+        HoaDonPhong hoaDon = new HoaDonPhong(mahoadon, maSV, hoTen, maPhong, gia, thang, ngatTaohoadon);
         hoaDon.setVisible(true);
     }//GEN-LAST:event_btnXuatHoaDonActionPerformed
 

@@ -40,7 +40,7 @@ public class ChiTietSinhVien extends javax.swing.JFrame {
                 Object[] row = {
                     sv.getThang(),
                     sv.getTienPhong(),
-                    sv.isTrangThai() ? "Đã thu" : "Chưa thu"};
+                    sv.getTrangThai()};
                 model.addRow(row);
             } 
         } catch (Exception e) {

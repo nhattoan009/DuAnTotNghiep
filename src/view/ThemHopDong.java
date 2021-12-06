@@ -91,7 +91,7 @@ public class ThemHopDong extends javax.swing.JFrame {
                     hd.getMaPhong(),
                     hd.getHoTen(),
                     hd.getThang(),
-                    hd.isTrangThaiThu()? "Đã thu" : "Chưa thu"};
+                    hd.getTrangThaiThu()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -106,11 +106,11 @@ public class ThemHopDong extends javax.swing.JFrame {
         sv.setMaSV(txtMaSV.getText());
         sv.setHoTen(txtHoTen.getText());
         sv.setNgayTao(DateHelper.toDate(txtNgayTao.getText()));
-        sv.setTrangThai(cboTrangThai.getSelectedIndex() == 0);
+        sv.setTrangThai(cboTrangThai.getSelectedItem().toString());
         String gia = txtGia.getText();
         String str = gia.substring(0, 6);
         sv.setGiaThue(Double.parseDouble(str));
-        sv.setTrangThaiThu(false);
+        sv.setTrangThaiThu("Chưa thu");
         return sv;
     }
 
