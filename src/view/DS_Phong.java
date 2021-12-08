@@ -2,7 +2,11 @@ package view;
 
 import dao.PhongDAO;
 import java.awt.Color;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Phong;
@@ -24,20 +28,25 @@ public class DS_Phong extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblDSP.getModel();
         model.setRowCount(0);
         try {
-            String keyword = txtTimKiem.getText();
-            List<Phong> list = dao.selectByKeyword(keyword);
+//            String keyword = txtTimKiem.getText();
+//            List<Phong> list = dao.selectByKeyword(keyword);
+            Locale localeVN = new Locale("vi", "VN");
+            NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
             
-//            List<SinhVien> list = dao.select();
+            List<Phong> list = dao.select();
             for (Phong sv : list) {
                 Object[] row = {
                     sv.getMaPhong(),
                     sv.getTenPhong(),
-                    sv.getGiaPhong(),
+                    String.format(Locale.UK, "%1$,.0f", sv.getGiaPhong()),
+//                    String.format("%1$,.0f", sv.getGiaPhong()),
+//                    currencyVN.format(sv.getGiaPhong()),
                     sv.isTrangThai() ? "Hoạt động" : "Không hoạt động",};
                 model.addRow(row);
             }
         } catch (Exception e) {
             lblMessage.setText("Lỗi truy vấn dữ liệu!");
+            System.out.println("e " + e);
         }
     }
 

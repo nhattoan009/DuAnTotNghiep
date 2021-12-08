@@ -24,12 +24,14 @@ public class DangNhap extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         lblError = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -55,6 +57,16 @@ public class DangNhap extends javax.swing.JFrame {
         lblError.setForeground(new java.awt.Color(255, 0, 0));
         getContentPane().add(lblError, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 340, 30));
 
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setText("quên mật khẩu");
+        jButton3.setContentAreaFilled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 130, -1));
+
         txtUsername.setText("hntoan");
         getContentPane().add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 360, 50));
 
@@ -75,6 +87,14 @@ public class DangNhap extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/background-2203989_960_720.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 540));
+
+        jButton2.setText("Thoát");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 433, 170, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -113,6 +133,14 @@ public class DangNhap extends javax.swing.JFrame {
         exit();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        new QuenMatKhau().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -146,6 +174,8 @@ public class DangNhap extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -4,6 +4,7 @@ import dao.HopDongDAO;
 import dao.PhongDAO;
 import helper.DateHelper;
 import java.awt.Color;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +35,7 @@ public class ThemHopDong extends javax.swing.JFrame {
         loadComboBox();
         this.setLocationRelativeTo(null);
         this.txtNgayTao.setText(DateHelper.toString(new Date()));
-        
+
         this.txtMaSV.setText(MaSV);
         this.txtHoTen.setText(hoTen);
 
@@ -66,9 +67,9 @@ public class ThemHopDong extends javax.swing.JFrame {
 //        }
 //
 //    }
-    
-    void clear(){
-        
+
+    void clear() {
+
     }
 //    void setModel(HopDong sv) {
 //        txtMaSV.setText(sv.getMaSV());
@@ -79,7 +80,7 @@ public class ThemHopDong extends javax.swing.JFrame {
 //        txtGia.setText(String.valueOf(sv.getGiaThue()));
 //
 //    }
-    
+
     public void loadPhong() {
         DefaultTableModel model = (DefaultTableModel) tblChiTietPhong.getModel();
         model.setRowCount(0);
@@ -108,7 +109,7 @@ public class ThemHopDong extends javax.swing.JFrame {
         sv.setNgayTao(DateHelper.toDate(txtNgayTao.getText()));
         sv.setTrangThai(cboTrangThai.getSelectedItem().toString());
         String gia = txtGia.getText();
-        String str = gia.substring(0, 6);
+        String str = gia.substring(0, 7);
         sv.setGiaThue(Double.parseDouble(str));
         sv.setTrangThaiThu("Chưa thu");
         return sv;
@@ -375,21 +376,25 @@ public class ThemHopDong extends javax.swing.JFrame {
     }
 
     void setGiaLenComboboxPhong() {
-        
+
         String id = (String) cboPhong.getSelectedItem();
         Phong phong = pDao.findById(id);
         double giaPhong = phong.getGiaPhong();
+
+//        Locale locale = new Locale("vi", "VN");
+//        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+//        String gia = currencyFormatter.format(giaPhong);
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+        txtGia.setText(currencyVN.format(giaPhong));
         
-        Locale locale = new Locale("vi", "VN");
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
-        String gia = currencyFormatter.format(giaPhong);
-        System.out.println(gia);
-        txtGia.setText(gia);
-        
+
+//        DecimalFormat formatter = new DecimalFormat("###,###,###");
+//        txtGia.setText(formatter.format(giaPhong) + " VNĐ");
     }
 
     private void cboPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhongActionPerformed
-        
+
     }//GEN-LAST:event_cboPhongActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed
