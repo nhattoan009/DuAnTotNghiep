@@ -116,7 +116,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
              txtEmail.setBackground(Color.yellow);
              txtEmail.requestFocus();
             return false;
-        } else if (txtNgaySinh.getText().equals("") || txtNgaySinh.getText().length() != 10 == false) {
+        } else if (txtNgaySinh.getText().equals("")) {
             lblMessage.setText("Ngày sinh không hợp lệ");
             lblMessage.setForeground(Color.red);
             txtNgaySinh.setBackground(Color.yellow);

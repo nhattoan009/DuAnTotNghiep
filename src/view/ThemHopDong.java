@@ -71,15 +71,6 @@ public class ThemHopDong extends javax.swing.JFrame {
     void clear() {
 
     }
-//    void setModel(HopDong sv) {
-//        txtMaSV.setText(sv.getMaSV());
-//        txtHoTen.setText(sv.getSinhVien().getHoTen());
-//        cboPhong.setSelectedItem(sv.getPhong().getMaPhong());
-//        txtNgayTao.setText(DateHelper.toString(new Date()));
-//        cboTrangThai.setSelectedIndex(sv.isTrangThai() ? "Hoạt động" : "Không hoạt động");
-//        txtGia.setText(String.valueOf(sv.getGiaThue()));
-//
-//    }
 
     public void loadPhong() {
         DefaultTableModel model = (DefaultTableModel) tblChiTietPhong.getModel();
@@ -108,9 +99,8 @@ public class ThemHopDong extends javax.swing.JFrame {
         sv.setHoTen(txtHoTen.getText());
         sv.setNgayTao(DateHelper.toDate(txtNgayTao.getText()));
         sv.setTrangThai(cboTrangThai.getSelectedItem().toString());
-        String gia = txtGia.getText();
-        String str = gia.substring(0, 7);
-        sv.setGiaThue(Double.parseDouble(str));
+        String gia = txtGia.getText().substring(0, 6);
+        sv.setGiaThue(Double.parseDouble(gia) * 1000);
         sv.setTrangThaiThu("Chưa thu");
         return sv;
     }
@@ -376,8 +366,7 @@ public class ThemHopDong extends javax.swing.JFrame {
     }
 
     void setGiaLenComboboxPhong() {
-
-        String id = (String) cboPhong.getSelectedItem();
+        String id = cboPhong.getSelectedItem().toString();
         Phong phong = pDao.findById(id);
         double giaPhong = phong.getGiaPhong();
 
@@ -387,7 +376,6 @@ public class ThemHopDong extends javax.swing.JFrame {
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         txtGia.setText(currencyVN.format(giaPhong));
-        
 
 //        DecimalFormat formatter = new DecimalFormat("###,###,###");
 //        txtGia.setText(formatter.format(giaPhong) + " VNĐ");
@@ -403,6 +391,8 @@ public class ThemHopDong extends javax.swing.JFrame {
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
         insert();
+
+
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed

@@ -71,6 +71,10 @@ public class HoaDonDAO {
         String sql = "SELECT * FROM HoaDon WHERE MaPhong = ?";
         return selectAll(sql, keyword);
     }
+    public List<HoaDon> selectByThang(int t) {
+        String sql = "SELECT * FROM HoaDon WHERE Thang = ?";
+        return selectAll(sql, t);
+    }
 
     private List<HoaDon> selectAll(String sql, Object... args) {
         List<HoaDon> list = new ArrayList<>();

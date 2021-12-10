@@ -2,20 +2,31 @@ package view;
 
 import dao.HopDongDAO;
 import dao.PhongDAO;
+import dao.SinhVienDAO;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import model.HopDong;
 import model.Phong;
+import model.SinhVien;
 
 public class ThongKeThuTien extends javax.swing.JPanel {
 
     PhongDAO pDao = new PhongDAO();
     HopDongDAO hdDao = new HopDongDAO();
+    SinhVienDAO svDao = new SinhVienDAO();
 
     public ThongKeThuTien() {
         initComponents();
@@ -26,7 +37,7 @@ public class ThongKeThuTien extends javax.swing.JPanel {
     void loadComboBoxPhong() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboPhong.getModel();
         model.removeAllElements();
-        
+
         try {
             List<Phong> list = pDao.select();
             for (Phong p : list) {
@@ -38,13 +49,13 @@ public class ThongKeThuTien extends javax.swing.JPanel {
     }
 
     public void loadPhong() {
-        DefaultTableModel model = (DefaultTableModel) tblDSHD.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblTKTT.getModel();
         model.setRowCount(0);
         String maPhong = cboPhong.getSelectedItem().toString();
         String Thang = cboThang.getSelectedItem().toString();
         try {
             List<HopDong> list = hdDao.selectByMaPhongAndThang(maPhong, Thang);
-            System.out.println("-=-=-=-=-"+ list);
+            System.out.println("-=-=-=-=-" + list);
             for (HopDong sv : list) {
                 Object[] row = {
                     sv.getMaSV(),
@@ -60,22 +71,23 @@ public class ThongKeThuTien extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
         }
     }
-    public void loadAll() {
-        DefaultTableModel model = (DefaultTableModel) tblDSHD.getModel();
-        model.setRowCount(0);
-        
-        Font font = new Font("Segoe UI", Font.PLAIN, 14);
-        tblDSHD.setFont(font);
-        tblDSHD.setRowHeight(30);
-        tblDSHD.setBackground(Color.decode("#ffffff"));
-        tblDSHD.setForeground(Color.decode("#505160"));
 
-        JTableHeader tableHeader = tblDSHD.getTableHeader();
+    public void loadAll() {
+        DefaultTableModel model = (DefaultTableModel) tblTKTT.getModel();
+        model.setRowCount(0);
+
+        Font font = new Font("Segoe UI", Font.PLAIN, 14);
+        tblTKTT.setFont(font);
+        tblTKTT.setRowHeight(30);
+        tblTKTT.setBackground(Color.decode("#ffffff"));
+        tblTKTT.setForeground(Color.decode("#505160"));
+
+        JTableHeader tableHeader = tblTKTT.getTableHeader();
         tableHeader.setBackground(Color.decode("#B7B8B6"));
         tableHeader.setForeground(Color.decode("#0099FF"));
         Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
         tableHeader.setFont(headerFont);
-        
+
         try {
             List<HopDong> list = hdDao.select();
             for (HopDong sv : list) {
@@ -94,6 +106,47 @@ public class ThongKeThuTien extends javax.swing.JPanel {
         }
     }
 
+    private void Sendmail() {
+        String Masinhvien = (String) tblTKTT.getValueAt(this.index, 0);
+        String Thang = (String) tblTKTT.getValueAt(this.index, 5);
+        Double TienPhong = (Double) tblTKTT.getValueAt(this.index, 4);
+        System.out.println(Masinhvien);
+        SinhVien sv = svDao.findById(Masinhvien.trim());
+        final String username = "Toanhnpc00366@fpt.edu.vn";
+        final String password = "nhattoan009";
+        
+        JOptionPane.showMessageDialog(this, "Đang gửi đến "+sv.getEmail().toUpperCase()+ " ...");
+
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+        Session session = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("Toanhnpc00366@fpt.edu.vn"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse(sv.getEmail())
+            );
+            message.setSubject("Hóa đơn tiền phòng tháng " + Thang);
+            message.setText("Tiền phòng tháng " + Thang + " Là " + TienPhong);
+            Transport.send(message);
+            JOptionPane.showMessageDialog(this, "Đã gửi email thành công đến: "+ sv.getEmail().toUpperCase());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi");
+            System.out.println("" + e);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -101,8 +154,9 @@ public class ThongKeThuTien extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnLamMoi = new javax.swing.JButton();
+        btnSendMail = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblDSHD = new javax.swing.JTable();
+        tblTKTT = new javax.swing.JTable();
         cboPhong = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         cboThang = new javax.swing.JComboBox<>();
@@ -125,6 +179,17 @@ public class ThongKeThuTien extends javax.swing.JPanel {
             }
         });
 
+        btnSendMail.setBackground(new java.awt.Color(204, 204, 204));
+        btnSendMail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSendMail.setForeground(new java.awt.Color(51, 51, 51));
+        btnSendMail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_forward_message_20px.png"))); // NOI18N
+        btnSendMail.setText("Gửi email");
+        btnSendMail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSendMailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -133,6 +198,8 @@ public class ThongKeThuTien extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSendMail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLamMoi)
                 .addContainerGap())
         );
@@ -142,11 +209,12 @@ public class ThongKeThuTien extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLamMoi))
+                    .addComponent(btnLamMoi)
+                    .addComponent(btnSendMail))
                 .addContainerGap())
         );
 
-        tblDSHD.setModel(new javax.swing.table.DefaultTableModel(
+        tblTKTT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -154,12 +222,12 @@ public class ThongKeThuTien extends javax.swing.JPanel {
                 "Mã sinh viên", "Tên sinh viên", "Mã phòng", "Trạng thái", "Giá thuê", "Tháng", "Trạng thái thu"
             }
         ));
-        tblDSHD.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblTKTT.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblDSHDMouseClicked(evt);
+                tblTKTTMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tblDSHD);
+        jScrollPane2.setViewportView(tblTKTT);
 
         cboPhong.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cboPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -250,14 +318,14 @@ public class ThongKeThuTien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     int index = 0;
-    private void tblDSHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSHDMouseClicked
+    private void tblTKTTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTKTTMouseClicked
         if (evt.getClickCount() == 1) {
-            this.index = tblDSHD.rowAtPoint(evt.getPoint());
+            this.index = tblTKTT.rowAtPoint(evt.getPoint());
 
             System.out.println(index);
             System.out.println("click");
         }
-    }//GEN-LAST:event_tblDSHDMouseClicked
+    }//GEN-LAST:event_tblTKTTMouseClicked
 
     private void cboPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhongActionPerformed
         // TODO add your handling code here:
@@ -271,9 +339,14 @@ public class ThongKeThuTien extends javax.swing.JPanel {
         loadPhong();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnSendMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMailActionPerformed
+        Sendmail();
+    }//GEN-LAST:event_btnSendMailActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLamMoi;
+    private javax.swing.JButton btnSendMail;
     private javax.swing.JComboBox<String> cboPhong;
     private javax.swing.JComboBox<String> cboThang;
     private javax.swing.JButton jButton1;
@@ -283,6 +356,6 @@ public class ThongKeThuTien extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblMessage;
-    private javax.swing.JTable tblDSHD;
+    private javax.swing.JTable tblTKTT;
     // End of variables declaration//GEN-END:variables
 }

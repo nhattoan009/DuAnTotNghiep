@@ -211,6 +211,11 @@ public class DS_Phong extends javax.swing.JPanel {
                 "Mã phòng", "Tên phòng", "Giá phòng", "Trạng thái phòng"
             }
         ));
+        tblDSP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDSPMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblDSP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -280,6 +285,15 @@ public class DS_Phong extends javax.swing.JPanel {
     private void btnLamMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoi1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLamMoi1ActionPerformed
+
+    private void tblDSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSPMouseClicked
+        if (evt.getClickCount() == 1) {
+            this.index = tblDSP.rowAtPoint(evt.getPoint());
+
+            System.out.println(index);
+            System.out.println("click");
+        }
+    }//GEN-LAST:event_tblDSPMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

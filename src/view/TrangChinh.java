@@ -221,6 +221,11 @@ public class TrangChinh extends javax.swing.JFrame {
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_expensive_24px.png"))); // NOI18N
         jMenuItem2.setText("Doanh thu theo tháng");
         jMenuItem2.setMargin(new java.awt.Insets(5, 5, 5, 5));
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem2);
 
         jMenuItem4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -433,6 +438,20 @@ public class TrangChinh extends javax.swing.JFrame {
             tab.setSelectedComponent(pnl);
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        ImageIcon tab1Icon = new ImageIcon(Objects.requireNonNull(
+                this.getClass().getResource("/img/money.png")));
+        try {
+            tab.setSelectedComponent(new DoanhThuThang());
+        } catch (Exception e) {
+            DoanhThuThang pnl = new DoanhThuThang();
+            tab.setFont(new Font("Segoe UI", Font.BOLD | Font.BOLD, 18));
+            tab.addTab("Doanh Thu Tháng", tab1Icon, pnl);
+            tab.setBackground(Color.WHITE);
+            tab.setSelectedComponent(pnl);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
