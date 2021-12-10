@@ -2,6 +2,7 @@ package view;
 
 import dao.SinhVienDAO;
 import helper.DateHelper;
+import java.awt.Color;
 import java.util.Date;
 import model.SinhVien;
 
@@ -67,12 +68,101 @@ public class SuaSinhVien extends javax.swing.JFrame {
         SinhVien model = getModel();
         try {
             dao.Update(model);
-//            this.load();
+            this.clear();
             lblMessage.setText("Cập nhật thành công!");
         } catch (Exception e) {
             lblMessage.setText("Cập nhật thất bại!");
         }
 
+    }
+    private static final String EMAIL_PATTERN
+            = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+    public static boolean verifyEmail(String email) {
+        if (email == null) {
+            return false;
+        }
+        return email.matches(EMAIL_PATTERN);
+    }
+    boolean check() {
+       // String maNhanVien = txtMaSV.getText();
+        if ((txtMaSV.getText()).length() < 5) {
+             if ((txtMaSV.getText()).equals("")) {
+                lblMessage.setText("Mã số cần 5 ký tự");
+                lblMessage.setForeground(Color.red);
+                txtMaSV.setBackground(Color.yellow);
+                return false;         
+            }
+        } 
+        
+        else if ((txtHoTen.getText()).equals("")) {
+            lblMessage.setText("Không được để trống");
+            lblMessage.setForeground(Color.red);
+            txtHoTen.setBackground(Color.yellow);
+            txtHoTen.requestFocus();
+            return false;
+        } else if (txtSDT.getText().equals("")) {
+            lblMessage.setText("Không được để trống");
+            lblMessage.setForeground(Color.red);
+            txtSDT.setBackground(Color.yellow);
+            txtSDT.requestFocus();
+            return false;
+        } else if (txtSDT.getText().length() < 10 || txtSDT.getText().length() > 12) {
+            lblMessage.setText("Số điện thoại phải từ 10 -> 12 số!");
+            lblMessage.setForeground(Color.red);
+            txtSDT.setBackground(Color.yellow);
+            txtSDT.requestFocus();
+            return false;
+        } else if (txtCMND.getText().length() < 9 || txtCMND.getText().length() > 12 || txtCMND.getText().matches("^\\d{9,12}$") == false) {
+          
+            lblMessage.setText("Số CMDN phải 9-12 số!");
+            lblMessage.setForeground(Color.red);
+             txtCMND.setBackground(Color.yellow);
+             txtCMND.requestFocus();
+            return false;
+        } else if (txtEmail.getText().equals("")) {
+            lblMessage.setText("Email không hợp lệ");
+            lblMessage.setForeground(Color.red);
+             txtEmail.setBackground(Color.yellow);
+             txtEmail.requestFocus();
+            return false;
+        } else if (verifyEmail(txtEmail.getText()) == false) {
+            lblMessage.setText(" Email không hợp lệ");
+            lblMessage.setForeground(Color.red);
+             txtEmail.setBackground(Color.yellow);
+             txtEmail.requestFocus();
+            return false;
+        } else if (txtNgaySinh.getText().equals("")) {
+            lblMessage.setText("Ngày sinh không hợp lệ");
+            lblMessage.setForeground(Color.red);
+            txtNgaySinh.setBackground(Color.yellow);
+            txtNgaySinh.requestFocus();
+            return false;
+        }
+       
+        else if (!txtNgaySinh.getText().equals("")) {
+            if ((txtNgaySinh.getText().length() != 10)) {
+                lblMessage.setText("Ngày sinh không hợp lệ");
+                lblMessage.setForeground(Color.red);
+                 txtNgaySinh.setBackground(Color.yellow);
+                 txtNgaySinh.requestFocus();
+                return false;
+            } else {
+                lblMessage.setForeground(new Color(0,153,255));
+                return true;
+            }
+        }
+         
+        return true;
+    }
+    void clear() {
+txtCMND.setBackground(Color.white);
+        txtEmail.setBackground(Color.white);
+        txtHoTen.setBackground(Color.white);
+//        txtMaSV.setBackground(Color.white);
+        txtNgaySinh.setBackground(Color.white);
+        txtSDT.setBackground(Color.white);
     }
 
     @SuppressWarnings("unchecked")
@@ -275,7 +365,9 @@ public class SuaSinhVien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        update();
+        if (check()) {
+            update();
+        }
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed

@@ -20,6 +20,23 @@ public class ThemSinhVien extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
+//    public void insert() {
+//        SinhVien sv = getModel();
+//        try {
+//            dao.Insert(sv);
+////            this.ds_SinhVien.dao.select();
+//            this.clear();
+//            lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
+//
+//        } catch (Exception e) {
+//            lblMessage.setText("Thêm mới thất bại!");
+//            lblMessage.setForeground(Color.red);
+//            System.out.print(e);
+//        }
+////        } else {
+////            lblMessage.setText("Lỗi!");
+////        }
+//    }
     public void insert() {
         SinhVien sv = getModel();
         try {
@@ -27,10 +44,13 @@ public class ThemSinhVien extends javax.swing.JFrame {
 //            this.ds_SinhVien.dao.select();
             this.clear();
             lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
+            lblMessage.setForeground(Color.BLUE);
 
         } catch (Exception e) {
-            lblMessage.setText("Thêm mới thất bại!");
+            lblMessage.setText("Mã sinh viên đã tồn tại!");
             lblMessage.setForeground(Color.red);
+            txtMaSV.setBackground(Color.yellow);
+            txtMaSV.requestFocus();
             System.out.print(e);
         }
 //        } else {
@@ -51,50 +71,73 @@ public class ThemSinhVien extends javax.swing.JFrame {
     }
 
     boolean check() {
+       // String maNhanVien = txtMaSV.getText();
         if ((txtMaSV.getText()).length() < 5) {
-            if ((txtMaSV.getText()).equals("")) {
-                lblMessage.setText("Thông tin không hợp lệ");
+             if ((txtMaSV.getText()).equals("")) {
+                lblMessage.setText("Mã số cần 5 ký tự");
                 lblMessage.setForeground(Color.red);
-                return false;
-            }
-        } else if ((txtHoTen.getText()).equals("")) {
-            lblMessage.setText("Thông tin không hợp lệ");
-            lblMessage.setForeground(Color.red);
-            return false;
-        } else if (txtSDT.getText().equals("")) {
-            lblMessage.setText("Thông tin không hợp lệ");
-            lblMessage.setForeground(Color.red);
-            return false;
-        } else if (txtSDT.getText().length() < 10 || txtSDT.getText().length() > 12) {
-            lblMessage.setText("Thông tin không hợp lệ");
-            lblMessage.setForeground(Color.red);
-            return false;
-        } else if (!txtSDT.getText().matches("[0-9]+")) {
-            lblMessage.setText("Thông tin không hợp lệ");
-            lblMessage.setForeground(Color.red);
-            return false;
-        } else if (txtEmail.getText().equals("")) {
-            lblMessage.setText("Thông tin không hợp lệ");
-            lblMessage.setForeground(Color.red);
-            return false;
-        } else if (verifyEmail(txtEmail.getText()) == false) {
-            lblMessage.setText("Thông tin không hợp lệ");
-            lblMessage.setForeground(Color.red);
-            return false;
-        } else if (txtNgaySinh.getText().equals("")) {
-            lblMessage.setText("Thông tin không hợp lệ");
-            lblMessage.setForeground(Color.red);
-            return false;
-        } else if (!txtNgaySinh.getText().equals("")) {
-            if ((txtNgaySinh.getText().length() != 10)) {
-                lblMessage.setText("Thông tin không hợp lệ");
-                lblMessage.setForeground(Color.red);
-                return false;
-            } else {
-                lblMessage.setForeground(new Color(0,153,255));
-                return true;
+                txtMaSV.setBackground(Color.yellow);
+                return false;         
             }
         }
+        else if ((txtHoTen.getText()).equals("")) {
+            lblMessage.setText("Không được để trống");
+            lblMessage.setForeground(Color.red);
+            txtHoTen.setBackground(Color.yellow);
+            txtHoTen.requestFocus();
+            return false;
+        } else if (txtSDT.getText().equals("")) {
+            lblMessage.setText("Không được để trống");
+            lblMessage.setForeground(Color.red);
+            txtSDT.setBackground(Color.yellow);
+            txtSDT.requestFocus();
+            return false;
+        } else if (txtSDT.getText().length() < 10 || txtSDT.getText().length() > 12) {
+            lblMessage.setText("Số điện thoại phải từ 10 -> 12 số!");
+            lblMessage.setForeground(Color.red);
+            txtSDT.setBackground(Color.yellow);
+            txtSDT.requestFocus();
+            return false;
+        } else if (!txtCMND.getText().matches("[0-9]+")) {
+            lblMessage.setText("Số CMDN phải 9 số!");
+            lblMessage.setForeground(Color.red);
+             txtCMND.setBackground(Color.yellow);
+             txtCMND.requestFocus();
+            return false;
+        } else if (txtEmail.getText().equals("")) {
+            lblMessage.setText("Email không hợp lệ");
+            lblMessage.setForeground(Color.red);
+             txtEmail.setBackground(Color.yellow);
+             txtEmail.requestFocus();
+            return false;
+        } else if (verifyEmail(txtEmail.getText()) == false) {
+            lblMessage.setText(" Email không hợp lệ");
+            lblMessage.setForeground(Color.red);
+             txtEmail.setBackground(Color.yellow);
+             txtEmail.requestFocus();
+            return false;
+        } else if (txtNgaySinh.getText().equals("") || txtNgaySinh.getText().length() != 10 == false) {
+            lblMessage.setText("Ngày sinh không hợp lệ");
+            lblMessage.setForeground(Color.red);
+            txtNgaySinh.setBackground(Color.yellow);
+            txtNgaySinh.requestFocus();
+            return false;
+        }
+       
+//        else if (!txtNgaySinh.getText().equals("")) {
+//            if ((txtNgaySinh.getText().length() != 10)) {
+//                lblMessage.setText("Ngày sinh không hợp lệ");
+//                lblMessage.setForeground(Color.red);
+//                 txtNgaySinh.setBackground(Color.yellow);
+//                 txtNgaySinh.requestFocus();
+//                return false;
+//            }
+////            else {
+////                lblMessage.setForeground(new Color(0,153,255));
+////                return true;
+////            }
+//        }
+         
         return true;
     }
 

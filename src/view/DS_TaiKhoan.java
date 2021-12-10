@@ -2,10 +2,12 @@ package view;
 
 import dao.QuanLyDAO;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import model.QuanLy;
 
 /**
@@ -25,6 +27,18 @@ public class DS_TaiKhoan extends javax.swing.JPanel {
     public void load() {
         DefaultTableModel model = (DefaultTableModel) tblDSTK.getModel();
         model.setRowCount(0);
+        
+        Font font = new Font("Segoe UI", Font.PLAIN, 14);
+        tblDSTK.setFont(font);
+        tblDSTK.setRowHeight(30);
+        tblDSTK.setBackground(Color.decode("#ffffff"));
+        tblDSTK.setForeground(Color.decode("#505160"));
+
+        JTableHeader tableHeader = tblDSTK.getTableHeader();
+        tableHeader.setBackground(Color.decode("#B7B8B6"));
+        tableHeader.setForeground(Color.decode("#0099FF"));
+        Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
+        tableHeader.setFont(headerFont);
         try {
             List<QuanLy> list = dao.select();
             for (QuanLy ql : list) {
@@ -141,19 +155,19 @@ public class DS_TaiKhoan extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_create_20px.png"))); // NOI18N
         jButton3.setText("Thêm mới");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_update_20px.png"))); // NOI18N
         jButton2.setText("Cập nhật");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setText("Danh sách tài khoản");
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Delete_20px.png"))); // NOI18N
         jButton5.setText("Xóa");
 
@@ -205,11 +219,20 @@ public class DS_TaiKhoan extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Tạo mới tài khoản");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel3.setText("Tên đăng nhập:");
 
+        txtMaSV.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel4.setText("Mật khẩu:");
 
+        txtMK.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel5.setText("Nhập lại mật khẩu:");
+
+        txtMK1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
 
         btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cancel_20px.png"))); // NOI18N

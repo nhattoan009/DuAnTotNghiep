@@ -4,10 +4,12 @@ import dao.HopDongDAO;
 import dao.PhongDAO;
 import dao.SinhVienDAO;
 import java.awt.Color;
+import java.awt.Font;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import model.HopDong;
 import model.Phong;
 import model.SinhVien;
@@ -34,6 +36,18 @@ public class DS_SinhVien extends javax.swing.JPanel {
     public void load() {
         DefaultTableModel model = (DefaultTableModel) tblDSSV.getModel();
         model.setRowCount(0);
+        
+        Font font = new Font("Segoe UI", Font.PLAIN, 14);
+        tblDSSV.setFont(font);
+        tblDSSV.setRowHeight(30);
+        tblDSSV.setBackground(Color.decode("#ffffff"));
+        tblDSSV.setForeground(Color.decode("#505160"));
+
+        JTableHeader tableHeader = tblDSSV.getTableHeader();
+        tableHeader.setBackground(Color.decode("#B7B8B6"));
+        tableHeader.setForeground(Color.decode("#0099FF"));
+        Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
+        tableHeader.setFont(headerFont);
         try {
 //            String keyword = txtTimKiem.getText();
 //            List<SinhVien> list = dao.selectByKeyword(keyword);
@@ -77,7 +91,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
-        btnThemMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThemMoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_create_20px.png"))); // NOI18N
         btnThemMoi.setText("Thêm mới");
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -86,7 +100,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
             }
         });
 
-        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_update_20px.png"))); // NOI18N
         btnCapNhat.setText("Cập nhật");
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -95,11 +109,11 @@ public class DS_SinhVien extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setText("Danh sách sinh viên");
 
-        btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_available_updates_20px.png"))); // NOI18N
         btnLamMoi.setText("Làm mới");
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +122,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
             }
         });
 
-        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Delete_20px.png"))); // NOI18N
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +131,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
             }
         });
 
-        txtTaoHopDong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtTaoHopDong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txtTaoHopDong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_contract_20px.png"))); // NOI18N
         txtTaoHopDong.setText("Tạo hợp đồng");
         txtTaoHopDong.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +140,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
             }
         });
 
-        btnChiTietSinhVien.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnChiTietSinhVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnChiTietSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_show_property_20px.png"))); // NOI18N
         btnChiTietSinhVien.setText("Xem chi tiết hợp đồng");
         btnChiTietSinhVien.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +154,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnChiTietSinhVien)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -189,9 +203,10 @@ public class DS_SinhVien extends javax.swing.JPanel {
 
         lblMessage.setText(" ");
 
+        txtTimKiem.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtTimKiem.setText(" ");
 
-        btnTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_search_20px.png"))); // NOI18N
         btnTimKiem.setText("Tìm kiếm");
         btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
@@ -200,10 +215,13 @@ public class DS_SinhVien extends javax.swing.JPanel {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel2.setText("Tên sinh viên");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel3.setText("Mã sinh viên");
 
+        txtTimKiem1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtTimKiem1.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -265,9 +283,15 @@ public class DS_SinhVien extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     void delete() {
-        int x = JOptionPane.showConfirmDialog(this, "Ấn YES để xóa");
-        if (x == JOptionPane.YES_OPTION) {
-            try {
+        index = tblDSSV.getSelectedRow();
+        if (index >= 0) {
+            Object[] luaChon = {"Đồng Ý", "Hủy bỏ"};
+            int traLoi = JOptionPane.showOptionDialog(this,
+                    "Bạn có muốn xóa không", "Thông Báo", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null, luaChon, luaChon[0]);
+            if (traLoi == JOptionPane.YES_OPTION) {
+                try {
                 String masv = (String) tblDSSV.getValueAt(this.index, 0);
                 SinhVien sv = dao.findById(masv);
                 HopDong hopDong = hdDao.findByIdMaSV(masv);
@@ -275,15 +299,16 @@ public class DS_SinhVien extends javax.swing.JPanel {
                     if (hopDong.getMaSV().equals(masv)) {
                         lblMessage.setText("Sinh viên này đang ở, không thể xóa");
                         lblMessage.setForeground(Color.RED);
-                    } else {
-                        dao.Delete(masv);
-                        lblMessage.setText("Xóa thành công");
+                    }else{
+                        
                     }
                 }
             } catch (Exception e) {
-                lblMessage.setText("xóa lỗi");
-                lblMessage.setForeground(Color.RED);
-                System.out.println(e);
+                String masv = (String) tblDSSV.getValueAt(this.index, 0);
+                dao.Delete(masv);
+                lblMessage.setForeground(Color.BLUE);
+                lblMessage.setText("Xóa thành công");
+            }
             }
         }
     }
