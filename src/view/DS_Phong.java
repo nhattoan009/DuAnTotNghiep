@@ -1,5 +1,6 @@
 package view;
 
+import dao.HopDongDAO;
 import dao.PhongDAO;
 import java.awt.Color;
 import java.awt.Font;
@@ -11,6 +12,7 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import model.HopDong;
 import model.Phong;
 
 /**
@@ -20,6 +22,7 @@ import model.Phong;
 public class DS_Phong extends javax.swing.JPanel {
 
     PhongDAO dao = new PhongDAO();
+    HopDongDAO hdDao = new HopDongDAO();
 
     public DS_Phong() {
         initComponents();
@@ -29,7 +32,7 @@ public class DS_Phong extends javax.swing.JPanel {
     public void load() {
         DefaultTableModel model = (DefaultTableModel) tblDSP.getModel();
         model.setRowCount(0);
-        
+
         Font font = new Font("Segoe UI", Font.PLAIN, 14);
         tblDSP.setFont(font);
         tblDSP.setRowHeight(30);
@@ -46,7 +49,7 @@ public class DS_Phong extends javax.swing.JPanel {
 //            List<Phong> list = dao.selectByKeyword(keyword);
             Locale localeVN = new Locale("vi", "VN");
             NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-            
+
             List<Phong> list = dao.select();
             for (Phong sv : list) {
                 Object[] row = {
@@ -67,14 +70,24 @@ public class DS_Phong extends javax.swing.JPanel {
         if (x == JOptionPane.YES_OPTION) {
             try {
                 String maphong = (String) tblDSP.getValueAt(this.index, 0);
-                Phong model = dao.findById(maphong);
-                if (model != null) {
+                Phong p = dao.findById(maphong.trim());
+                HopDong hd = hdDao.findByIdMaP(maphong.trim());
+                System.out.println("p" + p);
+                System.out.println("hd" + hd);
+
+                if (p != null && hd != null) {
+                    if (p.getMaPhong().trim().equals(hd.getMaPhong().trim())) {
+                        lblMessage.setText("Phòng này đang có người ở, không thể xóa. ");
+                    }
+
+                } else {
                     dao.Delete(maphong);
                     lblMessage.setText("Xóa thành công");
                 }
             } catch (Exception e) {
                 lblMessage.setForeground(Color.RED);
                 lblMessage.setText("xóa lỗi");
+                System.out.println(e);
             }
         }
     }
@@ -133,7 +146,7 @@ public class DS_Phong extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setText("Danh sách phòng");
 
-        btnLamMoi.setBackground(new java.awt.Color(0, 153, 255));
+        btnLamMoi.setBackground(new java.awt.Color(204, 204, 204));
         btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_available_updates_20px.png"))); // NOI18N
         btnLamMoi.setText("Làm mới");
@@ -144,7 +157,7 @@ public class DS_Phong extends javax.swing.JPanel {
             }
         });
 
-        btnLamMoi1.setBackground(new java.awt.Color(0, 153, 255));
+        btnLamMoi1.setBackground(new java.awt.Color(204, 204, 204));
         btnLamMoi1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLamMoi1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_eye_20px.png"))); // NOI18N
         btnLamMoi1.setText("Xem chi tiết phòng");
@@ -161,10 +174,10 @@ public class DS_Phong extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 277, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
                 .addComponent(btnLamMoi1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnThemMoi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -200,6 +213,7 @@ public class DS_Phong extends javax.swing.JPanel {
             }
         });
 
+        lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblMessage.setForeground(new java.awt.Color(0, 153, 255));
         lblMessage.setText(" ");
 
@@ -229,12 +243,12 @@ public class DS_Phong extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(34, 34, 34)
-                                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblMessage, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -249,7 +263,7 @@ public class DS_Phong extends javax.swing.JPanel {
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 639, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -292,6 +306,7 @@ public class DS_Phong extends javax.swing.JPanel {
 
             System.out.println(index);
             System.out.println("click");
+            
         }
     }//GEN-LAST:event_tblDSPMouseClicked
 

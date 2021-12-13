@@ -54,6 +54,11 @@ public class HopDongDAO {
         List<HopDong> list = selectAll(sql, id);
         return list.size() > 0 ? list.get(0) : null;
     }
+    public HopDong findByIdMaP(String id) {
+        String sql = "SELECT * FROM HopDong WHERE MaPhong=?";
+        List<HopDong> list = selectAll(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
+    }
     
     public List<HopDong> selectByMaSV(String keyword) {
         String sql = "SELECT * FROM HopDong WHERE MaSV = ?";
