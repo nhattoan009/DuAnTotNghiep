@@ -9,14 +9,14 @@ create database KTX_1
  create table DichVu(
 	MaDV char(10),
 	TenDV nvarchar(50) not null,
-	GiaDV float not null,
+	GiaDV decimal(9,2); not null,
 	primary key (MaDV)
  )
  create table Phong(
 	MaPhong char(10),
 	TenPhong nvarchar(100) not null,
-	GiaPhong float not null,
-	TrangThai bit, 
+	GiaPhong decimal(9,2); not null,
+	TrangThai nvarchar(20),
 	primary key (MaPhong)
  )
  create table DienNuoc(
@@ -29,10 +29,10 @@ create database KTX_1
 	ChiSoMoiNuoc int not null,
 	SuDungDien int not null,
 	SuDungNuoc int not null,
-	TongTienDien float not null,
-	TongTienNuoc float not null,
+	TongTienDien decimal(9,2); not null,
+	TongTienNuoc decimal(9,2); not null,
 	Thang NVARCHAR(10) NOT NULL,
-	TrangThai bit not null,
+	TrangThai nvarchar(20) not null,
 	primary key (MaDienNuoc),
 	foreign key (MaDV)references DichVu (MaDV),
 	foreign key (MaPhong)references Phong (MaPhong)
@@ -55,7 +55,7 @@ create database KTX_1
 	MaSV char(10),
 	NgayTao date not null,
 	TrangThai nvarchar(20) not null,
-	GiaThue float not null,
+	GiaThue decimal(9,2); not null,
 	Thang nvarchar(10) not null,
 	TrangThaiThu nvarchar(20),
 	HoTen nvarchar(50) not null,
@@ -67,7 +67,7 @@ create database KTX_1
  create table HoaDon(
 	MaHoaDon int identity(1,1),
 	MaHopDong int,
-	TienPhong float,
+	TienPhong decimal(9,2);
 	NgayTao date,
 	TrangThai nvarchar(20),
 	Thang nvarchar(10) not null,
@@ -103,7 +103,7 @@ ALTER TABLE HoaDon
 ALTER TABLE HopDong
   ALTER COLUMN HoTen nvarchar(50)
 
-  ALTER TABLE HopDong
-  ALTER COLUMN TrangThaiThu nvarchar(20);
+  ALTER TABLE DienNuoc
+  ALTER COLUMN TrangThai nvarchar(20)
 
 

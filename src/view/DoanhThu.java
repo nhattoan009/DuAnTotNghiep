@@ -4,6 +4,7 @@ import dao.DienNuocDAO;
 import dao.HoaDonDAO;
 import dao.HopDongDAO;
 import dao.PhongDAO;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -28,173 +29,174 @@ public class DoanhThu extends javax.swing.JPanel {
 
     }
 
+    
     private void fillDoanhThu() {
 
         String maPhong = cboPhong.getSelectedItem().toString();
         List<model.HoaDon> list = hdDao.selectByMaPhong(maPhong);
         List<model.DienNuoc> list2 = dnDao.selectByMaPhong(maPhong);
 
-        double tongTien1 = list.stream()
+        BigDecimal tongTien1 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("1"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien1 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 1"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getMaDienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien1 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("1"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double tongTien2 = list.stream()
+        BigDecimal tongTien2 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("2"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien2 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 2"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getTongTienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien2 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("2"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double tongTien3 = list.stream()
+        BigDecimal tongTien3 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("3"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien3 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 3"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getTongTienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien3 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("3"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double tongTien4 = list.stream()
+        BigDecimal tongTien4 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("4"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien4 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 4"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getTongTienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien4 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("4"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double tongTien5 = list.stream()
+        BigDecimal tongTien5 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("5"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien5 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 5"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getTongTienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien5 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("5"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double tongTien6 = list.stream()
+        BigDecimal tongTien6 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("6"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien6 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 6"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getTongTienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien6 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("6"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double tongTien7 = list.stream()
+        BigDecimal tongTien7 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("7"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien7 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 7"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getTongTienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien7 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("7"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double tongTien8 = list.stream()
+        BigDecimal tongTien8 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("8"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien8 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 8"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getTongTienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien8 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("8"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double tongTien9 = list.stream()
+        BigDecimal tongTien9 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("9"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien9 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 9"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getTongTienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien9 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("9"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double tongTien10 = list.stream()
+        BigDecimal tongTien10 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("10"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien10 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 10"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getTongTienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien10 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("10"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double tongTien11 = list.stream()
+        BigDecimal tongTien11 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("11"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien11 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 11"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getTongTienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien11 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("11"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        double tongTien12 = list.stream()
+        BigDecimal tongTien12 = list.stream()
                 .filter(s -> s.getTrangThai().trim().length() == 6)
                 .filter(s -> s.getThang().equals("12"))
-                .mapToDouble(s -> s.getTienPhong())
-                .sum();
-        double tongTienDien12 = list2.stream()
-                .filter(s -> s.isTrangThai() == true)
-                .filter(s -> s.getThang().equals("Tháng 12"))
-                .mapToDouble(s -> s.getTongTienDien() + s.getTongTienNuoc())
-                .sum();
+                .map(s -> s.getTienPhong()) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        BigDecimal tongTienDien12 = list2.stream()
+                .filter(s -> s.getTrangThai().trim().length() == 6)
+                .filter(s -> s.getThang().equals("12"))
+                .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
         
         //tổng tiền
         
-        double t1 = tongTien1 + tongTienDien1;
-        double t2 = tongTien2 + tongTienDien2;
-        double t3 = tongTien3 + tongTienDien3;
-        double t4 = tongTien4 + tongTienDien4;
-        double t5 = tongTien5 + tongTienDien5;
-        double t6 = tongTien6 + tongTienDien6;
-        double t7 = tongTien7 + tongTienDien7;
-        double t8 = tongTien8 + tongTienDien8;
-        double t9 = tongTien9 + tongTienDien9;
-        double t10 = tongTien10 + tongTienDien10;
-        double t11 = tongTien11 + tongTienDien11;
-        double t12 = tongTien12 + tongTienDien12;
+        BigDecimal t1 = tongTien1.add(tongTienDien1);
+        BigDecimal t2 = tongTien2.add(tongTienDien2);
+        BigDecimal t3 = tongTien3.add(tongTienDien3);
+        BigDecimal t4 = tongTien4.add(tongTienDien4);
+        BigDecimal t5 = tongTien5.add(tongTienDien5);
+        BigDecimal t6 = tongTien6.add(tongTienDien6);
+        BigDecimal t7 = tongTien7.add(tongTienDien7);
+        BigDecimal t8 = tongTien8.add(tongTienDien8);
+        BigDecimal t9 = tongTien9.add(tongTienDien9);
+        BigDecimal t10 = tongTien10.add(tongTienDien10);
+        BigDecimal t11 = tongTien11.add(tongTienDien11);
+        BigDecimal t12 = tongTien12.add(tongTienDien12);
         
         Locale locale = new Locale("vi", "VN");
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
-        String gia1 = currencyFormatter.format(t1);
-        String gia2 = currencyFormatter.format(t2);
-        String gia3 = currencyFormatter.format(t3);
-        String gia4 = currencyFormatter.format(t4);
-        String gia5 = currencyFormatter.format(t5);
-        String gia6 = currencyFormatter.format(t6);
-        String gia7 = currencyFormatter.format(t7);
-        String gia8 = currencyFormatter.format(t8);
-        String gia9 = currencyFormatter.format(t9);
-        String gia10 = currencyFormatter.format(t10);
-        String gia11 = currencyFormatter.format(t11);
-        String gia12 = currencyFormatter.format(t12);
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
+        String gia1 = formatter.format(t1);
+        String gia2 = formatter.format(t2);
+        String gia3 = formatter.format(t3);
+        String gia4 = formatter.format(t4);
+        String gia5 = formatter.format(t5);
+        String gia6 = formatter.format(t6);
+        String gia7 = formatter.format(t7);
+        String gia8 = formatter.format(t8);
+        String gia9 = formatter.format(t9);
+        String gia10 = formatter.format(t10);
+        String gia11 = formatter.format(t11);
+        String gia12 = formatter.format(t12);
         
         lblThang13.setText(String.valueOf(gia1));
         lblThang14.setText(String.valueOf(gia2));
@@ -210,18 +212,18 @@ public class DoanhThu extends javax.swing.JPanel {
         lblThang24.setText(String.valueOf(gia12));
         
         //tiền phòng
-        String p1 = currencyFormatter.format(tongTien1);
-        String p2 = currencyFormatter.format(tongTien2);
-        String p3 = currencyFormatter.format(tongTien3);
-        String p4 = currencyFormatter.format(tongTien4);
-        String p5 = currencyFormatter.format(tongTien5);
-        String p6 = currencyFormatter.format(tongTien6);
-        String p7 = currencyFormatter.format(tongTien7);
-        String p8 = currencyFormatter.format(tongTien8);
-        String p9 = currencyFormatter.format(tongTien9);
-        String p10 = currencyFormatter.format(tongTien10);
-        String p11 = currencyFormatter.format(tongTien11);
-        String p12 = currencyFormatter.format(tongTien12);
+        String p1 = formatter.format(tongTien1);
+        String p2 = formatter.format(tongTien2);
+        String p3 = formatter.format(tongTien3);
+        String p4 = formatter.format(tongTien4);
+        String p5 = formatter.format(tongTien5);
+        String p6 = formatter.format(tongTien6);
+        String p7 = formatter.format(tongTien7);
+        String p8 = formatter.format(tongTien8);
+        String p9 = formatter.format(tongTien9);
+        String p10 = formatter.format(tongTien10);
+        String p11 = formatter.format(tongTien11);
+        String p12 = formatter.format(tongTien12);
         
         lblThang1.setText(String.valueOf(p1));
         lblThang2.setText(String.valueOf(p2));
@@ -238,18 +240,18 @@ public class DoanhThu extends javax.swing.JPanel {
         
         //tiền điện nước
 
-        String dn1 = currencyFormatter.format(tongTienDien1);
-        String dn2 = currencyFormatter.format(tongTienDien2);
-        String dn3 = currencyFormatter.format(tongTienDien3);
-        String dn4 = currencyFormatter.format(tongTienDien4);
-        String dn5 = currencyFormatter.format(tongTienDien5);
-        String dn6 = currencyFormatter.format(tongTienDien6);
-        String dn7 = currencyFormatter.format(tongTienDien7);
-        String dn8 = currencyFormatter.format(tongTienDien8);
-        String dn9 = currencyFormatter.format(tongTienDien9);
-        String dn10 = currencyFormatter.format(tongTienDien10);
-        String dn11 = currencyFormatter.format(tongTienDien11);
-        String dn12 = currencyFormatter.format(tongTienDien12);
+        String dn1 = formatter.format(tongTienDien1);
+        String dn2 = formatter.format(tongTienDien2);
+        String dn3 = formatter.format(tongTienDien3);
+        String dn4 = formatter.format(tongTienDien4);
+        String dn5 = formatter.format(tongTienDien5);
+        String dn6 = formatter.format(tongTienDien6);
+        String dn7 = formatter.format(tongTienDien7);
+        String dn8 = formatter.format(tongTienDien8);
+        String dn9 = formatter.format(tongTienDien9);
+        String dn10 = formatter.format(tongTienDien10);
+        String dn11 = formatter.format(tongTienDien11);
+        String dn12 = formatter.format(tongTienDien12);
         
         lblThang25.setText(String.valueOf(dn1));
         lblThang26.setText(String.valueOf(dn2));
@@ -264,14 +266,14 @@ public class DoanhThu extends javax.swing.JPanel {
         lblThang35.setText(String.valueOf(dn11));
         lblThang36.setText(String.valueOf(dn12));
         
-        double tong = t1+t2+t3+t4+t5+t6+t7+t8+t9+t10+t11+t12;
-        String tong1 = currencyFormatter.format(tong);
+        BigDecimal tong = t1.add(t2).add(t3).add(t4).add(t5).add(t6).add(t7).add(t8).add(t9).add(t10).add(t11).add(t12);
+//                t1+t2+t3+t4+t5+t6+t7+t8+t9+t10+t11+t12;
+        String tong1 = formatter.format(tong);
         
         lblTong.setText(String.valueOf(tong1));
 
     }
-
-    void fillComboBoxNam() {
+    private void fillComboBoxNam() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboNam.getModel();
         model.removeAllElements();
         List<HopDong> list = hopDongDAO.select();
@@ -857,11 +859,12 @@ public class DoanhThu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
-        fillDoanhThu();
+//        fillDoanhThu();
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
         this.fillDoanhThu();
+       
     }//GEN-LAST:event_btnChonActionPerformed
 
     private void cboPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhongActionPerformed

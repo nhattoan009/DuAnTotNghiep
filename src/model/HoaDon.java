@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
@@ -11,7 +12,7 @@ class HoaDon {
     String maSV;
     String hoTen;
     String maPhong;
-    double tienPhong;
+    BigDecimal tienPhong;
     Date ngayTao;
     String trangThai;
     String Thang;

@@ -74,10 +74,8 @@ public class DS_DichVu extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnThemDV = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
         lblMessage = new javax.swing.JLabel();
-        btnXoaDV = new javax.swing.JButton();
         btnCapNhat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSDV = new javax.swing.JTable();
@@ -87,16 +85,6 @@ public class DS_DichVu extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
         jLabel1.setText("Danh sách dịch vụ");
-
-        btnThemDV.setBackground(new java.awt.Color(0, 153, 255));
-        btnThemDV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnThemDV.setText("Thêm dịch vụ");
-        btnThemDV.setOpaque(false);
-        btnThemDV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemDVActionPerformed(evt);
-            }
-        });
 
         btnLamMoi.setBackground(new java.awt.Color(0, 153, 255));
         btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -110,16 +98,6 @@ public class DS_DichVu extends javax.swing.JPanel {
 
         lblMessage.setForeground(new java.awt.Color(0, 204, 255));
         lblMessage.setText(" ");
-
-        btnXoaDV.setBackground(new java.awt.Color(0, 0, 0));
-        btnXoaDV.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnXoaDV.setText("Xóa dịch vụ");
-        btnXoaDV.setOpaque(false);
-        btnXoaDV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaDVActionPerformed(evt);
-            }
-        });
 
         btnCapNhat.setBackground(new java.awt.Color(0, 153, 255));
         btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -139,11 +117,7 @@ public class DS_DichVu extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
                 .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnXoaDV, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnThemDV, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(307, 307, 307)
                 .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCapNhat)
@@ -155,10 +129,8 @@ public class DS_DichVu extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnThemDV)
                         .addComponent(btnLamMoi)
                         .addComponent(lblMessage)
-                        .addComponent(btnXoaDV)
                         .addComponent(btnCapNhat))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -169,7 +141,7 @@ public class DS_DichVu extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã dịch vụ", "Tên dịch vụ", "Giá", "Ghi chú"
+                "Mã dịch vụ", "Tên dịch vụ", "Giá"
             }
         ));
         tblDSDV.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -218,27 +190,18 @@ public class DS_DichVu extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tblDSDVMouseClicked
 
-    private void btnThemDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemDVActionPerformed
-        new ThemDichVu().setVisible(true);
-    }//GEN-LAST:event_btnThemDVActionPerformed
-
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         load();
     }//GEN-LAST:event_btnLamMoiActionPerformed
-
-    private void btnXoaDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaDVActionPerformed
-        delete();
-    }//GEN-LAST:event_btnXoaDVActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         String madv = (String) tblDSDV.getValueAt(this.index, 0);
         String tendv = (String) tblDSDV.getValueAt(this.index, 1);
         String giadv = (String.valueOf(tblDSDV.getValueAt(this.index, 2)));
-        String ghiChu = (String) tblDSDV.getValueAt(this.index, 3);
 
         DichVu model = dao.findById(madv);
         if (model != null) {
-            SuaDichVu sdv = new SuaDichVu(madv, tendv, giadv, ghiChu);
+            SuaDichVu sdv = new SuaDichVu(madv, tendv, giadv);
             sdv.setVisible(true);
         }
     }//GEN-LAST:event_btnCapNhatActionPerformed
@@ -247,8 +210,6 @@ public class DS_DichVu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnLamMoi;
-    private javax.swing.JButton btnThemDV;
-    private javax.swing.JButton btnXoaDV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

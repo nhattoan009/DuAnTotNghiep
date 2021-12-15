@@ -4,6 +4,7 @@ import dao.DichVuDAO;
 import dao.DienNuocDAO;
 import dao.PhongDAO;
 import java.awt.Color;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -68,13 +69,13 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         int cscd = Integer.parseInt(txtCSCdien.getText());
         int csmd = Integer.parseInt(txtCSMdien.getText());
         int dntt = csmd - cscd;
-        double giaDien = dichVuDien.getGiaDV();
+        BigDecimal giaDien = dichVuDien.getGiaDV();
 
         int cscn = Integer.parseInt(txtCSCnuoc.getText());
         int csmn = Integer.parseInt(txtCSMnuoc.getText());
         int ntt = csmn - cscn;
-        double giaNuoc = dichVuNuoc.getGiaDV();
-//        dien.setTrangThai(cboTrangThai.getSelectedIndex() == 0);
+        BigDecimal giaNuoc = dichVuNuoc.getGiaDV();
+        dien.setTrangThai(cboTrangThai.getSelectedItem().toString());
         dien.setMaPhong(cboPhong.getSelectedItem().toString());
 //        dien.setMaDV(dichVuDien.getMaDV());
         dien.setThang(cboThang.getSelectedItem().toString());
@@ -84,8 +85,8 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         dien.setChiSoMoiNuoc(csmn);
         dien.setSuDungDien(dntt);
         dien.setSuDungNuoc(ntt);
-        dien.setTongTienDien(dntt * giaDien);
-        dien.setTongTienNuoc(ntt * giaNuoc);
+        dien.setTongTienDien(giaDien.multiply(new BigDecimal(dntt)));
+        dien.setTongTienNuoc(giaNuoc.multiply(new BigDecimal(ntt)));
         return dien;
     }
 
@@ -120,6 +121,8 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         txtCSMnuoc = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         btnChon = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        cboTrangThai = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -145,7 +148,7 @@ public class ThemDienNuoc extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
-        jLabel1.setText("Thông tin điện nước");
+        jLabel1.setText("Thêm điện nước");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -201,6 +204,10 @@ public class ThemDienNuoc extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("Trạng thái:");
+
+        cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã thu", "Chưa thu" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -209,13 +216,18 @@ public class ThemDienNuoc extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(cboThang, 0, 168, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(cboPhong, 0, 168, Short.MAX_VALUE)))
+                        .addComponent(cboTrangThai, 0, 168, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(cboThang, 0, 168, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(cboPhong, 0, 168, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnChon)
                 .addGap(90, 90, 90)
@@ -263,14 +275,21 @@ public class ThemDienNuoc extends javax.swing.JFrame {
                         .addComponent(txtCSCdien, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(txtCSMdien, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCSCnuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCSMnuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCSCnuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCSMnuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(197, Short.MAX_VALUE))
         );
 
@@ -351,8 +370,10 @@ public class ThemDienNuoc extends javax.swing.JFrame {
     private javax.swing.JButton btnLuu;
     private javax.swing.JComboBox<String> cboPhong;
     private javax.swing.JComboBox<String> cboThang;
+    private javax.swing.JComboBox<String> cboTrangThai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

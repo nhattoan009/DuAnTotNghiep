@@ -142,7 +142,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
 
         btnChiTietSinhVien.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnChiTietSinhVien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_show_property_20px.png"))); // NOI18N
-        btnChiTietSinhVien.setText("Xem chi tiết hợp đồng");
+        btnChiTietSinhVien.setText("Xem chi tiết sinh viên");
         btnChiTietSinhVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnChiTietSinhVienActionPerformed(evt);

@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import lombok.Data;
 
 public @Data
@@ -7,6 +8,6 @@ class Phong {
 
     String maPhong;
     String tenPhong;
-    double giaPhong;
-    boolean trangThai;
+    BigDecimal giaPhong;
+    String trangThai;
 }

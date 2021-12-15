@@ -1,27 +1,31 @@
 package view;
+
 import dao.HoaDonDAO;
+import dao.HopDongDAO;
 import dao.PhongDAO;
 import helper.DateHelper;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import model.DienNuoc;
 
 public class HoaDonPhong extends javax.swing.JFrame {
 
     PhongDAO pDao = new PhongDAO();
     HoaDonDAO hdDao = new HoaDonDAO();
+    HopDongDAO hopDongDao = new HopDongDAO();
 
     public HoaDonPhong(
             int maHD,
             String MaSV,
             String hoTen,
             String MaPhong,
-            double tongTien,
+            BigDecimal tongTien,
             String Thang,
             Date ngayTaoHoaDon
     ) {
@@ -240,58 +244,54 @@ public class HoaDonPhong extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-//    void xuatFile() {
-//        String maPhong = (String) cboPhong.getSelectedItem();
-//        String thang = (String) cboThang.getSelectedItem();
-//        String cscDien = txtMaHDong.getText();
-//        String csmDien = txtMaSV.getText();
-//        String cscNuoc = txtCSCNuoc.getText();
-//        String csmNuoc = txtCSMNuoc.getText();
-//        String dienSD = txtMaPhong.getText();
-//        String nuocSD = txtNSD.getText();
-//        String tienDien = txtTongTien.getText();
-//        String tienNuoc = txtNgayTaoHD.getText();
-//
-//        Document document = new Document(PageSize.A4, 50, 50, 50, 50);
-//        try {
-//            //tạo đối tượng pdf
-//            PdfWriter.getInstance(document, new FileOutputStream("E:\\MyFile\\cc.pdf"));
-//            //mở kết nối ghi
-//            document.open();
-//            //thêm nội dung
-//            document.add(new Paragraph("Hoa don dien nuoc"));
-//            Anchor anchor = new Anchor(thang);
-//            anchor.add("Phòng: " + maPhong + "\n");
-//            anchor.add("CSC Điện: " + cscDien + "\n");
-//            anchor.add("CSM Điện: " + csmDien + "\n");
-//            anchor.add("Điện sử dụng: " + dienSD + "\n");
-//            anchor.add("Tiền điện: " + tienDien + "\n");
-//
-//            document.add(anchor);
-//
-//            document.close();
-//            System.out.println("Xuất xong!");
-//            updateStatus();
-//            JOptionPane.showMessageDialog(rootPane, "Xuất thành công");
-//        } catch (FileNotFoundException | DocumentException e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(rootPane, "Đéo xuất được");
-//        }
-//    }
+    public synchronized void xuatFile(File tenFile) {
+        int maHoaDon = Integer.parseInt(txtMaHD.getText());
+        List<model.HoaDon> hd = hdDao.selectByMaHD(maHoaDon);
+//        diens.stream().forEach(s -> System.err.println("Mã HD: "+ s.getMaDienNuoc()));
+
+        try {
+            FileWriter fw = new FileWriter(tenFile, StandardCharsets.UTF_8);
+//            fw.write();
+            hd.stream().forEach(s -> {
+                try {
+                    fw.write("  HOA DON PHONG THANG " + s.getThang() + "\n");
+                    fw.write("  ****    \n");
+                    fw.write(" MA : " + String.valueOf(s.getMaHoaDon()) + "\n");
+                    fw.write(" PHONG: " + String.valueOf(s.getMaPhong()) + "\n");
+                    fw.write(" MSSV: " + String.valueOf(s.getMaSV()) + "\n");
+                    fw.write(" HỌ TÊN: " + String.valueOf(s.getHoTen()) + "\n");
+                    fw.write(" THANG: " + String.valueOf(s.getThang()) + "\n");
+                    fw.write(" TONG TIEN: " + String.valueOf(s.getTienPhong()) + "\n");
+
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
+            });
+            fw.close();
+            updateStatus();
+            JOptionPane.showMessageDialog(null, "Lưu thành công");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "File không tồn tại");
+        }
+    }
 
     void updateStatus() {
-        int maHD = Integer.parseInt(txtMaHD.getText());
+        int maHoaDon = Integer.parseInt(txtMaHD.getText());
+        String maSV = txtMaSV.getText();
+        model.HopDong hd = hopDongDao.findByIdMaSV(maSV);
         try {
-            hdDao.UpdateStatus(maHD);
+            hopDongDao.UpdateStatus(hd.getMaHopDong());
+            hdDao.UpdateStatus(maHoaDon);
         } catch (Exception e) {
             System.out.println("update status: " + e);
         }
-
     }
 
-    
+
     private void btnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatFileActionPerformed
-        updateStatus();
+        JFileChooser saveDig = new JFileChooser();
+        saveDig.showSaveDialog(this);
+        xuatFile(saveDig.getSelectedFile());
     }//GEN-LAST:event_btnXuatFileActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed

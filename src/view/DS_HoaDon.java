@@ -4,6 +4,7 @@ import dao.HoaDonDAO;
 import dao.HopDongDAO;
 import java.awt.Color;
 import java.awt.Font;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -59,6 +60,8 @@ public class DS_HoaDon extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
         }
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -286,7 +289,7 @@ public class DS_HoaDon extends javax.swing.JPanel {
         String maSV = hopDong.getMaSV();
         String maPhong = hopDong.getMaPhong();
         String hoTen = hopDong.getHoTen();
-        double gia = hopDong.getGiaThue();
+        BigDecimal gia = hopDong.getGiaThue();
         String thang = hopDong.getThang();
 
         HoaDonPhong hoaDon = new HoaDonPhong(mahoadon, maSV, hoTen, maPhong, gia, thang, ngatTaohoadon);

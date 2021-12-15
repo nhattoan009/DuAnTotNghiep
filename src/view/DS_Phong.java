@@ -4,8 +4,6 @@ import dao.HopDongDAO;
 import dao.PhongDAO;
 import java.awt.Color;
 import java.awt.Font;
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
@@ -47,16 +45,15 @@ public class DS_Phong extends javax.swing.JPanel {
         try {
 //            String keyword = txtTimKiem.getText();
 //            List<Phong> list = dao.selectByKeyword(keyword);
-            Locale localeVN = new Locale("vi", "VN");
-            NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
 
             List<Phong> list = dao.select();
             for (Phong sv : list) {
                 Object[] row = {
                     sv.getMaPhong(),
                     sv.getTenPhong(),
-                    String.format(Locale.UK, "%1$,.0f", sv.getGiaPhong()),
-                    sv.isTrangThai() ? "Hoạt động" : "Không hoạt động",};
+                    String.format(Locale.UK, "%1$.0f", sv.getGiaPhong()),
+                    //                    sv.getGiaPhong(),
+                    sv.getTrangThai()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -106,7 +103,7 @@ public class DS_Phong extends javax.swing.JPanel {
         btnXoa = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnLamMoi = new javax.swing.JButton();
-        btnLamMoi1 = new javax.swing.JButton();
+        btnChiTietPhong = new javax.swing.JButton();
         txtTimKiem = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
         lblMessage = new javax.swing.JLabel();
@@ -157,14 +154,14 @@ public class DS_Phong extends javax.swing.JPanel {
             }
         });
 
-        btnLamMoi1.setBackground(new java.awt.Color(204, 204, 204));
-        btnLamMoi1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnLamMoi1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_eye_20px.png"))); // NOI18N
-        btnLamMoi1.setText("Xem chi tiết phòng");
-        btnLamMoi1.setOpaque(false);
-        btnLamMoi1.addActionListener(new java.awt.event.ActionListener() {
+        btnChiTietPhong.setBackground(new java.awt.Color(204, 204, 204));
+        btnChiTietPhong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnChiTietPhong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_eye_20px.png"))); // NOI18N
+        btnChiTietPhong.setText("Xem chi tiết phòng");
+        btnChiTietPhong.setOpaque(false);
+        btnChiTietPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLamMoi1ActionPerformed(evt);
+                btnChiTietPhongActionPerformed(evt);
             }
         });
 
@@ -175,7 +172,7 @@ public class DS_Phong extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
-                .addComponent(btnLamMoi1)
+                .addComponent(btnChiTietPhong)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -197,7 +194,7 @@ public class DS_Phong extends javax.swing.JPanel {
                             .addComponent(btnCapNhat)
                             .addComponent(btnThemMoi)
                             .addComponent(btnLamMoi)
-                            .addComponent(btnLamMoi1))
+                            .addComponent(btnChiTietPhong))
                         .addContainerGap())))
         );
 
@@ -296,9 +293,18 @@ public class DS_Phong extends javax.swing.JPanel {
         delete();
     }//GEN-LAST:event_btnXoaActionPerformed
 
-    private void btnLamMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoi1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLamMoi1ActionPerformed
+
+    private void btnChiTietPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChiTietPhongActionPerformed
+        String maphong = (String) tblDSP.getValueAt(this.index, 0);
+        String tenphong = (String) tblDSP.getValueAt(this.index, 1);
+        String giaphong = (String.valueOf(tblDSP.getValueAt(this.index, 2)));
+        String trangthai = (String) tblDSP.getValueAt(this.index, 3);
+
+        ChiTietPhong sp = new ChiTietPhong(maphong, tenphong, giaphong, trangthai);
+        sp.setVisible(true);
+
+
+    }//GEN-LAST:event_btnChiTietPhongActionPerformed
 
     private void tblDSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSPMouseClicked
         if (evt.getClickCount() == 1) {
@@ -306,15 +312,15 @@ public class DS_Phong extends javax.swing.JPanel {
 
             System.out.println(index);
             System.out.println("click");
-            
+
         }
     }//GEN-LAST:event_tblDSPMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnChiTietPhong;
     private javax.swing.JButton btnLamMoi;
-    private javax.swing.JButton btnLamMoi1;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;

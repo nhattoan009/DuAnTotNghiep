@@ -2,6 +2,8 @@ package view;
 
 import dao.PhongDAO;
 import java.awt.Color;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import model.Phong;
 
 /**
@@ -51,10 +53,13 @@ public class ThemPhong extends javax.swing.JFrame {
 
     Phong getModel() {
         Phong sv = new Phong();
+        BigDecimal model = new BigDecimal(txtGiaPhong.getText());
+        BigDecimal gia = model.setScale(2, RoundingMode.HALF_EVEN);
+        
         sv.setMaPhong(txtMaPhong.getText());
         sv.setTenPhong(txtTenPhong.getText());
-        sv.setGiaPhong(Double.parseDouble(txtGiaPhong.getText()));
-        sv.setTrangThai(cboTrangThai.getSelectedIndex() == 0);
+        sv.setGiaPhong(gia);
+        sv.setTrangThai(cboTrangThai.getSelectedItem().toString());
         return sv;
     }
 

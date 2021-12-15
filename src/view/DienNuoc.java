@@ -1,9 +1,13 @@
 package view;
 
 import dao.DienNuocDAO;
+import java.awt.Color;
+import java.awt.Font;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class DienNuoc extends javax.swing.JPanel {
 
@@ -18,6 +22,18 @@ public class DienNuoc extends javax.swing.JPanel {
     public void loadDienNuoc() {
         DefaultTableModel model = (DefaultTableModel) tblDSDienNuoc.getModel();
         model.setRowCount(0);
+        
+        Font font = new Font("Segoe UI", Font.PLAIN, 14);
+        tblDSDienNuoc.setFont(font);
+        tblDSDienNuoc.setRowHeight(30);
+        tblDSDienNuoc.setBackground(Color.decode("#ffffff"));
+        tblDSDienNuoc.setForeground(Color.decode("#505160"));
+
+        JTableHeader tableHeader = tblDSDienNuoc.getTableHeader();
+        tableHeader.setBackground(Color.decode("#B7B8B6"));
+        tableHeader.setForeground(Color.decode("#0099FF"));
+        Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
+        tableHeader.setFont(headerFont);
         try {
             List<model.DienNuoc> list = dDao.select();
             for (model.DienNuoc sv : list) {
@@ -33,7 +49,7 @@ public class DienNuoc extends javax.swing.JPanel {
                     sv.getTongTienDien(),
                     sv.getTongTienNuoc(),
                     sv.getThang(),
-                    sv.isTrangThai() ? "Đã thanh toán" : "Chưa thanh toán"};
+                    sv.getTrangThai()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -169,7 +185,8 @@ public class DienNuoc extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1193, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1183, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -178,10 +195,10 @@ public class DienNuoc extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(86, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 503, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(5, 5, 5)
@@ -260,8 +277,8 @@ public class DienNuoc extends javax.swing.JPanel {
         int csmNuoc = (int) tblDSDienNuoc.getValueAt(this.x, 5);
         int dienSD = (int) tblDSDienNuoc.getValueAt(this.x, 6);
         int nuocSD = (int) tblDSDienNuoc.getValueAt(this.x, 7);
-        double tienDien = (double) tblDSDienNuoc.getValueAt(this.x, 8);
-        double tienNuoc = (double) tblDSDienNuoc.getValueAt(this.x, 9);
+        BigDecimal tienDien = (BigDecimal) tblDSDienNuoc.getValueAt(this.x, 8);
+        BigDecimal tienNuoc = (BigDecimal) tblDSDienNuoc.getValueAt(this.x, 9);
         String thang = (String) tblDSDienNuoc.getValueAt(this.x, 10);
 
         HoaDonDienNuoc ssv = new HoaDonDienNuoc(maHD, maPhong, thang, cscDien, csmDien, cscNuoc, csmNuoc, dienSD, nuocSD, tienDien, tienNuoc);

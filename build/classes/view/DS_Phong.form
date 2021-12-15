@@ -73,7 +73,7 @@
               <Group type="102" alignment="1" attributes="0">
                   <Component id="jLabel1" min="-2" pref="245" max="-2" attributes="0"/>
                   <EmptySpace pref="269" max="32767" attributes="0"/>
-                  <Component id="btnLamMoi1" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnChiTietPhong" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnLamMoi" min="-2" pref="115" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -97,7 +97,7 @@
                               <Component id="btnCapNhat" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnThemMoi" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnLamMoi" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnLamMoi1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnChiTietPhong" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -178,7 +178,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLamMoiActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnLamMoi1">
+        <Component class="javax.swing.JButton" name="btnChiTietPhong">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="cc" type="rgb"/>
@@ -193,7 +193,7 @@
             <Property name="opaque" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLamMoi1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChiTietPhongActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

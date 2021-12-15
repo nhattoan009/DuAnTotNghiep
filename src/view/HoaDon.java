@@ -1,13 +1,17 @@
 package view;
 
 import dao.HoaDonDAO;
+import dao.HopDongDAO;
 import helper.DateHelper;
 import java.awt.Color;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 public class HoaDon extends javax.swing.JFrame {
 
     HoaDonDAO hdDao = new HoaDonDAO();
+    HopDongDAO hopdongDAO = new HopDongDAO();
 
     public HoaDon(
             int maHD,
@@ -39,6 +43,7 @@ public class HoaDon extends javax.swing.JFrame {
 //            this.clear(););
 
             lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
+            updateStatus();
         } catch (Exception e) {
             lblMessage.setText("Thêm mới thất bại!");
             lblMessage.setForeground(Color.RED);
@@ -46,10 +51,30 @@ public class HoaDon extends javax.swing.JFrame {
         }
     }
 
+    void updateStatus() {
+        try {
+            int maHD = Integer.parseInt(txtMaHD.getText());
+            model.HoaDon hd = hdDao.findByMaHD(maHD);
+            int maHopDong = hd.getMaHopDong();
+            System.out.println("getMaHopDong"+ maHopDong);
+            if (cboTrangThai.getSelectedItem().equals("Đã thu")) {
+                hopdongDAO.UpdateStatus(maHopDong);
+            }else{
+                hopdongDAO.UpdateStatus2(maHopDong);
+            }
+        } catch (Exception e) {
+            System.out.println("update status: " + e);
+        }
+
+    }
+
     model.HoaDon getModel() {
         model.HoaDon sv = new model.HoaDon();
+        BigDecimal model = new BigDecimal(txtGiaPhong.getText());
+        BigDecimal gia = model.setScale(2, RoundingMode.HALF_EVEN);
+        
         sv.setMaHopDong(Integer.parseInt(txtMaHD.getText()));
-        sv.setTienPhong(Double.parseDouble(txtGiaPhong.getText()));
+        sv.setTienPhong(gia);
         sv.setNgayTao(new Date());
         sv.setTrangThai(cboTrangThai.getSelectedItem().toString());
         sv.setThang(txtThang.getText());

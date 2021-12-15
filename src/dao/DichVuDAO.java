@@ -69,7 +69,7 @@ public class DichVuDAO {
         DichVu dichVu = new DichVu();
         dichVu.setMaDV(rs.getString("MaDV"));
         dichVu.setTenDV(rs.getString("TenDV"));
-        dichVu.setGiaDV(rs.getDouble("GiaDV"));
+        dichVu.setGiaDV(rs.getBigDecimal("GiaDV"));
         return dichVu;
     }
 }

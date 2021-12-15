@@ -19,7 +19,7 @@ public class PhongDAO {
                 phong.getMaPhong(),
                 phong.getTenPhong(),
                 phong.getGiaPhong(),
-                phong.isTrangThai());
+                phong.getTrangThai());
     }
 
     public void Update(Phong phong) {
@@ -27,7 +27,7 @@ public class PhongDAO {
         JDBCHelper.executeUpdate(sql,
                 phong.getTenPhong(),
                 phong.getGiaPhong(),
-                phong.isTrangThai(),
+                phong.getTrangThai(),
                 phong.getMaPhong());
     }
 
@@ -85,8 +85,8 @@ public class PhongDAO {
         Phong phong = new Phong();
         phong.setMaPhong(rs.getString("MaPhong"));
         phong.setTenPhong(rs.getString("TenPhong"));
-        phong.setGiaPhong(rs.getFloat("GiaPhong"));
-        phong.setTrangThai(rs.getBoolean("TrangThai"));
+        phong.setGiaPhong(rs.getBigDecimal("GiaPhong"));
+        phong.setTrangThai(rs.getString("TrangThai"));
         return phong;
     }
 }

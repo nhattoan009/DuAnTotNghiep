@@ -2,6 +2,8 @@ package view;
 
 import dao.HopDongDAO;
 import helper.DateHelper;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import model.HopDong;
 
@@ -50,12 +52,15 @@ public class SuaHopDong extends javax.swing.JFrame {
 
     HopDong getModel() {
         HopDong sv = new HopDong();
+        BigDecimal model = new BigDecimal(txtGia.getText());
+        BigDecimal gia = model.setScale(2, RoundingMode.HALF_EVEN);
+        
         sv.setMaHopDong(Integer.parseInt(txtMaHD.getText()));
         sv.setMaSV(txtMaSV.getText());
         sv.setMaPhong(txtMaPhong.getText());
         sv.setNgayTao(DateHelper.toDate(txtNgayTao.getText()));
         sv.setTrangThai(cboTrangThai.getSelectedItem().toString());
-        sv.setGiaThue(Double.parseDouble(txtGia.getText()));
+        sv.setGiaThue(gia);
         return sv;
 
     }

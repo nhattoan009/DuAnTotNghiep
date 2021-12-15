@@ -57,6 +57,11 @@ public class HoaDonDAO {
         List<HoaDon> list = selectAll(sql, id);
         return list.size() > 0 ? list.get(0) : null;
     }
+    public HoaDon findByMaHD(Integer id) {
+        String sql = "SELECT * FROM HoaDon WHERE MaHopDong=?";
+        List<HoaDon> list = selectAll(sql, id);
+        return list.size() > 0 ? list.get(0) : null;
+    }
     
     public HoaDon findByIdPhong(Integer id) {
         String sql = "SELECT * FROM HoaDon WHERE MaHoaDon=?";
@@ -69,6 +74,10 @@ public class HoaDonDAO {
     }
     public List<HoaDon> selectByMaPhong(String keyword) {
         String sql = "SELECT * FROM HoaDon WHERE MaPhong = ?";
+        return selectAll(sql, keyword);
+    }
+    public List<HoaDon> selectByMaHD(int keyword) {
+        String sql = "SELECT * FROM HoaDon WHERE MaHoaDon = ?";
         return selectAll(sql, keyword);
     }
     public List<HoaDon> selectByThang(int t) {
@@ -99,7 +108,7 @@ public class HoaDonDAO {
         HoaDon hoaDon = new HoaDon();
         hoaDon.setMaHoaDon(rs.getInt("MaHoaDon"));
         hoaDon.setMaHopDong(rs.getInt("MaHopDong"));
-        hoaDon.setTienPhong(rs.getDouble("TienPhong"));
+        hoaDon.setTienPhong(rs.getBigDecimal("TienPhong"));
         hoaDon.setNgayTao(rs.getDate("NgayTao"));
         hoaDon.setTrangThai(rs.getString("TrangThai"));
         hoaDon.setThang(rs.getString("Thang"));

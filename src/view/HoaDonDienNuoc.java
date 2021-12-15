@@ -1,19 +1,13 @@
 package view;
 
-import com.itextpdf.text.Anchor;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 import dao.DienNuocDAO;
 import dao.PhongDAO;
 import helper.DateHelper;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -31,13 +25,12 @@ public class HoaDonDienNuoc extends javax.swing.JFrame {
             int maHD,
             String MaPhong,
             String Thang,
-//            String trangThai,
+            //            String trangThai,
             int CSCDien, int CSMDien,
             int CSCNuoc, int CSMNuoc,
             int DSD, int NSD,
-            double tongTienDien,
-            double tongTienNuoc          
-            
+            BigDecimal tongTienDien,
+            BigDecimal tongTienNuoc
     ) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -362,41 +355,41 @@ public class HoaDonDienNuoc extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     void updateStatus() {
         int maHD = Integer.parseInt(txtMaHD.getText());
         try {
             dDao.UpdateStatus(maHD);
         } catch (Exception e) {
-            System.out.println("update status: "+e);
+            System.out.println("update status: " + e);
         }
 
     }
+
     public synchronized void xuatFile(File tenFile) {
         int maHoaDon = Integer.parseInt(txtMaHD.getText());
         List<DienNuoc> diens = dDao.selectDienNuocByMaDN(maHoaDon);
 //        diens.stream().forEach(s -> System.err.println("Mã HD: "+ s.getMaDienNuoc()));
 
         try {
-            FileWriter fw = new FileWriter(tenFile, true);
+            FileWriter fw = new FileWriter(tenFile, StandardCharsets.UTF_8);
 //            fw.write();
             diens.stream().forEach(s -> {
                 try {
-                    fw.write("  HOA DON DIEN NUOC THANG " + s.getThang()+ "\n");
+                    fw.write("  HOA DON DIEN NUOC THANG " + s.getThang() + "\n");
                     fw.write("  ****    \n");
-                    fw.write(" MA : "+ String.valueOf(s.getMaDienNuoc())+ "\n");
-                    fw.write(" PHONG: "+String.valueOf(s.getMaPhong())+ "\n");
-                    fw.write(" CSC DIEN: "+String.valueOf(s.getChiSoCuDien())+ "\n");
-                    fw.write(" CSM DIEN: "+String.valueOf(s.getChiSoMoiDien())+ "\n");
-                    fw.write(" DIEN SU DUNG: "+String.valueOf(s.getSuDungDien())+ "\n");
-                    fw.write(" TIEN DIEN: "+String.valueOf(s.getTongTienDien())+ "\n");
-                    
-                    fw.write(" CSC NUOC: "+String.valueOf(s.getChiSoCuNuoc())+ "\n");
-                    fw.write(" CSM NUOC: "+String.valueOf(s.getChiSoMoiNuoc())+ "\n");
-                    fw.write(" NUOC SU DUNG: "+String.valueOf(s.getSuDungNuoc())+ "\n");
-                    fw.write(" TIEN NUOC: "+String.valueOf(s.getTongTienNuoc())+ "\n");
-                    fw.write(" TONG: "+String.valueOf(s.getTongTienNuoc()+ s.getTongTienDien()));
-                    
+                    fw.write(" MA : " + String.valueOf(s.getMaDienNuoc()) + "\n");
+                    fw.write(" PHONG: " + String.valueOf(s.getMaPhong()) + "\n");
+                    fw.write(" CSC DIEN: " + String.valueOf(s.getChiSoCuDien()) + "\n");
+                    fw.write(" CSM DIEN: " + String.valueOf(s.getChiSoMoiDien()) + "\n");
+                    fw.write(" DIEN SU DUNG: " + String.valueOf(s.getSuDungDien()) + "\n");
+                    fw.write(" TIEN DIEN: " + String.valueOf(s.getTongTienDien()) + "\n");
+
+                    fw.write(" CSC NUOC: " + String.valueOf(s.getChiSoCuNuoc()) + "\n");
+                    fw.write(" CSM NUOC: " + String.valueOf(s.getChiSoMoiNuoc()) + "\n");
+                    fw.write(" NUOC SU DUNG: " + String.valueOf(s.getSuDungNuoc()) + "\n");
+                    fw.write(" TIEN NUOC: " + String.valueOf(s.getTongTienNuoc()) + "\n");
+                    fw.write(" TONG: " + String.valueOf(s.getTongTienNuoc().add(s.getTongTienDien())));
+
                 } catch (IOException ex) {
                     System.out.println(ex);
                 }
@@ -412,7 +405,7 @@ public class HoaDonDienNuoc extends javax.swing.JFrame {
         JFileChooser saveDig = new JFileChooser();
         saveDig.showSaveDialog(this);
         xuatFile(saveDig.getSelectedFile());
-        
+
     }//GEN-LAST:event_btnXuatFileActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed

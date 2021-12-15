@@ -1,9 +1,11 @@
 package view;
 
+import dao.HoaDonDAO;
 import dao.HopDongDAO;
 import dao.PhongDAO;
 import java.awt.Color;
 import java.awt.Font;
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,7 @@ public class DS_HopDong extends javax.swing.JPanel {
 
     HopDongDAO dao = new HopDongDAO();
     PhongDAO pDao = new PhongDAO();
+    HoaDonDAO hdDao = new HoaDonDAO();
 
     /**
      * Creates new form DS_HopDong
@@ -60,7 +63,7 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.getMaPhong(),
                     sv.getNgayTao(),
                     sv.getTrangThai(),
-                    sv.getGiaThue(),
+                    String.format(Locale.UK, "%1$.0f", sv.getGiaThue()),
                     sv.getThang(),
                     sv.getTrangThaiThu()};
                 model.addRow(row);
@@ -69,46 +72,18 @@ public class DS_HopDong extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
             System.out.println(e);
         }
+        
     }
 
-    public void loadP() {  // search for room
+    private void loadPhongAndTrangThai() {  // search for room
         DefaultTableModel model = (DefaultTableModel) tblDSHD.getModel();
         model.setRowCount(0);
         try {
             String MaPhong = (String) cboPhong.getSelectedItem();
-            List<HopDong> list = dao.selectByMaPhong(MaPhong.trim());
-            System.out.println(list);
-//            List<SinhVien> list = dao.select();
-            for (HopDong sv : list) {
-                Object[] row = {
-                    sv.getMaHopDong(),
-                    sv.getMaSV(),
-                    sv.getHoTen(),
-                    sv.getMaPhong(),
-                    sv.getNgayTao(),
-                    sv.getTrangThai(),
-                    sv.getGiaThue(),
-                    sv.getThang(),
-                    sv.getTrangThaiThu()};
-                model.addRow(row);
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
-        }
-    }
-
-    public void loadTT() {  // search trạng thái
-        DefaultTableModel model = (DefaultTableModel) tblDSHD.getModel();
-        model.setRowCount(0);
-        try {
-            List<HopDong> list;
             String tt = (String) cboTrangThai.getSelectedItem();
-
-            if (tt.equals("Không hoạt động")) {
-                list = dao.selectByTrangThai0();
-            } else {
-                list = dao.selectByTrangThai1();
-            }
+//            String maSV = txtTimKiemMaSV.getText();
+            List<HopDong> list = dao.selectByMaPhongAndTT(MaPhong.trim(), tt);
+            
             for (HopDong sv : list) {
                 Object[] row = {
                     sv.getMaHopDong(),
@@ -127,10 +102,7 @@ public class DS_HopDong extends javax.swing.JPanel {
         }
     }
 
-    void TimKiem() {
-        loadTT();
-    }
-
+   
     private void loadComboBoxPhong() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboPhong.getModel();
         model.removeAllElements();
@@ -156,8 +128,6 @@ public class DS_HopDong extends javax.swing.JPanel {
         btnTaoHoaDon = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         btnTimKiem = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        txtTimKiemMaSV = new javax.swing.JTextField();
         cboPhong = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -208,7 +178,7 @@ public class DS_HopDong extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 281, Short.MAX_VALUE)
                 .addComponent(jButton5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnTaoHoaDon)
@@ -241,12 +211,6 @@ public class DS_HopDong extends javax.swing.JPanel {
                 btnTimKiemActionPerformed(evt);
             }
         });
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel3.setText("Mã sinh viên");
-
-        txtTimKiemMaSV.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        txtTimKiemMaSV.setText(" ");
 
         cboPhong.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         cboPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
@@ -297,20 +261,15 @@ public class DS_HopDong extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cboPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTimKiemMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(51, 51, 51)
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
-                                .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(21, 21, 21)))))
+                                .addGap(4, 4, 4))
+                            .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -318,50 +277,33 @@ public class DS_HopDong extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(1, 1, 1)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cboPhong)
-                            .addComponent(txtTimKiemMaSV, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cboTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboTrangThai)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cboPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        TimKiem();
-        load();
-        loadP();
+        loadPhongAndTrangThai();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
         int mahd = (int) tblDSHD.getValueAt(this.index, 0);
-        String masv = (String) tblDSHD.getValueAt(this.index, 1);
-        String mp = (String) tblDSHD.getValueAt(this.index, 2);
-        Date ngayTao = (Date) tblDSHD.getValueAt(this.index, 3);
-        String tt = (String) tblDSHD.getValueAt(this.index, 4);
-        double gia = (double) tblDSHD.getValueAt(this.index, 5);
-
-//        HopDong model = dao.findById(mahd);
-//        if (model != null) {
-        SuaHopDong ssv = new SuaHopDong(mahd, masv, mp, ngayTao, tt, gia);
+        String gia = (String) tblDSHD.getValueAt(this.index, 6);
+        
+        CapNhatHopDong ssv = new CapNhatHopDong(mahd, gia);
         ssv.setVisible(true);
-//        }
-        System.out.println(mahd + "-" + masv + "-" + mp + "-" + ngayTao + "-" + tt + "-" + gia);
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
@@ -406,13 +348,11 @@ public class DS_HopDong extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboTrangThai;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tblDSHD;
-    private javax.swing.JTextField txtTimKiemMaSV;
     // End of variables declaration//GEN-END:variables
 
 }

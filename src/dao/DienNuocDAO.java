@@ -27,12 +27,12 @@ public class DienNuocDAO {
                 dien.getTongTienDien(),
                 dien.getTongTienNuoc(),
                 dien.getThang(),
-                dien.isTrangThai()
+                dien.getTrangThai()
         );
     }
 
     public void UpdateStatus(int maDN) {
-        String sql = "UPDATE DienNuoc SET TrangThai=1 WHERE MaDienNuoc=?"; //where
+        String sql = "UPDATE DienNuoc SET TrangThai='Đã thu' WHERE MaDienNuoc=?"; //where
         JDBCHelper.executeUpdate(sql, maDN);
     }
 
@@ -95,10 +95,10 @@ public class DienNuocDAO {
         dien.setChiSoMoiNuoc(rs.getInt("ChiSoMoiNuoc"));
         dien.setSuDungDien(rs.getInt("SuDungDien"));
         dien.setSuDungNuoc(rs.getInt("SuDungNuoc"));
-        dien.setTongTienDien(rs.getDouble("TongTienDien"));
-        dien.setTongTienNuoc(rs.getDouble("TongTienNuoc"));
+        dien.setTongTienDien(rs.getBigDecimal("TongTienDien"));
+        dien.setTongTienNuoc(rs.getBigDecimal("TongTienNuoc"));
         dien.setThang(rs.getString("Thang"));
-        dien.setTrangThai(rs.getBoolean("TrangThai"));
+        dien.setTrangThai(rs.getString("TrangThai"));
         return dien;
     }
 }

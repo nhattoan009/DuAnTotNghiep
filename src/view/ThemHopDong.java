@@ -4,6 +4,8 @@ import dao.HopDongDAO;
 import dao.PhongDAO;
 import helper.DateHelper;
 import java.awt.Color;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Date;
@@ -93,14 +95,16 @@ public class ThemHopDong extends javax.swing.JFrame {
 
     HopDong getModel() {
         HopDong sv = new HopDong();
+        BigDecimal model = new BigDecimal(txtGia.getText());
+        BigDecimal gia = model.setScale(2, RoundingMode.HALF_EVEN);
+        
         sv.setMaPhong(cboPhong.getSelectedItem().toString()); //////
         sv.setThang(cboThang.getSelectedItem().toString()); //////
         sv.setMaSV(txtMaSV.getText());
         sv.setHoTen(txtHoTen.getText());
         sv.setNgayTao(DateHelper.toDate(txtNgayTao.getText()));
         sv.setTrangThai(cboTrangThai.getSelectedItem().toString());
-        String gia = txtGia.getText().substring(0, 6);
-        sv.setGiaThue(Double.parseDouble(gia) * 1000);
+        sv.setGiaThue(gia);
         sv.setTrangThaiThu("Chưa thu");
         return sv;
     }
@@ -132,6 +136,7 @@ public class ThemHopDong extends javax.swing.JFrame {
         btnChiTietPhong = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblChiTietPhong = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -235,6 +240,8 @@ public class ThemHopDong extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblChiTietPhong);
 
+        jLabel9.setText("VND");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -262,21 +269,25 @@ public class ThemHopDong extends javax.swing.JFrame {
                                     .addGap(49, 49, 49)
                                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(29, 29, 29)
-                                            .addComponent(txtGia))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(29, 29, 29)
-                                            .addComponent(cboTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(jPanel2Layout.createSequentialGroup()
                                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(29, 29, 29)
                                             .addComponent(txtNgayTao))
                                         .addGroup(jPanel2Layout.createSequentialGroup()
                                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(29, 29, 29)
-                                            .addComponent(cboPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(cboPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(29, 29, 29)
+                                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(cboTrangThai, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                                    .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(0, 0, Short.MAX_VALUE)))))))
                             .addComponent(btnChiTietPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 5, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -317,9 +328,10 @@ public class ThemHopDong extends javax.swing.JFrame {
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cboThang, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtGia, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addComponent(btnChiTietPhong)
                 .addGap(18, 18, 18)
@@ -368,14 +380,14 @@ public class ThemHopDong extends javax.swing.JFrame {
     void setGiaLenComboboxPhong() {
         String id = cboPhong.getSelectedItem().toString();
         Phong phong = pDao.findById(id);
-        double giaPhong = phong.getGiaPhong();
+        BigDecimal giaPhong = phong.getGiaPhong();
 
 //        Locale locale = new Locale("vi", "VN");
 //        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
 //        String gia = currencyFormatter.format(giaPhong);
-        Locale localeVN = new Locale("vi", "VN");
-        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
-        txtGia.setText(currencyVN.format(giaPhong));
+//        Locale localeVN = new Locale("vi", "VN");
+//        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+        txtGia.setText(String.format(Locale.UK, "%1$.0f", giaPhong));
 
 //        DecimalFormat formatter = new DecimalFormat("###,###,###");
 //        txtGia.setText(formatter.format(giaPhong) + " VNĐ");
@@ -453,6 +465,7 @@ public class ThemHopDong extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

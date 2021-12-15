@@ -3,6 +3,8 @@ package view;
 import dao.DichVuDAO;
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import model.DichVu;
 
 public class ThemDichVu extends javax.swing.JFrame {
@@ -41,9 +43,12 @@ public class ThemDichVu extends javax.swing.JFrame {
 
     DichVu getModel() {
         DichVu model = new DichVu();
+        BigDecimal g = new BigDecimal(txtGia.getText());
+        BigDecimal gia = g.setScale(2, RoundingMode.HALF_EVEN);
+        
         model.setMaDV(txtMaDV.getText());
         model.setTenDV(txtTenDV.getText());
-        model.setGiaDV(Double.parseDouble(txtGia.getText()));
+        model.setGiaDV(gia);
         return model;
     }
 

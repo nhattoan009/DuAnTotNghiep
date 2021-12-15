@@ -1,6 +1,8 @@
 package view;
 
 import dao.DichVuDAO;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import model.DichVu;
 
 public class SuaDichVu extends javax.swing.JFrame {
@@ -10,14 +12,12 @@ public class SuaDichVu extends javax.swing.JFrame {
     public SuaDichVu(
             String maDV,
             String tenDV,
-            String giaDV,
-            String ghiChu) {
+            String giaDV) {
         initComponents();
         this.setLocationRelativeTo(null);
         this.txtMaDV.setText(maDV.trim());
         this.txtTenDV.setText(tenDV);
         this.txtGia.setText(giaDV);
-        this.txtGhiChu.setText(ghiChu);
     }
 
     private SuaDichVu() {
@@ -37,9 +37,12 @@ public class SuaDichVu extends javax.swing.JFrame {
 
     DichVu getModel() {
         DichVu model = new DichVu();
+        BigDecimal g = new BigDecimal(txtGia.getText());
+        BigDecimal gia = g.setScale(2, RoundingMode.HALF_EVEN);
+        
         model.setMaDV(txtMaDV.getText());
         model.setTenDV(txtTenDV.getText());
-        model.setGiaDV(Double.parseDouble(txtGia.getText()));
+        model.setGiaDV(gia);
         return model;
     }
 
@@ -54,9 +57,6 @@ public class SuaDichVu extends javax.swing.JFrame {
         txtTenDV = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtGia = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtGhiChu = new javax.swing.JTextArea();
         btnDong = new javax.swing.JButton();
         btnLuu = new javax.swing.JButton();
         lblMessage = new javax.swing.JLabel();
@@ -66,41 +66,34 @@ public class SuaDichVu extends javax.swing.JFrame {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setText("Mã dịch vụ:");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 95, 35));
-        jPanel2.add(txtMaDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 40, 281, 35));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 95, 35));
+        jPanel2.add(txtMaDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 281, 35));
 
         jLabel3.setText("Tên dịch vụ:");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 95, 35));
-        jPanel2.add(txtTenDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 281, 35));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 95, 35));
+        jPanel2.add(txtTenDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 281, 35));
 
         jLabel4.setText("Giá:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 95, 35));
-        jPanel2.add(txtGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 281, 35));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 95, 35));
+        jPanel2.add(txtGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 281, 35));
 
-        jLabel5.setText("Ghi chú:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 95, 35));
-
-        txtGhiChu.setColumns(20);
-        txtGhiChu.setRows(5);
-        jScrollPane2.setViewportView(txtGhiChu);
-
-        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 190, 281, -1));
-
+        btnDong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDong.setText("đóng");
         btnDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDongActionPerformed(evt);
             }
         });
-        jPanel2.add(btnDong, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 290, 83, -1));
+        jPanel2.add(btnDong, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 83, -1));
 
+        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnLuu.setText("Lưu");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);
             }
         });
-        jPanel2.add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, 80, -1));
+        jPanel2.add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 80, -1));
 
         lblMessage.setForeground(new java.awt.Color(51, 153, 255));
         lblMessage.setText(" ");
@@ -119,12 +112,12 @@ public class SuaDichVu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 335, Short.MAX_VALUE)
+            .addGap(0, 286, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap()))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -176,11 +169,8 @@ public class SuaDichVu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblMessage;
-    private javax.swing.JTextArea txtGhiChu;
     private javax.swing.JTextField txtGia;
     private javax.swing.JTextField txtMaDV;
     private javax.swing.JTextField txtTenDV;

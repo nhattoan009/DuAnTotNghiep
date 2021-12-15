@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import lombok.Data;
 
 public @Data
@@ -14,8 +15,8 @@ class DienNuoc {
     int chiSoMoiNuoc;
     int suDungDien;
     int suDungNuoc;
-    double tongTienDien;
-    double tongTienNuoc;
+    BigDecimal tongTienDien;
+    BigDecimal tongTienNuoc;
     String Thang;
-    boolean trangThai;
+    String trangThai;
 }
