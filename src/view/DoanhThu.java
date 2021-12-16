@@ -1,9 +1,17 @@
 package view;
 
+import EasyXLS.Constants.Alignment;
+import EasyXLS.Constants.Border;
+import EasyXLS.Constants.DataType;
+import EasyXLS.ExcelDocument;
+import EasyXLS.ExcelStyle;
+import EasyXLS.ExcelTable;
+import EasyXLS.ExcelWorksheet;
 import dao.DienNuocDAO;
 import dao.HoaDonDAO;
 import dao.HopDongDAO;
 import dao.PhongDAO;
+import java.awt.Color;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -29,7 +37,6 @@ public class DoanhThu extends javax.swing.JPanel {
 
     }
 
-    
     private void fillDoanhThu() {
 
         String maPhong = cboPhong.getSelectedItem().toString();
@@ -167,9 +174,8 @@ public class DoanhThu extends javax.swing.JPanel {
                 .filter(s -> s.getThang().equals("12"))
                 .map(s -> s.getTongTienDien().add(s.getTongTienNuoc())) // map
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-        
+
         //tổng tiền
-        
         BigDecimal t1 = tongTien1.add(tongTienDien1);
         BigDecimal t2 = tongTien2.add(tongTienDien2);
         BigDecimal t3 = tongTien3.add(tongTienDien3);
@@ -182,7 +188,7 @@ public class DoanhThu extends javax.swing.JPanel {
         BigDecimal t10 = tongTien10.add(tongTienDien10);
         BigDecimal t11 = tongTien11.add(tongTienDien11);
         BigDecimal t12 = tongTien12.add(tongTienDien12);
-        
+
         Locale locale = new Locale("vi", "VN");
         NumberFormat formatter = NumberFormat.getCurrencyInstance(locale);
         String gia1 = formatter.format(t1);
@@ -197,7 +203,7 @@ public class DoanhThu extends javax.swing.JPanel {
         String gia10 = formatter.format(t10);
         String gia11 = formatter.format(t11);
         String gia12 = formatter.format(t12);
-        
+
         lblThang13.setText(String.valueOf(gia1));
         lblThang14.setText(String.valueOf(gia2));
         lblThang15.setText(String.valueOf(gia3));
@@ -210,7 +216,7 @@ public class DoanhThu extends javax.swing.JPanel {
         lblThang22.setText(String.valueOf(gia10));
         lblThang23.setText(String.valueOf(gia11));
         lblThang24.setText(String.valueOf(gia12));
-        
+
         //tiền phòng
         String p1 = formatter.format(tongTien1);
         String p2 = formatter.format(tongTien2);
@@ -224,7 +230,7 @@ public class DoanhThu extends javax.swing.JPanel {
         String p10 = formatter.format(tongTien10);
         String p11 = formatter.format(tongTien11);
         String p12 = formatter.format(tongTien12);
-        
+
         lblThang1.setText(String.valueOf(p1));
         lblThang2.setText(String.valueOf(p2));
         lblThang3.setText(String.valueOf(p3));
@@ -237,9 +243,8 @@ public class DoanhThu extends javax.swing.JPanel {
         lblThang10.setText(String.valueOf(p10));
         lblThang11.setText(String.valueOf(p11));
         lblThang12.setText(String.valueOf(p12));
-        
-        //tiền điện nước
 
+        //tiền điện nước
         String dn1 = formatter.format(tongTienDien1);
         String dn2 = formatter.format(tongTienDien2);
         String dn3 = formatter.format(tongTienDien3);
@@ -252,7 +257,7 @@ public class DoanhThu extends javax.swing.JPanel {
         String dn10 = formatter.format(tongTienDien10);
         String dn11 = formatter.format(tongTienDien11);
         String dn12 = formatter.format(tongTienDien12);
-        
+
         lblThang25.setText(String.valueOf(dn1));
         lblThang26.setText(String.valueOf(dn2));
         lblThang27.setText(String.valueOf(dn3));
@@ -265,14 +270,15 @@ public class DoanhThu extends javax.swing.JPanel {
         lblThang34.setText(String.valueOf(dn10));
         lblThang35.setText(String.valueOf(dn11));
         lblThang36.setText(String.valueOf(dn12));
-        
+
         BigDecimal tong = t1.add(t2).add(t3).add(t4).add(t5).add(t6).add(t7).add(t8).add(t9).add(t10).add(t11).add(t12);
 //                t1+t2+t3+t4+t5+t6+t7+t8+t9+t10+t11+t12;
         String tong1 = formatter.format(tong);
-        
+
         lblTong.setText(String.valueOf(tong1));
 
     }
+
     private void fillComboBoxNam() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboNam.getModel();
         model.removeAllElements();
@@ -304,6 +310,103 @@ public class DoanhThu extends javax.swing.JPanel {
         }
     }
 
+    private void Export() {
+        try {
+            ExcelDocument workbook = new ExcelDocument(2);
+            // Set the sheet names
+            workbook.easy_getSheetAt(0).setSheetName("Doanh thu");
+//            workbook.easy_getSheetAt(1).setSheetName("Second tab");
+
+            // Get the table of data for the first worksheet
+            ExcelTable xlsFirstTable = ((ExcelWorksheet) workbook.easy_getSheetAt(0)).easy_getExcelTable();
+            ExcelStyle xlsStyleData = new ExcelStyle();
+            xlsStyleData.setForeground(Color.DARK_GRAY);
+            xlsStyleData.setBorderStyles(1, 1, 1, 1);
+            xlsStyleData.setDataType(DataType.STRING);
+            xlsFirstTable.easy_setRangeStyle("A1:M5", xlsStyleData);
+            xlsFirstTable.setRowHeight(30);
+            
+            // Add data in cells for report header
+            for (int t = 1; t <= 12; t++) {
+                xlsFirstTable.easy_getCell(0, t).setValue("Tháng " + t);
+                xlsFirstTable.easy_getCell(0, t).setDataType(DataType.STRING);
+                xlsFirstTable.easy_getCell(0, t).setForeground(Color.DARK_GRAY);
+            }
+            for (int t = 0; t <= 12; t++) {
+                xlsFirstTable.setColumnWidth(t, 100);
+            }
+
+            xlsFirstTable.easy_getCell(1, 0).setValue("Tiền phòng");
+            xlsFirstTable.easy_getCell(2, 0).setValue("Tiền điện nước");
+            xlsFirstTable.easy_getCell(3, 0).setValue("Tổng thu");
+            xlsFirstTable.easy_getCell(4, 0).setValue("Tổng");
+            xlsFirstTable.setColumnWidth(0, 100);
+
+            xlsFirstTable.easy_getCell(1, 1).setValue(lblThang1.getText());
+            xlsFirstTable.easy_getCell(1, 2).setValue(lblThang2.getText());
+            xlsFirstTable.easy_getCell(1, 3).setValue(lblThang3.getText());
+            xlsFirstTable.easy_getCell(1, 4).setValue(lblThang4.getText());
+            xlsFirstTable.easy_getCell(1, 5).setValue(lblThang5.getText());
+            xlsFirstTable.easy_getCell(1, 6).setValue(lblThang6.getText());
+            xlsFirstTable.easy_getCell(1, 7).setValue(lblThang7.getText());
+            xlsFirstTable.easy_getCell(1, 8).setValue(lblThang8.getText());
+            xlsFirstTable.easy_getCell(1, 9).setValue(lblThang9.getText());
+            xlsFirstTable.easy_getCell(1, 10).setValue(lblThang10.getText());
+            xlsFirstTable.easy_getCell(1, 11).setValue(lblThang11.getText());
+            xlsFirstTable.easy_getCell(1, 12).setValue(lblThang12.getText());
+
+            xlsFirstTable.easy_getCell(2, 1).setValue(lblThang25.getText());
+            xlsFirstTable.easy_getCell(2, 2).setValue(lblThang26.getText());
+            xlsFirstTable.easy_getCell(2, 3).setValue(lblThang27.getText());
+            xlsFirstTable.easy_getCell(2, 4).setValue(lblThang28.getText());
+            xlsFirstTable.easy_getCell(2, 5).setValue(lblThang20.getText());
+            xlsFirstTable.easy_getCell(2, 6).setValue(lblThang30.getText());
+            xlsFirstTable.easy_getCell(2, 7).setValue(lblThang31.getText());
+            xlsFirstTable.easy_getCell(2, 8).setValue(lblThang32.getText());
+            xlsFirstTable.easy_getCell(2, 9).setValue(lblThang33.getText());
+            xlsFirstTable.easy_getCell(2, 10).setValue(lblThang34.getText());
+            xlsFirstTable.easy_getCell(2, 11).setValue(lblThang35.getText());
+            xlsFirstTable.easy_getCell(2, 12).setValue(lblThang36.getText());
+
+            xlsFirstTable.easy_getCell(3, 1).setValue(lblThang13.getText());
+            xlsFirstTable.easy_getCell(3, 2).setValue(lblThang14.getText());
+            xlsFirstTable.easy_getCell(3, 3).setValue(lblThang15.getText());
+            xlsFirstTable.easy_getCell(3, 4).setValue(lblThang16.getText());
+            xlsFirstTable.easy_getCell(3, 5).setValue(lblThang17.getText());
+            xlsFirstTable.easy_getCell(3, 6).setValue(lblThang18.getText());
+            xlsFirstTable.easy_getCell(3, 7).setValue(lblThang19.getText());
+            xlsFirstTable.easy_getCell(3, 8).setValue(lblThang20.getText());
+            xlsFirstTable.easy_getCell(3, 9).setValue(lblThang21.getText());
+            xlsFirstTable.easy_getCell(3, 10).setValue(lblThang22.getText());
+            xlsFirstTable.easy_getCell(3, 11).setValue(lblThang23.getText());
+            xlsFirstTable.easy_getCell(3, 12).setValue(lblThang24.getText());
+
+            xlsFirstTable.easy_getCell(4, 1).setValue(lblTong.getText());
+
+            // Add data in cells for report values
+//            for (int row = 0; row < 4; row++) {
+//                for (int column = 1; column <= 12; column++) {
+//                    xlsFirstTable.easy_getCell(row + 1, column).setValue("Data 1");
+//                    xlsFirstTable.easy_getCell(row + 1, column).setDataType(DataType.STRING);
+//                }
+//            }
+            workbook.easy_WriteXLSXFile("E:\\MyFile\\aDUAn\\DemoExcel.xlsx");
+
+            // Confirm export of Excel file
+            if (workbook.easy_getError().equals("")) {
+                System.out.println("File successfully created.");
+                JOptionPane.showMessageDialog(this, "Xuất file thàng công");
+            } else {
+                System.out.println("Error encountered: " + workbook.easy_getError());
+            }
+
+            // Dispose memory
+            workbook.Dispose();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -312,7 +415,7 @@ public class DoanhThu extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
-        btnLamMoi1 = new javax.swing.JButton();
+        btnExport = new javax.swing.JButton();
         lblMessage = new javax.swing.JLabel();
         cboPhong = new javax.swing.JComboBox<>();
         btnChon = new javax.swing.JButton();
@@ -391,11 +494,11 @@ public class DoanhThu extends javax.swing.JPanel {
             }
         });
 
-        btnLamMoi1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnLamMoi1.setText("Export excel");
-        btnLamMoi1.addActionListener(new java.awt.event.ActionListener() {
+        btnExport.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnExport.setText("Export excel");
+        btnExport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLamMoi1ActionPerformed(evt);
+                btnExportActionPerformed(evt);
             }
         });
 
@@ -408,7 +511,7 @@ public class DoanhThu extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLamMoi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLamMoi1)
+                .addComponent(btnExport)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton4))
         );
@@ -422,7 +525,7 @@ public class DoanhThu extends javax.swing.JPanel {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton4)
                             .addComponent(btnLamMoi)
-                            .addComponent(btnLamMoi1))
+                            .addComponent(btnExport))
                         .addContainerGap())))
         );
 
@@ -864,22 +967,23 @@ public class DoanhThu extends javax.swing.JPanel {
 
     private void btnChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonActionPerformed
         this.fillDoanhThu();
-       
+
     }//GEN-LAST:event_btnChonActionPerformed
 
     private void cboPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboPhongActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboPhongActionPerformed
 
-    private void btnLamMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoi1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnLamMoi1ActionPerformed
+    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
+        Export();
+
+    }//GEN-LAST:event_btnExportActionPerformed
     int index = 0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChon;
+    private javax.swing.JButton btnExport;
     private javax.swing.JButton btnLamMoi;
-    private javax.swing.JButton btnLamMoi1;
     private javax.swing.JComboBox<String> cboNam;
     private javax.swing.JComboBox<String> cboPhong;
     private javax.swing.JButton jButton4;

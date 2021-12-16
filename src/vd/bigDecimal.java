@@ -6,11 +6,9 @@
 package vd;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Locale;
-import org.javamoney.moneta.Money;
 
 /**
  *
