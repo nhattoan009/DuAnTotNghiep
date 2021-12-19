@@ -46,6 +46,7 @@ create database KTX_1
 	SDT nvarchar(15) not null,
 	CMND nvarchar(15) not null,
 	Email varchar(40) not null,
+	TrangThai nvarchar(20) not null,
 	primary key (MaSV)
  )
  
@@ -95,8 +96,9 @@ drop table HopDong
 drop table HoaDon
 drop table DienNuoc
 
-ALTER TABLE HoaDon
-  ADD MaSV char(10),
+ALTER TABLE SinhVien
+  ADD TrangThai nvarchar(20)
+
 	Hoten nvarchar(50),
 	MaPhong char(10)
 

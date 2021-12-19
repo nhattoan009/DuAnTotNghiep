@@ -15,7 +15,7 @@ import model.SinhVien;
 public class SinhVienDAO {
 
     public void Insert(SinhVien sinhVien) {
-        String sql = "INSERT INTO SinhVien VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO SinhVien VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
                 sinhVien.getMaSV(),
                 sinhVien.getHoTen(),
@@ -24,7 +24,8 @@ public class SinhVienDAO {
                 //                                    DateHelper.toString(sinhVien.getNgaySinh()),
                 sinhVien.getSDT(),
                 sinhVien.getCMND(),
-                sinhVien.getEmail());
+                sinhVien.getEmail(),
+                sinhVien.getTrangThai());
     }
 
     public void Update(SinhVien sinhVien) {
@@ -52,6 +53,11 @@ public class SinhVienDAO {
     public List<SinhVien> selectByKeyword(String keyword) {
         String sql = "SELECT * FROM SinhVien WHERE HoTen LIKE ? ORDER BY HoTen";
         return selectAll(sql, "%" + keyword + "%");
+    }
+    
+    public void UpdateStatus(String maSV) {
+        String sql = "UPDATE SinhVien SET TrangThai='Đã có' WHERE MaSV=?"; //where
+        JDBCHelper.executeUpdate(sql, maSV);
     }
 
     public SinhVien findById(String id) {
@@ -88,6 +94,7 @@ public class SinhVienDAO {
         sinhVien.setSDT(rs.getString("SDT"));
         sinhVien.setCMND(rs.getString("CMND"));
         sinhVien.setEmail(rs.getString("Email"));
+        sinhVien.setTrangThai(rs.getString("TrangThai"));
         return sinhVien;
     }
 }

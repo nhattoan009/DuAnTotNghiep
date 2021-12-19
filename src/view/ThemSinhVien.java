@@ -14,7 +14,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
     SinhVienDAO dao = new SinhVienDAO();
     DS_SinhVien ds_SinhVien = new DS_SinhVien();
 
-
     public ThemSinhVien() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -58,7 +57,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
 //        }
     }
 
-
     private static final String EMAIL_PATTERN
             = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
@@ -71,16 +69,15 @@ public class ThemSinhVien extends javax.swing.JFrame {
     }
 
     boolean check() {
-       // String maNhanVien = txtMaSV.getText();
+        // String maNhanVien = txtMaSV.getText();
         if ((txtMaSV.getText()).length() < 5) {
-             if ((txtMaSV.getText()).equals("")) {
+            if ((txtMaSV.getText()).equals("")) {
                 lblMessage.setText("Mã số cần 5 ký tự");
                 lblMessage.setForeground(Color.red);
                 txtMaSV.setBackground(Color.yellow);
-                return false;         
+                return false;
             }
-        }
-        else if ((txtHoTen.getText()).equals("")) {
+        } else if ((txtHoTen.getText()).equals("")) {
             lblMessage.setText("Không được để trống");
             lblMessage.setForeground(Color.red);
             txtHoTen.setBackground(Color.yellow);
@@ -101,20 +98,20 @@ public class ThemSinhVien extends javax.swing.JFrame {
         } else if (!txtCMND.getText().matches("[0-9]+")) {
             lblMessage.setText("Số CMDN phải 9 số!");
             lblMessage.setForeground(Color.red);
-             txtCMND.setBackground(Color.yellow);
-             txtCMND.requestFocus();
+            txtCMND.setBackground(Color.yellow);
+            txtCMND.requestFocus();
             return false;
         } else if (txtEmail.getText().equals("")) {
             lblMessage.setText("Email không hợp lệ");
             lblMessage.setForeground(Color.red);
-             txtEmail.setBackground(Color.yellow);
-             txtEmail.requestFocus();
+            txtEmail.setBackground(Color.yellow);
+            txtEmail.requestFocus();
             return false;
         } else if (verifyEmail(txtEmail.getText()) == false) {
             lblMessage.setText(" Email không hợp lệ");
             lblMessage.setForeground(Color.red);
-             txtEmail.setBackground(Color.yellow);
-             txtEmail.requestFocus();
+            txtEmail.setBackground(Color.yellow);
+            txtEmail.requestFocus();
             return false;
         } else if (txtNgaySinh.getText().equals("")) {
             lblMessage.setText("Ngày sinh không hợp lệ");
@@ -123,21 +120,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
             txtNgaySinh.requestFocus();
             return false;
         }
-       
-//        else if (!txtNgaySinh.getText().equals("")) {
-//            if ((txtNgaySinh.getText().length() != 10)) {
-//                lblMessage.setText("Ngày sinh không hợp lệ");
-//                lblMessage.setForeground(Color.red);
-//                 txtNgaySinh.setBackground(Color.yellow);
-//                 txtNgaySinh.requestFocus();
-//                return false;
-//            }
-////            else {
-////                lblMessage.setForeground(new Color(0,153,255));
-////                return true;
-////            }
-//        }
-         
         return true;
     }
 
@@ -150,6 +132,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
         sv.setSDT(txtSDT.getText());
         sv.setNgaySinh(DateHelper.toDate(txtNgaySinh.getText()));
         sv.setGioiTinh(cboGioiTinh.getSelectedIndex() == 0);
+        sv.setTrangThai("Chưa có");
         return sv;
     }
 
@@ -189,7 +172,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtSDT = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         lblMessage = new javax.swing.JLabel();
         cboGioiTinh = new javax.swing.JComboBox<>();
 
@@ -257,8 +239,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
 
         jLabel8.setText("Giới tính:");
 
-        jLabel9.setText("Hình:");
-
         lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblMessage.setForeground(new java.awt.Color(0, 153, 255));
 
@@ -288,20 +268,18 @@ public class ThemSinhVien extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(cboGioiTinh, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(153, 153, 153)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                                .addComponent(txtCMND, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
-                                .addComponent(txtSDT)))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                            .addComponent(txtCMND, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                            .addComponent(txtSDT))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -338,8 +316,7 @@ public class ThemSinhVien extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(181, Short.MAX_VALUE))
         );
 
@@ -376,9 +353,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnHuyActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -424,7 +398,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblMessage;

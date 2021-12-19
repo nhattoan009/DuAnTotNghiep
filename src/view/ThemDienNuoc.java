@@ -18,20 +18,18 @@ public class ThemDienNuoc extends javax.swing.JFrame {
     DienNuocDAO dDao = new DienNuocDAO();
     DichVuDAO dvDAO = new DichVuDAO();
 
-    public ThemDienNuoc(
-            int csmDien,
-            int csmNuoc
-    ) {
+    public ThemDienNuoc( //            int csmDien,
+            //            int csmNuoc
+            ) {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.txtCSCdien.setText(String.valueOf(csmDien));
-        this.txtCSCnuoc.setText(String.valueOf(csmNuoc));
+//        this.txtCSCdien.setText(String.valueOf(csmDien));
+//        this.txtCSCnuoc.setText(String.valueOf(csmNuoc));
 
         this.loadComboBoxPhong();
     }
 
-    private ThemDienNuoc() { }
-
+//    public ThemDienNuoc() { }
     void loadComboBoxPhong() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboPhong.getModel();
         model.removeAllElements();
@@ -50,7 +48,7 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         DienNuoc dien = getModelDienNuoc();
         try {
             dDao.Insert(dien);
-//            this.clear();
+            this.clear();
             lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
 
         } catch (Exception e) {
@@ -58,6 +56,11 @@ public class ThemDienNuoc extends javax.swing.JFrame {
             lblMessage.setForeground(Color.RED);
             System.out.print(e);
         }
+    }
+
+    private void clear() {
+        txtCSCdien.setText("");
+        txtCSCnuoc.setText("");
     }
 
     DienNuoc getModelDienNuoc() {
@@ -93,9 +96,12 @@ public class ThemDienNuoc extends javax.swing.JFrame {
     // load csc lên from
     public void loadDN() {
         String MaPhong = (String) cboPhong.getSelectedItem();
-        List<DienNuoc> diens = dDao.selectSCMDien(MaPhong);
+        String thang = (String) cboThang.getSelectedItem();
+        List<DienNuoc> diens = dDao.selectSCMDien(MaPhong.trim(), thang);
+
         diens.stream().forEach(s -> txtCSCdien.setText(String.valueOf(s.getChiSoMoiDien())));
         diens.stream().forEach(s -> txtCSCnuoc.setText(String.valueOf(s.getChiSoMoiNuoc())));
+
     }
 
     @SuppressWarnings("unchecked")

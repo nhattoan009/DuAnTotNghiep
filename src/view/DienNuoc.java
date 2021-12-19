@@ -22,7 +22,7 @@ public class DienNuoc extends javax.swing.JPanel {
     public void loadDienNuoc() {
         DefaultTableModel model = (DefaultTableModel) tblDSDienNuoc.getModel();
         model.setRowCount(0);
-        
+
         Font font = new Font("Segoe UI", Font.PLAIN, 14);
         tblDSDienNuoc.setFont(font);
         tblDSDienNuoc.setRowHeight(30);
@@ -63,8 +63,6 @@ public class DienNuoc extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         btnThemMoi = new javax.swing.JButton();
-        btnCapNhat = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
         btnLamMoi = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnHDDN = new javax.swing.JButton();
@@ -75,28 +73,10 @@ public class DienNuoc extends javax.swing.JPanel {
 
         btnThemMoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_create_20px.png"))); // NOI18N
-        btnThemMoi.setText("Thêm mới");
+        btnThemMoi.setText("Tạo hóa đơn mới");
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemMoiActionPerformed(evt);
-            }
-        });
-
-        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_update_20px.png"))); // NOI18N
-        btnCapNhat.setText("Cập nhật");
-        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCapNhatActionPerformed(evt);
-            }
-        });
-
-        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Delete_20px.png"))); // NOI18N
-        btnXoa.setText("Xóa");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
             }
         });
 
@@ -115,7 +95,7 @@ public class DienNuoc extends javax.swing.JPanel {
 
         btnHDDN.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnHDDN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_contract_20px.png"))); // NOI18N
-        btnHDDN.setText("Lập hóa đơn điện nước");
+        btnHDDN.setText("Xuất hóa đơn");
         btnHDDN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHDDNActionPerformed(evt);
@@ -129,33 +109,24 @@ public class DienNuoc extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 219, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 467, Short.MAX_VALUE)
                 .addComponent(btnHDDN)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLamMoi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnThemMoi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCapNhat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnLamMoi)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnXoa)
-                            .addComponent(btnCapNhat)
-                            .addComponent(btnThemMoi)
-                            .addComponent(btnLamMoi)
-                            .addComponent(btnHDDN)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnThemMoi)
+                        .addComponent(btnLamMoi)
+                        .addComponent(btnHDDN))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -209,32 +180,21 @@ public class DienNuoc extends javax.swing.JPanel {
 
 
     private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-        int csm = (int) tblDSDienNuoc.getValueAt(this.x, 3);
-        int csm1 = (int) tblDSDienNuoc.getValueAt(this.x, 5);
+        try {
+//            int csm = (int) tblDSDienNuoc.getValueAt(this.x, 3);
+//            int csm1 = (int) tblDSDienNuoc.getValueAt(this.x, 5);
 
-        ThemDienNuoc tdn = new ThemDienNuoc(csm, csm1);
+            ThemDienNuoc tdn = new ThemDienNuoc();
 //        ThemDienNuoc tdn = new ThemDienNuoc();
-        tdn.setVisible(true);
+            tdn.setVisible(true);
+        } catch (Exception e) {
+            ThemDienNuoc tdn = new ThemDienNuoc();
+//        ThemDienNuoc tdn = new ThemDienNuoc();
+            tdn.setVisible(true);
+        }
 
 
     }//GEN-LAST:event_btnThemMoiActionPerformed
-
-    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-//        String maphong = (String) tblDSP.getValueAt(this.index, 0);
-//        String tenphong = (String) tblDSP.getValueAt(this.index, 1);
-//        String giaphong = (String.valueOf(tblDSP.getValueAt(this.index, 2)));
-//        String trangthai = (String) tblDSP.getValueAt(this.index, 3);
-//
-//        Phong model = dao.findById(maphong);
-//        if (model != null) {
-//            SuaPhong sp = new SuaPhong(maphong, tenphong, giaphong, trangthai);
-//            sp.setVisible(true);
-//        }
-    }//GEN-LAST:event_btnCapNhatActionPerformed
-
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-
-    }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         loadDienNuoc();
@@ -288,11 +248,9 @@ public class DienNuoc extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnHDDN;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThemMoi;
-    private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

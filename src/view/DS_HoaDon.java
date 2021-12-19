@@ -69,12 +69,9 @@ public class DS_HoaDon extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         btnThemMoi = new javax.swing.JButton();
-        btnCapNhat = new javax.swing.JButton();
-        btnXoa = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnLamMoi = new javax.swing.JButton();
         btnXuatHoaDon = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSHoaDon = new javax.swing.JTable();
         txtTimKiem = new javax.swing.JTextField();
@@ -90,26 +87,6 @@ public class DS_HoaDon extends javax.swing.JPanel {
         btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemMoiActionPerformed(evt);
-            }
-        });
-
-        btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnCapNhat.setForeground(new java.awt.Color(51, 51, 51));
-        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_update_20px.png"))); // NOI18N
-        btnCapNhat.setText("Cập nhật");
-        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCapNhatActionPerformed(evt);
-            }
-        });
-
-        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnXoa.setForeground(new java.awt.Color(51, 51, 51));
-        btnXoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Delete_20px.png"))); // NOI18N
-        btnXoa.setText("Xóa");
-        btnXoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXoaActionPerformed(evt);
             }
         });
 
@@ -138,12 +115,6 @@ public class DS_HoaDon extends javax.swing.JPanel {
             }
         });
 
-        jButton6.setBackground(new java.awt.Color(204, 204, 204));
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(51, 51, 51));
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_forward_message_20px.png"))); // NOI18N
-        jButton6.setText("Gửi email");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -151,17 +122,12 @@ public class DS_HoaDon extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6)
-                .addGap(7, 7, 7)
                 .addComponent(btnXuatHoaDon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLamMoi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnThemMoi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCapNhat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,12 +137,9 @@ public class DS_HoaDon extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnXoa)
-                            .addComponent(btnCapNhat)
                             .addComponent(btnThemMoi)
                             .addComponent(btnLamMoi)
-                            .addComponent(btnXuatHoaDon)
-                            .addComponent(jButton6))
+                            .addComponent(btnXuatHoaDon))
                         .addContainerGap())))
         );
 
@@ -195,7 +158,6 @@ public class DS_HoaDon extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblDSHoaDon);
 
-        txtTimKiem.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         txtTimKiem.setText(" ");
 
         lblMessage.setForeground(new java.awt.Color(0, 153, 255));
@@ -248,23 +210,6 @@ public class DS_HoaDon extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnThemMoiActionPerformed
 
-    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
-//        String maphong = (String) tblDSP.getValueAt(this.index, 0);
-//        String tenphong = (String) tblDSP.getValueAt(this.index, 1);
-//        String giaphong = (String.valueOf(tblDSP.getValueAt(this.index, 2)));
-//        String trangthai = (String) tblDSP.getValueAt(this.index, 3);
-//
-//        Phong model = dao.findById(maphong);
-//        if (model != null) {
-//            SuaPhong sp = new SuaPhong(maphong, tenphong, giaphong, trangthai);
-//            sp.setVisible(true);
-//        }
-    }//GEN-LAST:event_btnCapNhatActionPerformed
-
-    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-//        delete();
-    }//GEN-LAST:event_btnXoaActionPerformed
-
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         load();
     }//GEN-LAST:event_btnLamMoiActionPerformed
@@ -298,13 +243,10 @@ public class DS_HoaDon extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimKiem;
-    private javax.swing.JButton btnXoa;
     private javax.swing.JButton btnXuatHoaDon;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

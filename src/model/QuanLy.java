@@ -7,5 +7,5 @@ class QuanLy {
 
     String tenDangNhap;
     String matKhau;
-
+    String Email;
 }

@@ -13,4 +13,5 @@ class SinhVien {
     String Email;
     boolean gioiTinh;
     Date ngaySinh;
+    String TrangThai;
 }

@@ -2,6 +2,7 @@ package view;
 
 import dao.HopDongDAO;
 import dao.PhongDAO;
+import dao.SinhVienDAO;
 import helper.DateHelper;
 import java.awt.Color;
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.HopDong;
 import model.Phong;
+import model.SinhVien;
 
 /**
  *
@@ -25,6 +27,7 @@ public class ThemHopDong extends javax.swing.JFrame {
 
     HopDongDAO dao = new HopDongDAO();
     PhongDAO pDao = new PhongDAO();
+    SinhVienDAO svDao = new SinhVienDAO();
 
     /**
      * Creates new form ThemHopDong
@@ -49,26 +52,34 @@ public class ThemHopDong extends javax.swing.JFrame {
     public void insert() {
         HopDong hd = getModel();
         try {
-            dao.Insert(hd);
-            this.clear();
-            lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
-
+            String maSV = txtMaSV.getText();
+            String maPhong = cboPhong.getSelectedItem().toString();
+            model.HopDong hopDong = dao.findByIdMaSVPhong(maSV.trim(), maPhong);
+            if (hopDong != null) {
+                lblMessage.setText("Sinh viên này đã ở trong phòng!");
+                lblMessage.setForeground(Color.RED);
+            } else {
+                dao.Insert(hd);
+                updateStatus();
+                this.clear();
+                lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
+            }
         } catch (Exception e) {
             lblMessage.setText("Thêm mới thất bại!");
             lblMessage.setForeground(Color.RED);
             System.out.print(e);
         }
     }
-//    public void update() {
-//        SinhVien sv = getModel();
-//        try {
-//            dao.Update(sv);
-//            lblMessage.setText("Cập nhật thành công!");
-//        } catch (Exception e) {
-//            lblMessage.setText("Cập nhật thành công!");
-//        }
-//
-//    }
+    
+    void updateStatus() {
+        String maSV = txtMaSV.getText();
+        try {
+            svDao.UpdateStatus(maSV.trim());
+        } catch (Exception e) {
+            System.out.println("update status: " + e);
+        }
+    }
+    
 
     void clear() {
 
@@ -97,7 +108,7 @@ public class ThemHopDong extends javax.swing.JFrame {
         HopDong sv = new HopDong();
         BigDecimal model = new BigDecimal(txtGia.getText());
         BigDecimal gia = model.setScale(2, RoundingMode.HALF_EVEN);
-        
+
         sv.setMaPhong(cboPhong.getSelectedItem().toString()); //////
         sv.setThang(cboThang.getSelectedItem().toString()); //////
         sv.setMaSV(txtMaSV.getText());

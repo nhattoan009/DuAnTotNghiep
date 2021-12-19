@@ -14,10 +14,12 @@ import model.QuanLy;
 public class QuanLyDAO {
 
     public void Insert(QuanLy quanLy) {
-        String sql = "INSERT INTO QuanLy VALUES (?, ?)";
+        String sql = "INSERT INTO QuanLy VALUES (?, ?, ?)";
         JDBCHelper.executeUpdate(sql,
                 quanLy.getTenDangNhap(),
-                quanLy.getMatKhau());
+                quanLy.getMatKhau(),
+                quanLy.getEmail()
+        );
     }
 
     public void Update(QuanLy quanLy) {

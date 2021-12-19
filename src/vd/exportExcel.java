@@ -32,7 +32,7 @@ public class exportExcel {
             xlsFirstTable.easy_getCell(3, 0).setValue("Tổng tiền");
 
             
-            workbook.easy_WriteXLSXFile("E:\\MyFile\\aDUAn\\DemoExcel.xlsx");
+            workbook.easy_WriteXLSXFile("D:\\DemoExcel.xlsx");
 
             // Confirm export of Excel file
             if (workbook.easy_getError().equals("")) {

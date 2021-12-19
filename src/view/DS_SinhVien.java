@@ -36,7 +36,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
     public void load() {
         DefaultTableModel model = (DefaultTableModel) tblDSSV.getModel();
         model.setRowCount(0);
-        
+
         Font font = new Font("Segoe UI", Font.PLAIN, 14);
         tblDSSV.setFont(font);
         tblDSSV.setRowHeight(30);
@@ -60,7 +60,8 @@ public class DS_SinhVien extends javax.swing.JPanel {
                     sv.getSDT(),
                     sv.getCMND(),
                     sv.getEmail(),
-                    sv.getNgaySinh()};
+                    sv.getNgaySinh(),
+                    sv.getTrangThai()};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -191,7 +192,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã sinh viên", "Tên sinh viên", "Giới tính", "Điện thoại", "CMND", "Email", "Ngày Sinh"
+                "Mã sinh viên", "Tên sinh viên", "Giới tính", "Điện thoại", "CMND", "Email", "Ngày Sinh", "Trạng thái hợp đồng"
             }
         ));
         tblDSSV.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -292,23 +293,23 @@ public class DS_SinhVien extends javax.swing.JPanel {
                     null, luaChon, luaChon[0]);
             if (traLoi == JOptionPane.YES_OPTION) {
                 try {
-                String masv = (String) tblDSSV.getValueAt(this.index, 0);
-                SinhVien sv = dao.findById(masv);
-                HopDong hopDong = hdDao.findByIdMaSV(masv);
-                if (sv != null) {
-                    if (hopDong.getMaSV().equals(masv)) {
-                        lblMessage.setText("Sinh viên này đang ở, không thể xóa");
-                        lblMessage.setForeground(Color.RED);
-                    }else{
-                        
+                    String masv = (String) tblDSSV.getValueAt(this.index, 0);
+                    SinhVien sv = dao.findById(masv);
+                    HopDong hopDong = hdDao.findByIdMaSV(masv);
+                    if (sv != null) {
+                        if (hopDong.getMaSV().equals(masv)) {
+                            lblMessage.setText("Sinh viên này đang ở, không thể xóa");
+                            lblMessage.setForeground(Color.RED);
+                        } else {
+
+                        }
                     }
+                } catch (Exception e) {
+                    String masv = (String) tblDSSV.getValueAt(this.index, 0);
+                    dao.Delete(masv);
+                    lblMessage.setForeground(Color.BLUE);
+                    lblMessage.setText("Xóa thành công");
                 }
-            } catch (Exception e) {
-                String masv = (String) tblDSSV.getValueAt(this.index, 0);
-                dao.Delete(masv);
-                lblMessage.setForeground(Color.BLUE);
-                lblMessage.setText("Xóa thành công");
-            }
             }
         }
     }
@@ -336,7 +337,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
     int index;
     private void tblDSSVMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSSVMouseClicked
         if (evt.getClickCount() == 1) {
-             index = tblDSSV.rowAtPoint(evt.getPoint());
+            index = tblDSSV.rowAtPoint(evt.getPoint());
             if (this.index >= 0) {
                 String masv = (String) tblDSSV.getValueAt(this.index, 0);
                 System.out.println(masv);

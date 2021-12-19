@@ -47,10 +47,11 @@ public class DienNuocDAO {
         return list.size() > 0 ? list.get(0) : null;
     }
 
-    public List<DienNuoc> selectSCMDien(String keyword) {
-        String sql = "SELECT * FROM DienNuoc WHERE MaPhong = ?";
-        return selectAll(sql, keyword);
+    public List<DienNuoc> selectSCMDien(String maPhong, String Thang) {
+        String sql = "SELECT * FROM DienNuoc WHERE MaPhong = ? and Thang = ? order by MaPhong";
+        return selectAll(sql, maPhong, Thang);
     }
+    
     public List<DienNuoc> selectDienNuocByMaDN(int id) {
         String sql = "SELECT * FROM DienNuoc WHERE MaDienNuoc = ?";
         return selectAll(sql, id);
