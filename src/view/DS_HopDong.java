@@ -5,10 +5,7 @@ import dao.HopDongDAO;
 import dao.PhongDAO;
 import java.awt.Color;
 import java.awt.Font;
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
@@ -27,6 +24,7 @@ public class DS_HopDong extends javax.swing.JPanel {
     HopDongDAO dao = new HopDongDAO();
     PhongDAO pDao = new PhongDAO();
     HoaDonDAO hdDao = new HoaDonDAO();
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     /**
      * Creates new form DS_HopDong
@@ -53,7 +51,6 @@ public class DS_HopDong extends javax.swing.JPanel {
         Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
         tableHeader.setFont(headerFont);
         
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
 //            String MaSV = txtTimKiemMaSV.getText();
 //            List<HopDong> list = dao.selectByMaSV(MaSV);
@@ -65,6 +62,7 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.getHoTen(),
                     sv.getMaPhong(),
                     formatter.format(sv.getNgayTao()),
+//                    sv.getNgayTao(),
                     sv.getTrangThai(),
                     String.format(Locale.UK, "%1$.0f", sv.getGiaThue()),
                     sv.getThang(),
@@ -93,9 +91,9 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.getMaSV(),
                     sv.getHoTen(),
                     sv.getMaPhong(),
-                    sv.getNgayTao(),
+                    formatter.format(sv.getNgayTao()),
                     sv.getTrangThai(),
-                    sv.getGiaThue(),
+                    String.format(Locale.UK, "%1$.0f", sv.getGiaThue()),
                     sv.getThang(),
                     sv.getTrangThaiThu()};
                 model.addRow(row);
@@ -310,7 +308,7 @@ public class DS_HopDong extends javax.swing.JPanel {
         String masv = (String) tblDSHD.getValueAt(this.index, 1);
         String hoTen = (String) tblDSHD.getValueAt(this.index, 2);
         String maphong = (String) tblDSHD.getValueAt(this.index, 3);
-        Date ngatTao = (Date) tblDSHD.getValueAt(this.index, 4);
+        String ngatTao = (String) tblDSHD.getValueAt(this.index, 4);
         String trangThai = (String) tblDSHD.getValueAt(this.index, 5);
         String giaThue = String.valueOf(tblDSHD.getValueAt(this.index, 6));
         String thang = String.valueOf(tblDSHD.getValueAt(this.index, 7));

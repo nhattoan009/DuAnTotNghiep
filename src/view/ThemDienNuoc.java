@@ -29,7 +29,20 @@ public class ThemDienNuoc extends javax.swing.JFrame {
         this.loadComboBoxPhong();
     }
 
+    void check_trungThang() {
+        String maPhong = cboPhong.getSelectedItem().toString();
+        String thang = cboThang.getSelectedItem().toString();
+        List<DienNuoc> list = dDao.selectByMaPhongAndThang(maPhong.trim(), thang);
+        System.out.println("list: " + list);
+        if (list.isEmpty()) {
+            insertDienNuoc();
+        } else {
+            lblMessage.setForeground(Color.red);
+            lblMessage.setText("Phòng đã được thêm");
+        }
+    }
 //    public ThemDienNuoc() { }
+
     void loadComboBoxPhong() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboPhong.getModel();
         model.removeAllElements();
@@ -61,6 +74,8 @@ public class ThemDienNuoc extends javax.swing.JFrame {
     private void clear() {
         txtCSCdien.setText("");
         txtCSCnuoc.setText("");
+        txtCSMdien.setText("");
+        txtCSMnuoc.setText("");
     }
 
     DienNuoc getModelDienNuoc() {
@@ -341,7 +356,8 @@ public class ThemDienNuoc extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        insertDienNuoc();
+//        insertDienNuoc();
+        check_trungThang();
     }//GEN-LAST:event_btnLuuActionPerformed
 
     private void btnHuyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyActionPerformed

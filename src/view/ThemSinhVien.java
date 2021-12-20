@@ -43,7 +43,6 @@ public class ThemSinhVien extends javax.swing.JFrame {
 //            this.ds_SinhVien.dao.select();
             this.clear();
             lblMessage.setText("Thêm mới thành công! Vui lòng Làm mới bản");
-            lblMessage.setForeground(Color.BLUE);
 
         } catch (Exception e) {
             lblMessage.setText("Mã sinh viên đã tồn tại!");
@@ -68,59 +67,51 @@ public class ThemSinhVien extends javax.swing.JFrame {
         return email.matches(EMAIL_PATTERN);
     }
 
-    boolean check() {
-        // String maNhanVien = txtMaSV.getText();
-        if ((txtMaSV.getText()).length() < 5) {
+    boolean flag = false;
+    void check() {
+        if ((txtMaSV.getText()).length() < 5 || (txtMaSV.getText()).length() > 7) {
             if ((txtMaSV.getText()).equals("")) {
-                lblMessage.setText("Mã số cần 5 ký tự");
-                lblMessage.setForeground(Color.red);
-                txtMaSV.setBackground(Color.yellow);
-                return false;
+                lblMessage.setText("Mã sinh viên không được để trống");
+                lblMessage.setForeground(Color.RED);txtMaSV.requestFocus();
+            } else {
+                lblMessage.setText("Mã sinh viên phải nhập đúng 7 ký tự");
+                lblMessage.setForeground(Color.red);txtMaSV.requestFocus();
             }
         } else if ((txtHoTen.getText()).equals("")) {
-            lblMessage.setText("Không được để trống");
-            lblMessage.setForeground(Color.red);
-            txtHoTen.setBackground(Color.yellow);
-            txtHoTen.requestFocus();
-            return false;
+            lblMessage.setText("Họ tên không được để trống");
+            lblMessage.setForeground(Color.red);txtHoTen.requestFocus();
         } else if (txtSDT.getText().equals("")) {
-            lblMessage.setText("Không được để trống");
-            lblMessage.setForeground(Color.red);
-            txtSDT.setBackground(Color.yellow);
-            txtSDT.requestFocus();
-            return false;
+            lblMessage.setText("Số điện thoại không được để trống");
+            lblMessage.setForeground(Color.red);txtSDT.requestFocus();
+        } else if (txtCMND.getText().equals("")) {
+            lblMessage.setText("Số CMND không được để trống");
+            lblMessage.setForeground(Color.red);txtCMND.requestFocus();
+        } else if (txtCMND.getText().length() < 9 || txtCMND.getText().length() > 12) {
+            lblMessage.setText("Số CMND không đúng");
+            lblMessage.setForeground(Color.red);txtCMND.requestFocus();
         } else if (txtSDT.getText().length() < 10 || txtSDT.getText().length() > 12) {
-            lblMessage.setText("Số điện thoại phải từ 10 -> 12 số!");
-            lblMessage.setForeground(Color.red);
-            txtSDT.setBackground(Color.yellow);
-            txtSDT.requestFocus();
-            return false;
-        } else if (!txtCMND.getText().matches("[0-9]+")) {
-            lblMessage.setText("Số CMDN phải 9 số!");
-            lblMessage.setForeground(Color.red);
-            txtCMND.setBackground(Color.yellow);
-            txtCMND.requestFocus();
-            return false;
+            lblMessage.setText("Số điện thoại phải nhập đủ 10 hoặc 11 số.");
+            lblMessage.setForeground(Color.red);txtSDT.requestFocus();
+        } else if (!txtSDT.getText().matches("[0-9]+")) {
+            lblMessage.setText("Số điện thoại chỉ nhập số.");
+            lblMessage.setForeground(Color.red);txtSDT.requestFocus();
         } else if (txtEmail.getText().equals("")) {
-            lblMessage.setText("Email không hợp lệ");
-            lblMessage.setForeground(Color.red);
-            txtEmail.setBackground(Color.yellow);
-            txtEmail.requestFocus();
-            return false;
+            lblMessage.setText("Email không đươc để trống.");
+            lblMessage.setForeground(Color.red);txtEmail.requestFocus();
         } else if (verifyEmail(txtEmail.getText()) == false) {
-            lblMessage.setText(" Email không hợp lệ");
-            lblMessage.setForeground(Color.red);
-            txtEmail.setBackground(Color.yellow);
-            txtEmail.requestFocus();
-            return false;
+            lblMessage.setText("Định dạng email bạn nhập không chính xác.");
+            lblMessage.setForeground(Color.red);txtEmail.requestFocus();
         } else if (txtNgaySinh.getText().equals("")) {
-            lblMessage.setText("Ngày sinh không hợp lệ");
-            lblMessage.setForeground(Color.red);
-            txtNgaySinh.setBackground(Color.yellow);
-            txtNgaySinh.requestFocus();
-            return false;
+            lblMessage.setText("Ngày sinh không đươc để trống.");
+            lblMessage.setForeground(Color.red);txtNgaySinh.requestFocus();
+        } else if (!txtNgaySinh.getText().equals("")) {
+            if ((txtNgaySinh.getText().length() != 10)) {
+                lblMessage.setText("Định dạng ngày nhập vào chưa chính xác.");
+                lblMessage.setForeground(Color.red);txtNgaySinh.requestFocus();
+            } else {
+                flag = true;
+            }
         }
-        return true;
     }
 
     SinhVien getModel() {
@@ -364,7 +355,8 @@ public class ThemSinhVien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        if (check()) {
+        check();
+        if (flag == true) {
             insert();
         }
     }//GEN-LAST:event_btnLuuActionPerformed

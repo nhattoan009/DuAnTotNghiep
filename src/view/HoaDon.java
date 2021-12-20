@@ -18,7 +18,7 @@ public class HoaDon extends javax.swing.JFrame {
             String maSV,
             String hoTen,
             String maPhong,
-            Date ngayTao,
+            String ngayTao,
             String TrangThai,
             String giaPhong,
             String Thang) {
@@ -28,7 +28,7 @@ public class HoaDon extends javax.swing.JFrame {
         this.txtHoTen.setText(hoTen);
         this.txtMaSV.setText(maSV);
         this.txtMaPhong.setText(maPhong);
-        this.txtNgayTao.setText(DateHelper.toString(ngayTao));
+        this.txtNgayTao.setText(ngayTao);
         this.txtNgayHuy.setText(DateHelper.toString(new Date()));
         this.txtGiaPhong.setText(giaPhong);
         this.cboTrangThai.setSelectedItem(TrangThai);

@@ -52,6 +52,11 @@ public class DienNuocDAO {
         return selectAll(sql, maPhong, Thang);
     }
     
+    public List<DienNuoc> selectByMaPhongAndThang(String maPhong, String thang) {
+        String sql = "SELECT * FROM DienNuoc WHERE MaPhong = ? and Thang = ? order by MaPhong";
+        return selectAll(sql, maPhong, thang);
+    }
+    
     public List<DienNuoc> selectDienNuocByMaDN(int id) {
         String sql = "SELECT * FROM DienNuoc WHERE MaDienNuoc = ?";
         return selectAll(sql, id);

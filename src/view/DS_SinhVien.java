@@ -344,7 +344,7 @@ public class DS_SinhVien extends javax.swing.JPanel {
         String sdt = (String) tblDSSV.getValueAt(this.index, 3);
         String cmnd = (String) tblDSSV.getValueAt(this.index, 4);
         String email = (String) tblDSSV.getValueAt(this.index, 5);
-        Date namsinh = (Date) tblDSSV.getValueAt(this.index, 6);
+        String namsinh = (String) tblDSSV.getValueAt(this.index, 6);
         if (this.index >= 0) {
             SuaSinhVien ssv = new SuaSinhVien(masv, tensv, sdt, email, cmnd, gt, namsinh);
             ssv.setVisible(true);

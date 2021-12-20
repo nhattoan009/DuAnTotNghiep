@@ -24,7 +24,7 @@ public class SuaSinhVien extends javax.swing.JFrame {
             String Email,
             String CMND,
             String GioiTinh,
-            Date NgaySinh
+            String NgaySinh
     ) {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -34,7 +34,7 @@ public class SuaSinhVien extends javax.swing.JFrame {
         this.txtEmail.setText(Email);
         this.txtSDT.setText(SDT);
 
-        this.txtNgaySinh.setText(DateHelper.toString(NgaySinh));
+        this.txtNgaySinh.setText(NgaySinh);
         this.cboGioiTinh.setSelectedItem(GioiTinh);
     }
 
@@ -85,79 +85,68 @@ public class SuaSinhVien extends javax.swing.JFrame {
         }
         return email.matches(EMAIL_PATTERN);
     }
-    boolean check() {
-       // String maNhanVien = txtMaSV.getText();
-        if ((txtMaSV.getText()).length() < 5) {
-             if ((txtMaSV.getText()).equals("")) {
-                lblMessage.setText("Mã số cần 5 ký tự");
-                lblMessage.setForeground(Color.red);
-                txtMaSV.setBackground(Color.yellow);
-                return false;         
-            }
-        } 
-        
-        else if ((txtHoTen.getText()).equals("")) {
-            lblMessage.setText("Không được để trống");
-            lblMessage.setForeground(Color.red);
-            txtHoTen.setBackground(Color.yellow);
-            txtHoTen.requestFocus();
-            return false;
-        } else if (txtSDT.getText().equals("")) {
-            lblMessage.setText("Không được để trống");
-            lblMessage.setForeground(Color.red);
-            txtSDT.setBackground(Color.yellow);
-            txtSDT.requestFocus();
-            return false;
-        } else if (txtSDT.getText().length() < 10 || txtSDT.getText().length() > 12) {
-            lblMessage.setText("Số điện thoại phải từ 10 -> 12 số!");
-            lblMessage.setForeground(Color.red);
-            txtSDT.setBackground(Color.yellow);
-            txtSDT.requestFocus();
-            return false;
-        } else if (txtCMND.getText().length() < 9 || txtCMND.getText().length() > 12 || txtCMND.getText().matches("^\\d{9,12}$") == false) {
-          
-            lblMessage.setText("Số CMDN phải 9-12 số!");
-            lblMessage.setForeground(Color.red);
-             txtCMND.setBackground(Color.yellow);
-             txtCMND.requestFocus();
-            return false;
-        } else if (txtEmail.getText().equals("")) {
-            lblMessage.setText("Email không hợp lệ");
-            lblMessage.setForeground(Color.red);
-             txtEmail.setBackground(Color.yellow);
-             txtEmail.requestFocus();
-            return false;
-        } else if (verifyEmail(txtEmail.getText()) == false) {
-            lblMessage.setText(" Email không hợp lệ");
-            lblMessage.setForeground(Color.red);
-             txtEmail.setBackground(Color.yellow);
-             txtEmail.requestFocus();
-            return false;
-        } else if (txtNgaySinh.getText().equals("")) {
-            lblMessage.setText("Ngày sinh không hợp lệ");
-            lblMessage.setForeground(Color.red);
-            txtNgaySinh.setBackground(Color.yellow);
-            txtNgaySinh.requestFocus();
-            return false;
-        }
-       
-        else if (!txtNgaySinh.getText().equals("")) {
-            if ((txtNgaySinh.getText().length() != 10)) {
-                lblMessage.setText("Ngày sinh không hợp lệ");
-                lblMessage.setForeground(Color.red);
-                 txtNgaySinh.setBackground(Color.yellow);
-                 txtNgaySinh.requestFocus();
-                return false;
+    boolean flag = false;
+
+    void check() {
+        if ((txtMaSV.getText()).length() < 5 || (txtMaSV.getText()).length() > 7) {
+            if ((txtMaSV.getText()).equals("")) {
+                lblMessage.setText("Mã sinh viên không được để trống");
+                lblMessage.setForeground(Color.RED);
+                txtMaSV.requestFocus();
             } else {
-                lblMessage.setForeground(new Color(0,153,255));
-                return true;
+                lblMessage.setText("Mã sinh viên phải nhập đúng 7 ký tự");
+                lblMessage.setForeground(Color.red);
+                txtMaSV.requestFocus();
+            }
+        } else if ((txtHoTen.getText()).equals("")) {
+            lblMessage.setText("Họ tên không được để trống");
+            lblMessage.setForeground(Color.red);
+            txtHoTen.requestFocus();
+        } else if (txtSDT.getText().equals("")) {
+            lblMessage.setText("Số điện thoại không được để trống");
+            lblMessage.setForeground(Color.red);
+            txtSDT.requestFocus();
+        } else if (txtCMND.getText().equals("")) {
+            lblMessage.setText("Số CMND không được để trống");
+            lblMessage.setForeground(Color.red);
+            txtCMND.requestFocus();
+        } else if (txtCMND.getText().length() < 9 || txtCMND.getText().length() > 12) {
+            lblMessage.setText("Số CMND không đúng");
+            lblMessage.setForeground(Color.red);
+            txtCMND.requestFocus();
+        } else if (txtSDT.getText().length() < 10 || txtSDT.getText().length() > 12) {
+            lblMessage.setText("Số điện thoại phải nhập đủ 10 hoặc 11 số.");
+            lblMessage.setForeground(Color.red);
+            txtSDT.requestFocus();
+        } else if (!txtSDT.getText().matches("[0-9]+")) {
+            lblMessage.setText("Số điện thoại chỉ nhập số.");
+            lblMessage.setForeground(Color.red);
+            txtSDT.requestFocus();
+        } else if (txtEmail.getText().equals("")) {
+            lblMessage.setText("Email không đươc để trống.");
+            lblMessage.setForeground(Color.red);
+            txtEmail.requestFocus();
+        } else if (verifyEmail(txtEmail.getText()) == false) {
+            lblMessage.setText("Định dạng email bạn nhập không chính xác.");
+            lblMessage.setForeground(Color.red);
+            txtEmail.requestFocus();
+        } else if (txtNgaySinh.getText().equals("")) {
+            lblMessage.setText("Ngày sinh không đươc để trống.");
+            lblMessage.setForeground(Color.red);
+            txtNgaySinh.requestFocus();
+        } else if (!txtNgaySinh.getText().equals("")) {
+            if ((txtNgaySinh.getText().length() != 10)) {
+                lblMessage.setText("Định dạng ngày nhập vào chưa chính xác.");
+                lblMessage.setForeground(Color.red);
+                txtNgaySinh.requestFocus();
+            } else {
+                flag = true;
             }
         }
-         
-        return true;
     }
+
     void clear() {
-txtCMND.setBackground(Color.white);
+        txtCMND.setBackground(Color.white);
         txtEmail.setBackground(Color.white);
         txtHoTen.setBackground(Color.white);
 //        txtMaSV.setBackground(Color.white);
@@ -380,7 +369,8 @@ txtCMND.setBackground(Color.white);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLuuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuActionPerformed
-        if (check()) {
+        check();
+        if (flag == true) {
             update();
         }
     }//GEN-LAST:event_btnLuuActionPerformed
