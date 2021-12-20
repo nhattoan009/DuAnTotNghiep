@@ -268,6 +268,8 @@ public class DS_TaiKhoan extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblMessage.setForeground(new java.awt.Color(0, 153, 255));
         lblMessage.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -297,7 +299,7 @@ public class DS_TaiKhoan extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

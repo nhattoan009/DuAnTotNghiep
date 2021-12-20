@@ -43,8 +43,8 @@ public class HoaDonDAO {
         return selectAll(sql);
     }
     public List<HoaDon> selectByMaSV(String keyword) {
-        String sql = "SELECT * FROM HoaDon WHERE MaSV = ?";
-        return selectAll(sql, keyword);
+        String sql = "SELECT * FROM HoaDon WHERE MaSV = ? order by MaSV";
+        return selectAll(sql,"%"+ keyword+ "%");
     }
     
     public void UpdateStatus(int maHD) {

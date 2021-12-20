@@ -1,4 +1,4 @@
-create database KTX_1
+﻿create database KTX_1
  
  create table QuanLy(
 	TenDangNhap char(30) not null,
@@ -107,5 +107,7 @@ ALTER TABLE HopDong
 
   ALTER TABLE DienNuoc
   ALTER COLUMN TrangThai nvarchar(20)
+
+  SELECT * FROM HopDong WHERE TrangThai=N'hoạt động' order by MaPhong
 
 

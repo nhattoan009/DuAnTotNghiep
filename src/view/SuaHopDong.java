@@ -104,7 +104,7 @@ public class SuaHopDong extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
-        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_save_20px_1.png"))); // NOI18N
         btnLuu.setText("Lưu");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +113,7 @@ public class SuaHopDong extends javax.swing.JFrame {
             }
         });
 
-        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cancel_20px.png"))); // NOI18N
         btnHuy.setText("Đóng");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
@@ -150,21 +150,42 @@ public class SuaHopDong extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Mã hợp đồng:");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Mã phòng:");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Mã Sinh Viên:");
 
+        txtMaSV.setEditable(false);
+        txtMaSV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Giá thuê:");
 
+        txtGia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Ngày tạo:");
 
+        txtNgayTao.setEditable(false);
+        txtNgayTao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        txtMaHD.setEditable(false);
+        txtMaHD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Trạng thái:");
+
+        txtMaPhong.setEditable(false);
+        txtMaPhong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblMessage.setForeground(new java.awt.Color(0, 153, 255));
 
+        cboTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hoạt động", "không hoạt động" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

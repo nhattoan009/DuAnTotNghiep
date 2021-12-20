@@ -37,7 +37,7 @@ public class PhongDAO {
     }
 
     public List<Phong> select() {
-        String sql = "SELECT * FROM Phong";
+        String sql = "SELECT * FROM Phong order by MaPhong";
         return selectAll(sql);
     }
 
@@ -54,6 +54,11 @@ public class PhongDAO {
     public List<Phong> selectByKeyword(String keyword) {
         String sql = "SELECT * FROM Phong WHERE MaPhong LIKE ?";
         return selectAll(sql, "%" + keyword + "%");
+    }
+    
+    public List<Phong> selectByMaPhongAndTT(String maPhong, String tt) {
+        String sql = "SELECT * FROM Phong WHERE MaPhong = ? and TrangThai = ? order by MaPhong";
+        return selectAll(sql, maPhong, tt);
     }
 
     public Phong findById(String id) {

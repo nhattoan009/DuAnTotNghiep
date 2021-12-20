@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -51,6 +52,8 @@ public class DS_HopDong extends javax.swing.JPanel {
         tableHeader.setForeground(Color.decode("#0099FF"));
         Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
         tableHeader.setFont(headerFont);
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
 //            String MaSV = txtTimKiemMaSV.getText();
 //            List<HopDong> list = dao.selectByMaSV(MaSV);
@@ -61,7 +64,7 @@ public class DS_HopDong extends javax.swing.JPanel {
                     sv.getMaSV(),
                     sv.getHoTen(),
                     sv.getMaPhong(),
-                    sv.getNgayTao(),
+                    formatter.format(sv.getNgayTao()),
                     sv.getTrangThai(),
                     String.format(Locale.UK, "%1$.0f", sv.getGiaThue()),
                     sv.getThang(),
@@ -204,7 +207,7 @@ public class DS_HopDong extends javax.swing.JPanel {
             }
         });
 
-        cboPhong.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        cboPhong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         cboPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,13 +215,13 @@ public class DS_HopDong extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Mã phòng");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Trạng thái");
 
-        cboTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        cboTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hoạt động", "Không hoạt động" }));
 
         tblDSHD.setModel(new javax.swing.table.DefaultTableModel(
@@ -279,7 +282,7 @@ public class DS_HopDong extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cboPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

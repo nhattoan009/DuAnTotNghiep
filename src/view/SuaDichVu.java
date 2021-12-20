@@ -65,35 +65,47 @@ public class SuaDichVu extends javax.swing.JFrame {
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Mã dịch vụ:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 95, 35));
+
+        txtMaDV.setEditable(false);
+        txtMaDV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel2.add(txtMaDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 281, 35));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Tên dịch vụ:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 95, 35));
+
+        txtTenDV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel2.add(txtTenDV, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 281, 35));
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Giá:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 95, 35));
+
+        txtGia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jPanel2.add(txtGia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 281, 35));
 
-        btnDong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnDong.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cancel_20px.png"))); // NOI18N
         btnDong.setText("đóng");
         btnDong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDongActionPerformed(evt);
             }
         });
-        jPanel2.add(btnDong, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 200, 83, -1));
+        jPanel2.add(btnDong, new org.netbeans.lib.awtextra.AbsoluteConstraints(333, 200, 100, -1));
 
-        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_save_20px_1.png"))); // NOI18N
         btnLuu.setText("Lưu");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLuuActionPerformed(evt);
             }
         });
-        jPanel2.add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, 80, -1));
+        jPanel2.add(btnLuu, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 200, 100, -1));
 
         lblMessage.setForeground(new java.awt.Color(51, 153, 255));
         lblMessage.setText(" ");

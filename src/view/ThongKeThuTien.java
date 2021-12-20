@@ -34,7 +34,7 @@ public class ThongKeThuTien extends javax.swing.JPanel {
         this.loadComboBoxPhong();
     }
 
-    void loadComboBoxPhong() {
+    private void loadComboBoxPhong() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboPhong.getModel();
         model.removeAllElements();
 
@@ -48,7 +48,7 @@ public class ThongKeThuTien extends javax.swing.JPanel {
         }
     }
 
-    public void loadPhong() {
+    private void loadPhong() {
         DefaultTableModel model = (DefaultTableModel) tblTKTT.getModel();
         model.setRowCount(0);
         String maPhong = cboPhong.getSelectedItem().toString();
@@ -61,7 +61,6 @@ public class ThongKeThuTien extends javax.swing.JPanel {
                     sv.getMaSV(),
                     sv.getHoTen(),
                     sv.getMaPhong(),
-                    sv.getTrangThai(),
                     sv.getGiaThue(),
                     sv.getThang(),
                     sv.getTrangThaiThu()};
@@ -72,7 +71,7 @@ public class ThongKeThuTien extends javax.swing.JPanel {
         }
     }
 
-    public void loadAll() {
+    private void loadAll() {
         DefaultTableModel model = (DefaultTableModel) tblTKTT.getModel();
         model.setRowCount(0);
 
@@ -95,7 +94,6 @@ public class ThongKeThuTien extends javax.swing.JPanel {
                     sv.getMaSV(),
                     sv.getHoTen(),
                     sv.getMaPhong(),
-                    sv.getTrangThai(),
                     sv.getGiaThue(),
                     sv.getThang(),
                     sv.getTrangThaiThu()};
@@ -219,7 +217,7 @@ public class ThongKeThuTien extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã sinh viên", "Tên sinh viên", "Mã phòng", "Trạng thái", "Giá thuê", "Tháng", "Trạng thái thu"
+                "Mã sinh viên", "Tên sinh viên", "Mã phòng", "Giá thuê", "Tháng", "Trạng thái thu"
             }
         ));
         tblTKTT.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -229,7 +227,7 @@ public class ThongKeThuTien extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblTKTT);
 
-        cboPhong.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        cboPhong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
         cboPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -237,10 +235,10 @@ public class ThongKeThuTien extends javax.swing.JPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Phòng");
 
-        cboThang.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        cboThang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         cboThang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,10 +246,10 @@ public class ThongKeThuTien extends javax.swing.JPanel {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Tháng");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_eye_20px.png"))); // NOI18N
         jButton1.setText("Xem");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -308,7 +306,7 @@ public class ThongKeThuTien extends javax.swing.JPanel {
                             .addComponent(cboThang, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

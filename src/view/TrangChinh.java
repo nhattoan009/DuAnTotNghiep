@@ -10,6 +10,21 @@ public class TrangChinh extends javax.swing.JFrame {
     public TrangChinh() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.dssv();
+    }
+
+    private void dssv() {
+        ImageIcon tab1Icon = new ImageIcon(Objects.requireNonNull(
+                this.getClass().getResource("/img/list_student.png")));
+        try {
+            tab.setSelectedComponent(new DS_SinhVien());
+        } catch (Exception e) {
+            DS_SinhVien pnl = new DS_SinhVien();
+            tab.setFont(new Font("Segoe UI", Font.BOLD | Font.BOLD, 18));
+            tab.addTab("Danh sách sinh viên", tab1Icon, pnl);
+            tab.setBackground(Color.WHITE);
+            tab.setSelectedComponent(pnl);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -299,24 +314,14 @@ public class TrangChinh extends javax.swing.JFrame {
     }//GEN-LAST:event_btnQLSVActionPerformed
 
     private void btnDSSVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDSSVActionPerformed
-        ImageIcon tab1Icon = new ImageIcon(Objects.requireNonNull(
-                this.getClass().getResource("/img/list_student.png")));
-        try {
-            tab.setSelectedComponent(new DS_SinhVien());
-        } catch (Exception e) {
-            DS_SinhVien pnl = new DS_SinhVien();
-            tab.setFont(new Font("Segoe UI", Font.BOLD | Font.BOLD, 18));
-            tab.addTab("Danh sách sinh viên", tab1Icon, pnl);
-            tab.setBackground(Color.WHITE);
-            tab.setSelectedComponent(pnl);
-        }
+        this.dssv();
 
     }//GEN-LAST:event_btnDSSVActionPerformed
 
     private void btnDSTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDSTKActionPerformed
         ImageIcon tab1Icon = new ImageIcon(Objects.requireNonNull(
                 this.getClass().getResource("/img/account.png")));
-        
+
         try {
             tab.setSelectedComponent(new DS_TaiKhoan());
         } catch (Exception e) {

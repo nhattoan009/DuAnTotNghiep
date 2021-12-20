@@ -4,6 +4,7 @@ import dao.DichVuDAO;
 import java.awt.Color;
 import java.awt.Font;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -22,7 +23,7 @@ public class DS_DichVu extends javax.swing.JPanel {
     public void load() {
         DefaultTableModel model = (DefaultTableModel) tblDSDV.getModel();
         model.setRowCount(0);
-        
+
         Font font = new Font("Segoe UI", Font.PLAIN, 14);
         tblDSDV.setFont(font);
         tblDSDV.setRowHeight(30);
@@ -34,14 +35,14 @@ public class DS_DichVu extends javax.swing.JPanel {
         tableHeader.setForeground(Color.decode("#0099FF"));
         Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
         tableHeader.setFont(headerFont);
-        
+
         try {
             List<DichVu> list = dao.select();
             for (DichVu sv : list) {
                 Object[] row = {
                     sv.getMaDV(),
                     sv.getTenDV(),
-                    sv.getGiaDV()};
+                    String.format(Locale.UK, "%1$.0f", sv.getGiaDV())};
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -79,6 +80,7 @@ public class DS_DichVu extends javax.swing.JPanel {
         btnCapNhat = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSDV = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
@@ -88,6 +90,7 @@ public class DS_DichVu extends javax.swing.JPanel {
 
         btnLamMoi.setBackground(new java.awt.Color(0, 153, 255));
         btnLamMoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnLamMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_available_updates_20px.png"))); // NOI18N
         btnLamMoi.setText("Làm mới");
         btnLamMoi.setOpaque(false);
         btnLamMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +104,7 @@ public class DS_DichVu extends javax.swing.JPanel {
 
         btnCapNhat.setBackground(new java.awt.Color(0, 153, 255));
         btnCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnCapNhat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_update_20px.png"))); // NOI18N
         btnCapNhat.setText("Cập nhật");
         btnCapNhat.setOpaque(false);
         btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -115,10 +119,10 @@ public class DS_DichVu extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 270, Short.MAX_VALUE)
                 .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(307, 307, 307)
-                .addComponent(btnLamMoi, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(282, 282, 282)
+                .addComponent(btnLamMoi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnCapNhat)
                 .addContainerGap())
@@ -151,6 +155,10 @@ public class DS_DichVu extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblDSDV);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel2.setText(" ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,6 +167,10 @@ public class DS_DichVu extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
                 .addGap(723, 723, 723))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -168,8 +180,10 @@ public class DS_DichVu extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -211,6 +225,7 @@ public class DS_DichVu extends javax.swing.JPanel {
     private javax.swing.JButton btnCapNhat;
     private javax.swing.JButton btnLamMoi;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblMessage;

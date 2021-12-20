@@ -43,7 +43,7 @@ public class HopDongDAO {
 //            JDBCHelper.executeUpdate(sql, id);
 //        }
     public List<HopDong> select() {
-        String sql = "SELECT * FROM HopDong order by MaPhong";
+        String sql = "SELECT * FROM HopDong WHERE TrangThai=N'hoạt động' order by MaPhong";
         return selectAll(sql);
     }
 

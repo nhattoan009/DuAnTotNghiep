@@ -80,6 +80,7 @@ public class DangNhap extends javax.swing.JFrame {
             }
         });
 
+        lblError.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblError.setForeground(new java.awt.Color(255, 0, 0));
         lblError.setText(" ");
 

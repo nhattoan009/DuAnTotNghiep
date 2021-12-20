@@ -1,9 +1,12 @@
 package view;
 
 import dao.HoaDonDAO;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class ChiTietSinhVien extends javax.swing.JFrame {
 
@@ -34,6 +37,18 @@ public class ChiTietSinhVien extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblLSTT.getModel();
         model.setRowCount(0);
         try {
+            Font font = new Font("Segoe UI", Font.PLAIN, 14);
+            tblLSTT.setFont(font);
+            tblLSTT.setRowHeight(30);
+            tblLSTT.setBackground(Color.decode("#ffffff"));
+            tblLSTT.setForeground(Color.decode("#505160"));
+
+            JTableHeader tableHeader = tblLSTT.getTableHeader();
+            tableHeader.setBackground(Color.decode("#B7B8B6"));
+            tableHeader.setForeground(Color.decode("#0099FF"));
+            Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
+            tableHeader.setFont(headerFont);
+
             String maSV = txtMaSV.getText();
             List<model.HoaDon> list = dao.selectByMaSV(maSV.trim());
             for (model.HoaDon sv : list) {
@@ -42,7 +57,7 @@ public class ChiTietSinhVien extends javax.swing.JFrame {
                     sv.getTienPhong(),
                     sv.getTrangThai()};
                 model.addRow(row);
-            } 
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
         }
@@ -78,7 +93,7 @@ public class ChiTietSinhVien extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
-        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_save_20px_1.png"))); // NOI18N
         btnLuu.setText("Lưu");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +102,7 @@ public class ChiTietSinhVien extends javax.swing.JFrame {
             }
         });
 
-        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cancel_20px.png"))); // NOI18N
         btnHuy.setText("Đóng");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
@@ -124,20 +139,44 @@ public class ChiTietSinhVien extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Mã sinh viên:");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Tháng:");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Tên sinh viên:");
 
+        txtHoTen.setEditable(false);
+        txtHoTen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Trạng thái hợp đồng:");
 
+        txtTTHopDong.setEditable(false);
+        txtTTHopDong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Phòng:");
 
+        txtPhong.setEditable(false);
+        txtPhong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        txtMaSV.setEditable(false);
+        txtMaSV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Trạng thái thu tiền:");
+
+        txtThang.setEditable(false);
+        txtThang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblMessage.setForeground(new java.awt.Color(0, 153, 255));
+
+        txtTTThuTien.setEditable(false);
+        txtTTThuTien.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         tblLSTT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -185,10 +224,9 @@ public class ChiTietSinhVien extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel5))
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel8))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtTTHopDong)

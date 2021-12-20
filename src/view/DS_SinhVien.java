@@ -5,6 +5,7 @@ import dao.PhongDAO;
 import dao.SinhVienDAO;
 import java.awt.Color;
 import java.awt.Font;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -48,10 +49,49 @@ public class DS_SinhVien extends javax.swing.JPanel {
         tableHeader.setForeground(Color.decode("#0099FF"));
         Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
         tableHeader.setFont(headerFont);
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
 //            String keyword = txtTimKiem.getText();
 //            List<SinhVien> list = dao.selectByKeyword(keyword);
             List<SinhVien> list = dao.select();
+            for (SinhVien sv : list) {
+                Object[] row = {
+                    sv.getMaSV(),
+                    sv.getHoTen(),
+                    sv.isGioiTinh() ? "Nam" : "Nữ",
+                    sv.getSDT(),
+                    sv.getCMND(),
+                    sv.getEmail(),
+                    formatter.format(sv.getNgaySinh()),
+                    sv.getTrangThai()};
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+    
+    public void TimKiem() {
+        DefaultTableModel model = (DefaultTableModel) tblDSSV.getModel();
+        model.setRowCount(0);
+
+        Font font = new Font("Segoe UI", Font.PLAIN, 14);
+        tblDSSV.setFont(font);
+        tblDSSV.setRowHeight(30);
+        tblDSSV.setBackground(Color.decode("#ffffff"));
+        tblDSSV.setForeground(Color.decode("#505160"));
+
+        JTableHeader tableHeader = tblDSSV.getTableHeader();
+        tableHeader.setBackground(Color.decode("#B7B8B6"));
+        tableHeader.setForeground(Color.decode("#0099FF"));
+        Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
+        tableHeader.setFont(headerFont);
+        try {
+            String maSV = txtMaSV.getText();
+            List<SinhVien> list = dao.selectByKeyword(maSV.trim());
+            System.out.println("list"+ list);
+//            List<SinhVien> list = dao.select();
             for (SinhVien sv : list) {
                 Object[] row = {
                     sv.getMaSV(),
@@ -84,11 +124,9 @@ public class DS_SinhVien extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDSSV = new javax.swing.JTable();
         lblMessage = new javax.swing.JLabel();
-        txtTimKiem = new javax.swing.JTextField();
+        txtMaSV = new javax.swing.JTextField();
         btnTimKiem = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtTimKiem1 = new javax.swing.JTextField();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
@@ -202,10 +240,11 @@ public class DS_SinhVien extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblDSSV);
 
+        lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblMessage.setForeground(new java.awt.Color(0, 153, 255));
         lblMessage.setText(" ");
 
-        txtTimKiem.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        txtTimKiem.setText(" ");
+        txtMaSV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnTimKiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnTimKiem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_search_20px.png"))); // NOI18N
@@ -216,14 +255,8 @@ public class DS_SinhVien extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel2.setText("Tên sinh viên");
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Mã sinh viên");
-
-        txtTimKiem1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        txtTimKiem1.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -236,14 +269,8 @@ public class DS_SinhVien extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1180, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTimKiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnTimKiem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -255,22 +282,17 @@ public class DS_SinhVien extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblMessage)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtTimKiem1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMaSV, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -312,10 +334,6 @@ public class DS_SinhVien extends javax.swing.JPanel {
                 }
             }
         }
-    }
-
-    void TimKiem() {
-        load();
     }
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
@@ -387,14 +405,12 @@ public class DS_SinhVien extends javax.swing.JPanel {
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblMessage;
     private javax.swing.JTable tblDSSV;
+    private javax.swing.JTextField txtMaSV;
     private javax.swing.JButton txtTaoHopDong;
-    private javax.swing.JTextField txtTimKiem;
-    private javax.swing.JTextField txtTimKiem1;
     // End of variables declaration//GEN-END:variables
 }

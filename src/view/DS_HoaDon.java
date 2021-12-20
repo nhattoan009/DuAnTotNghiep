@@ -5,8 +5,10 @@ import dao.HopDongDAO;
 import java.awt.Color;
 import java.awt.Font;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -38,10 +40,50 @@ public class DS_HoaDon extends javax.swing.JPanel {
         Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
         tableHeader.setFont(headerFont);
 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
 //            String MaSV = txtTimKiemMaSV.getText();
 //            List<model.HoaDon> list = hdDao.selectByMaSV(MaSV);
             List<model.HoaDon> list = hdDao.select();
+            System.out.println("-=-=-=-" + list);
+            for (model.HoaDon sv : list) {
+                Object[] row = {
+                    sv.getMaHoaDon(),
+                    sv.getMaSV(),
+                    sv.getHoTen(),
+                    sv.getMaPhong(),
+                    String.format(Locale.UK, "%1$.0f", sv.getTienPhong()),
+                    formatter.format(sv.getNgayTao()),
+                    sv.getTrangThai(),
+                    sv.getThang()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
+        }
+    }
+    
+    public void TimKiem() {
+        DefaultTableModel model = (DefaultTableModel) tblDSHoaDon.getModel();
+        model.setRowCount(0);
+
+        Font font = new Font("Segoe UI", Font.PLAIN, 14);
+        tblDSHoaDon.setFont(font);
+        tblDSHoaDon.setRowHeight(30);
+        tblDSHoaDon.setBackground(Color.decode("#ffffff"));
+        tblDSHoaDon.setForeground(Color.decode("#505160"));
+
+        JTableHeader tableHeader = tblDSHoaDon.getTableHeader();
+        tableHeader.setBackground(Color.decode("#B7B8B6"));
+        tableHeader.setForeground(Color.decode("#0099FF"));
+        Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
+        tableHeader.setFont(headerFont);
+
+        try {
+            String MaSV = txtTimKiem.getText();
+            List<model.HoaDon> list = hdDao.selectByMaSV(MaSV);
+//            List<model.HoaDon> list = hdDao.select();
             System.out.println("-=-=-=-" + list);
             for (model.HoaDon sv : list) {
                 Object[] row = {
@@ -68,7 +110,6 @@ public class DS_HoaDon extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnThemMoi = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnLamMoi = new javax.swing.JButton();
         btnXuatHoaDon = new javax.swing.JButton();
@@ -79,16 +120,6 @@ public class DS_HoaDon extends javax.swing.JPanel {
         btnTimKiem = new javax.swing.JButton();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
-
-        btnThemMoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnThemMoi.setForeground(new java.awt.Color(51, 51, 51));
-        btnThemMoi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_create_20px.png"))); // NOI18N
-        btnThemMoi.setText("Thêm mới");
-        btnThemMoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnThemMoiActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 153, 255));
@@ -125,8 +156,6 @@ public class DS_HoaDon extends javax.swing.JPanel {
                 .addComponent(btnXuatHoaDon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnLamMoi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnThemMoi)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -137,7 +166,6 @@ public class DS_HoaDon extends javax.swing.JPanel {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnThemMoi)
                             .addComponent(btnLamMoi)
                             .addComponent(btnXuatHoaDon))
                         .addContainerGap())))
@@ -201,14 +229,10 @@ public class DS_HoaDon extends javax.swing.JPanel {
                         .addComponent(btnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 685, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnThemMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemMoiActionPerformed
-
-    }//GEN-LAST:event_btnThemMoiActionPerformed
 
     private void btnLamMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLamMoiActionPerformed
         load();
@@ -221,7 +245,7 @@ public class DS_HoaDon extends javax.swing.JPanel {
     }//GEN-LAST:event_tblDSHoaDonMouseClicked
 
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-//        TimKiem();
+        TimKiem();
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     private void btnXuatHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXuatHoaDonActionPerformed
@@ -244,7 +268,6 @@ public class DS_HoaDon extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLamMoi;
-    private javax.swing.JButton btnThemMoi;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXuatHoaDon;
     private javax.swing.JLabel jLabel1;

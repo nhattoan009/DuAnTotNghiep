@@ -5,6 +5,7 @@ import dao.PhongDAO;
 import dao.SinhVienDAO;
 import helper.DateHelper;
 import java.awt.Color;
+import java.awt.Font;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -15,6 +16,7 @@ import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import model.HopDong;
 import model.Phong;
 import model.SinhVien;
@@ -70,7 +72,7 @@ public class ThemHopDong extends javax.swing.JFrame {
             System.out.print(e);
         }
     }
-    
+
     void updateStatus() {
         String maSV = txtMaSV.getText();
         try {
@@ -79,7 +81,6 @@ public class ThemHopDong extends javax.swing.JFrame {
             System.out.println("update status: " + e);
         }
     }
-    
 
     void clear() {
 
@@ -89,6 +90,18 @@ public class ThemHopDong extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblChiTietPhong.getModel();
         model.setRowCount(0);
         try {
+            Font font = new Font("Segoe UI", Font.PLAIN, 14);
+            tblChiTietPhong.setFont(font);
+            tblChiTietPhong.setRowHeight(30);
+            tblChiTietPhong.setBackground(Color.decode("#ffffff"));
+            tblChiTietPhong.setForeground(Color.decode("#505160"));
+
+            JTableHeader tableHeader = tblChiTietPhong.getTableHeader();
+            tableHeader.setBackground(Color.decode("#B7B8B6"));
+            tableHeader.setForeground(Color.decode("#0099FF"));
+            Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
+            tableHeader.setFont(headerFont);
+            
             String maPhong = cboPhong.getSelectedItem().toString();
             List<HopDong> list = dao.selectByMaPhong(maPhong);
             for (HopDong hd : list) {
@@ -153,7 +166,7 @@ public class ThemHopDong extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
-        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_save_20px_1.png"))); // NOI18N
         btnLuu.setText("Lưu");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +175,7 @@ public class ThemHopDong extends javax.swing.JFrame {
             }
         });
 
-        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cancel_20px.png"))); // NOI18N
         btnHuy.setText("Đóng");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
@@ -199,10 +212,13 @@ public class ThemHopDong extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Mã Sinh Viên:");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Danh Sách Phòng:");
 
+        cboPhong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboPhong.setToolTipText("chọn phòng ");
         cboPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,22 +226,40 @@ public class ThemHopDong extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Tên Sinh Viên:");
 
+        txtHoTen.setEditable(false);
+        txtHoTen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Ngày Tạo:");
 
+        txtNgayTao.setEditable(false);
+        txtNgayTao.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Trạng Thái:");
 
+        cboTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "hoạt động", "không hoạt động" }));
         cboTrangThai.setToolTipText("chọ trạng thái");
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setText("Giá Phòng:");
+
+        txtGia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        txtMaSV.setEditable(false);
+        txtMaSV.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblMessage.setForeground(new java.awt.Color(0, 153, 255));
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Tháng:");
 
+        cboThang.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         cboThang.setToolTipText("chọn tháng");
         cboThang.addActionListener(new java.awt.event.ActionListener() {
@@ -234,6 +268,7 @@ public class ThemHopDong extends javax.swing.JFrame {
             }
         });
 
+        btnChiTietPhong.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnChiTietPhong.setText("Xem chi tiết phòng");
         btnChiTietPhong.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -284,8 +319,8 @@ public class ThemHopDong extends javax.swing.JFrame {
                                             .addGap(29, 29, 29)
                                             .addComponent(txtNgayTao))
                                         .addGroup(jPanel2Layout.createSequentialGroup()
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(29, 29, 29)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addComponent(cboPhong, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel2Layout.createSequentialGroup()
                                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

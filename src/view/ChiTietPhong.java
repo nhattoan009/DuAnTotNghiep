@@ -2,9 +2,12 @@ package view;
 
 import dao.HoaDonDAO;
 import dao.HopDongDAO;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 public class ChiTietPhong extends javax.swing.JFrame {
 
@@ -32,15 +35,28 @@ public class ChiTietPhong extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblDSNO.getModel();
         model.setRowCount(0);
         try {
+            Font font = new Font("Segoe UI", Font.PLAIN, 14);
+            tblDSNO.setFont(font);
+            tblDSNO.setRowHeight(30);
+            tblDSNO.setBackground(Color.decode("#ffffff"));
+            tblDSNO.setForeground(Color.decode("#505160"));
+
+            JTableHeader tableHeader = tblDSNO.getTableHeader();
+            tableHeader.setBackground(Color.decode("#B7B8B6"));
+            tableHeader.setForeground(Color.decode("#0099FF"));
+            Font headerFont = new Font("Segoe UI", Font.BOLD, 16);
+            tableHeader.setFont(headerFont);
+
             String maPhong = txtMaPhong.getText();
             List<model.HopDong> list = dao.selectByMaPhong(maPhong.trim());
             for (model.HopDong sv : list) {
                 Object[] row = {
                     sv.getMaSV(),
-                    sv.getMaPhong(),
+                    sv.getHoTen(),
+                    sv.getThang(),
                     sv.getTrangThaiThu()};
                 model.addRow(row);
-            } 
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi truy vấn dữ liệu!");
         }
@@ -72,7 +88,7 @@ public class ChiTietPhong extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(153, 153, 153)));
 
-        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnLuu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnLuu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_save_20px_1.png"))); // NOI18N
         btnLuu.setText("Lưu");
         btnLuu.addActionListener(new java.awt.event.ActionListener() {
@@ -81,7 +97,7 @@ public class ChiTietPhong extends javax.swing.JFrame {
             }
         });
 
-        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnHuy.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnHuy.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_cancel_20px.png"))); // NOI18N
         btnHuy.setText("Đóng");
         btnHuy.addActionListener(new java.awt.event.ActionListener() {
@@ -118,13 +134,29 @@ public class ChiTietPhong extends javax.swing.JFrame {
                         .addContainerGap())))
         );
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Mã phòng:");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Giá phòng:");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Tên phòng:");
 
+        txtTenPhong.setEditable(false);
+        txtTenPhong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Trạng thái phòng:");
+
+        txtTrangThai.setEditable(false);
+        txtTrangThai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        txtMaPhong.setEditable(false);
+        txtMaPhong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        txtGia.setEditable(false);
+        txtGia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lblMessage.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblMessage.setForeground(new java.awt.Color(0, 153, 255));
@@ -134,7 +166,7 @@ public class ChiTietPhong extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã sinh viên", "Họ tên", "Trạng thái thu"
+                "Mã sinh viên", "Họ tên", "Tháng", "Trạng thái thu"
             }
         ));
         tblDSNguoiO.setViewportView(tblDSNO);

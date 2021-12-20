@@ -7,7 +7,10 @@ package vd;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -42,5 +45,10 @@ public class bigDecimal {
         BigDecimal gia = new BigDecimal(5000);
         BigDecimal g = gia.setScale(2, RoundingMode.HALF_EVEN);
         System.out.println(g.multiply(new BigDecimal(dntt)));
+
+        Date date = new Date();
+//        DateFormat df = new SimpleDateFormat("dd/mm/yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        System.out.println(formatter.format(date));
     }
 }

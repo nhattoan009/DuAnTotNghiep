@@ -29,22 +29,29 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
+                      <EmptySpace min="33" pref="106" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jLabel11" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabel10" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jLabel11" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="lblTong" min="-2" pref="154" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="129" max="32767" attributes="0"/>
-                      <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="297" max="-2" attributes="0"/>
-                      <Component id="jLabel15" min="-2" pref="116" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="423" max="-2" attributes="0"/>
                       <Component id="cboNam" min="-2" pref="123" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="btnChon" min="-2" max="-2" attributes="0"/>
@@ -64,25 +71,28 @@
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cboNam" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jLabel15" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="btnChon" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="87" max="-2" attributes="0"/>
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="319" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTong" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace pref="255" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -201,20 +211,12 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel15">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="16" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n ph&#xf2;ng:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="T&#x1ed5;ng thu"/>
+        <Property name="text" type="java.lang.String" value="T&#x1ed5;ng thu th&#xe1;ng:"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel3">
@@ -412,45 +414,40 @@
                               <Component id="lblThang36" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="lblThang47" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="lblThang48" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                              <Component id="lblThang32" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblThang33" alignment="3" min="-2" max="-2" attributes="0"/>
-                                              <Component id="lblThang34" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="lblThang35" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="lblThang44" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblThang45" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblThang46" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="lblThang47" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblThang48" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lblThang39" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblThang40" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblThang41" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="lblThang42" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="lblThang32" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblThang33" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="lblThang34" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="55" pref="55" max="-2" attributes="0"/>
-                                      <Component id="lblThang31" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="lblThang43" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblThang35" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="lblThang44" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblThang45" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblThang46" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lblThang39" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblThang40" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblThang41" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblThang42" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="55" pref="55" max="-2" attributes="0"/>
+                              <Component id="lblThang31" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="lblThang43" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="31" pref="31" max="-2" attributes="0"/>
@@ -852,7 +849,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ph&#xf2;ng"/>
+        <Property name="text" type="java.lang.String" value="Ti&#x1ec1;n ph&#xf2;ng:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
@@ -860,7 +857,27 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Di&#x1ec7;n n&#x1b0;&#x1edb;c"/>
+        <Property name="text" type="java.lang.String" value="Ti&#x1ec1;n &#x111;i&#x1ec7;n n&#x1b0;&#x1edb;c:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="18" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="99" red="0" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="T&#x1ed5;ng thu n&#x103;m:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblTong">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="16" style="0"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
     </Component>
   </SubComponents>
