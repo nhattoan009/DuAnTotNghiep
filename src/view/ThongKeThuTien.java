@@ -5,6 +5,7 @@ import dao.PhongDAO;
 import dao.SinhVienDAO;
 import java.awt.Color;
 import java.awt.Font;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -106,14 +107,14 @@ public class ThongKeThuTien extends javax.swing.JPanel {
 
     private void Sendmail() {
         String Masinhvien = (String) tblTKTT.getValueAt(this.index, 0);
-        String Thang = (String) tblTKTT.getValueAt(this.index, 5);
-        Double TienPhong = (Double) tblTKTT.getValueAt(this.index, 4);
+        String Thang = (String) tblTKTT.getValueAt(this.index, 4);
+        Double TienPhong = (Double) tblTKTT.getValueAt(this.index, 3);
         System.out.println(Masinhvien);
         SinhVien sv = svDao.findById(Masinhvien.trim());
         final String username = "Toanhnpc00366@fpt.edu.vn";
         final String password = "nhattoan009";
-        
-        JOptionPane.showMessageDialog(this, "Đang gửi đến "+sv.getEmail().toUpperCase()+ " ...");
+
+        JOptionPane.showMessageDialog(this, "Đang gửi đến " + sv.getEmail().toUpperCase() + " ...");
 
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
@@ -138,7 +139,49 @@ public class ThongKeThuTien extends javax.swing.JPanel {
             message.setSubject("Hóa đơn tiền phòng tháng " + Thang);
             message.setText("Tiền phòng tháng " + Thang + " Là " + TienPhong);
             Transport.send(message);
-            JOptionPane.showMessageDialog(this, "Đã gửi email thành công đến: "+ sv.getEmail().toUpperCase());
+            JOptionPane.showMessageDialog(this, "Đã gửi email thành công đến: " + sv.getEmail().toUpperCase());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Lỗi");
+            System.out.println("" + e);
+        }
+    }
+
+    private void Sendmail2() {
+        String Masinhvien = (String) tblTKTT.getValueAt(this.index, 0);
+        String Thang = (String) tblTKTT.getValueAt(this.index, 4);
+        BigDecimal TienPhong = (BigDecimal) tblTKTT.getValueAt(this.index, 3);
+
+        System.out.println(Masinhvien);
+        SinhVien sv = svDao.findById(Masinhvien.trim());
+        final String username = "Toanhnpc00366@fpt.edu.vn";
+        final String password = "nhattoan009";
+
+        JOptionPane.showMessageDialog(this, "Đang gửi đến " + sv.getEmail().toUpperCase() + " ...");
+
+        Properties prop = new Properties();
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "587");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.starttls.enable", "true"); //TLS
+
+        Session session = Session.getInstance(prop,
+                new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("Toanhnpc00366@fpt.edu.vn"));
+            message.setRecipients(
+                    Message.RecipientType.TO,
+                    InternetAddress.parse(sv.getEmail())
+            );
+            message.setSubject("Bạn chưa hoàn thành tiền phòng " + Thang);
+            message.setText("Tiền phòng tháng " + Thang + " Là " + TienPhong + "vui lòng thanh toán");
+            Transport.send(message);
+            JOptionPane.showMessageDialog(this, "Đã gửi email thành công đến: " + sv.getEmail().toUpperCase());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Lỗi");
             System.out.println("" + e);
@@ -338,7 +381,13 @@ public class ThongKeThuTien extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnSendMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendMailActionPerformed
-        Sendmail();
+        String TrangThai = (String) tblTKTT.getValueAt(this.index, 5);
+        System.out.println(TrangThai);
+        if (TrangThai.equals("Chưa thu")) {
+            Sendmail2();
+        } else {
+            Sendmail();
+        }
     }//GEN-LAST:event_btnSendMailActionPerformed
 
 

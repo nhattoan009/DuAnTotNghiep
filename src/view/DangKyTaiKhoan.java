@@ -358,7 +358,7 @@ public class DangKyTaiKhoan extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLayMaActionPerformed
 
     private void btnDangKi1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangKi1MouseEntered
-        // TODO add your handling code here:
+        insert();
     }//GEN-LAST:event_btnDangKi1MouseEntered
 
     private void btnDangKi1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDangKi1MouseExited
@@ -394,6 +394,7 @@ public class DangKyTaiKhoan extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DangKyTaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
